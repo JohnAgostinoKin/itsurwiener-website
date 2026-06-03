@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 const footerLinks = [
-  { label: 'Complex',      to: '/#chaos' },
+  { label: 'Venue',      to: '/#chaos' },
   { label: 'Game Day',     to: '/game-day' },
   { label: 'The Litcher®', to: '/the-litcher' },
   { label: 'The Basement', to: '/the-basement' },

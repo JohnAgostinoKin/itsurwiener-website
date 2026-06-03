@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
-  { label: 'Complex',      to: '/#chaos' },
+  { label: 'Venue',      to: '/#chaos' },
   { label: 'Game Day',     to: '/game-day' },
   { label: 'The Litcher®', to: '/the-litcher' },
   { label: 'The Basement', to: '/the-basement' },

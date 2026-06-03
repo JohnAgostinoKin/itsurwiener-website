@@ -10,18 +10,21 @@ export default function Ticker({ items = [], variant = 'orange', reverse = false
 
   const wrapClass = {
     orange: 'bg-orange overflow-hidden py-[18px]',
+    purple: 'bg-purple-bright overflow-hidden py-[22px]',
     dark:   'bg-black-3 border-y border-orange/10 overflow-hidden py-[18px]',
     hype:   'bg-orange overflow-hidden',
   }[variant]
 
   const itemClass = {
     orange: 'font-display text-[22px] tracking-[.08em] text-black',
+    purple: 'font-display text-[26px] tracking-[.06em] text-white',
     dark:   'font-display text-[22px] tracking-[.08em] text-orange/70',
     hype:   'font-display text-[clamp(60px,10vw,130px)] text-black leading-none',
   }[variant]
 
   const dot = {
     orange: <span className="text-[12px] opacity-50 mx-8">✶</span>,
+    purple: <span className="text-[14px] opacity-60 mx-8">✦</span>,
     dark:   <span className="text-[12px] opacity-50 mx-8">✶</span>,
     hype:   <span className="w-4 h-4 rounded-full bg-black flex-shrink-0 mx-10" />,
   }[variant]
