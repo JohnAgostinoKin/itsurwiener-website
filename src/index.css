@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Space+Grotesk:wght@300;400;500;700&family=Barlow+Condensed:ital,wght@0,700;0,900;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables (use these in non-Tailwind contexts) ── */
+:root {
+  --orange:   #F56520;
+  --orange2:  #FF8C42;
+  --purple:   #522D80;
+  --purple-b: #9D4EDD;
+  --black:    #04030A;
+  --black2:   #08060F;
+  --black3:   #0E0B18;
+  --cream:    #F0EAD6;
+  --white:    #FDFCF8;
+  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom cursor ── */
+* { cursor: none !important; }
+
+/* ── Selection ── */
+::selection {
+  background: var(--orange);
+  color: var(--black);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black2); }
+::-webkit-scrollbar-thumb { background: var(--orange); }
+
+/* ── Font helpers ── */
+.font-display  { font-family: 'Bebas Neue', sans-serif; }
+.font-bold-alt { font-family: 'Black Han Sans', sans-serif; }
+.font-ui       { font-family: 'Space Grotesk', sans-serif; }
+.font-cond     { font-family: 'Barlow Condensed', sans-serif; }
+
+/* ── Glitch effect (used in Hero) ── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.glitch::before {
+  color: var(--orange);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitch1 4s infinite;
+  transform: translateX(-4px);
+}
+.glitch::after {
+  color: var(--purple-b);
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: glitch2 4s infinite;
+  transform: translateX(4px);
+}
+
+/* ── LED Wall background ── */
+.led-wall-bg {
+  background: linear-gradient(45deg, #F56520, #9D4EDD, #00F5D4, #9D4EDD, #F56520);
+  background-size: 400% 400%;
+  animation: ledAnimate 3s ease-in-out infinite;
+}
+
+/* ── Noise texture overlay ── */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+/* ── Grain on sections ── */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Clip path helpers ── */
+.clip-angled {
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+.clip-angled-sm {
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+/* ── Keyframes ── */
+@keyframes glitch1 {
+  0%,90%,100% { transform: translateX(0); opacity: 0; }
+  91%,93%     { transform: translateX(-6px); opacity: 1; }
+  92%,94%     { transform: translateX(6px); opacity: 1; }
+}
+@keyframes glitch2 {
+  0%,88%,100% { transform: translateX(0); opacity: 0; }
+  89%,91%     { transform: translateX(6px); opacity: 1; }
+  90%,92%     { transform: translateX(-6px); opacity: 1; }
+}
+@keyframes ledAnimate {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+@keyframes logoFlash {
+  0%,28%  { color: #F56520; }
+  33%,58% { color: #FDFCF8; }
+  63%,88% { color: #9D4EDD; }
+  93%,100%{ color: #F56520; }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes beamSweep {
+  0%,100% { transform: rotate(-20deg); opacity: 0.4; }
+  50%     { transform: rotate(20deg); opacity: 1; }
+}
+@keyframes pinBounce {
+  0%,100% { transform: rotate(-45deg) translateY(0); }
+  50%     { transform: rotate(-45deg) translateY(-8px); }
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.3; }
+}
+@keyframes neonPulse {
+  0%,100% { text-shadow: 0 0 20px #9D4EDD, 0 0 40px rgba(157,78,221,0.3); }
+  50%     { text-shadow: 0 0 8px #9D4EDD; }
+}
+@keyframes canWobble {
+  0%,100% { transform: rotate(-2deg) translateY(0); }
+  25%     { transform: rotate(1deg) translateY(-8px); }
+  50%     { transform: rotate(-1deg) translateY(-4px); }
+  75%     { transform: rotate(2deg) translateY(-10px); }
+}
+@keyframes particleFloat {
+  0%      { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%,90% { opacity: 1; }
+  100%    { transform: translateY(-20px) scale(1); opacity: 0; }
+}
+
+/* ── Snipcart overrides (populated when Snipcart is added) ── */
+.snipcart-checkout-step__title { font-family: 'Bebas Neue', sans-serif !important; }
