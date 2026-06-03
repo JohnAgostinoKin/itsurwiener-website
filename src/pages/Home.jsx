@@ -113,7 +113,7 @@ function Complex() {
             <span className="w-6 h-0.5 bg-orange" />The Venue
           </div>
           <div className="font-display text-[clamp(48px,7vw,88px)] leading-[.88] text-white mb-6">
-            Not a restaurant.<br />Not a bar.<br />
+            More than a restaurant.<br />More than a bar.<br />
             <span className="text-orange">it's</span> <span className="text-orange">Clemson's</span><br />
             <span className="text-purple-bright" style={{ textShadow: '0 0 20px #9D4EDD,0 0 40px rgba(157,78,221,0.3)', animation: 'neonPulse 2.5s ease-in-out infinite' }}>
               wildest night.
