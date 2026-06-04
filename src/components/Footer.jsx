@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-8 flex-wrap">
 
         <Link to="/" className="font-display text-[30px] text-white no-underline">
-          its<span className="text-orange">ur</span>wiener
+          its<span className="animate-[logoFlash_3s_infinite]">ur</span>wiener
         </Link>
 
         <nav className="flex flex-wrap gap-5 justify-center">

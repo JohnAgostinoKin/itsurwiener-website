@@ -29,7 +29,7 @@ export default function Nav() {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-[800] flex items-center justify-between px-[5vw] h-[72px] transition-all duration-300 ${scrolled ? 'bg-[rgba(4,3,10,0.95)] backdrop-blur-lg border-b border-orange/10' : ''}`}>
         <Link to="/" className="font-display text-[30px] text-white tracking-wide no-underline">
-          its<span className="text-orange">ur</span>wiener
+          its<span className="animate-[logoFlash_3s_infinite]">ur</span>wiener
         </Link>
 
         <ul className="hidden lg:flex gap-7 list-none">
