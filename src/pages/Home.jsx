@@ -535,7 +535,6 @@ export default function Home() {
       <Complex />
       <GameDayHero />
       <GameDay />
-      <MerchSection />
       <EatsSection />
       <div className="py-10 bg-[#04030A]">
         <div className="overflow-hidden py-[22px]" style={{background:'#9D4EDD'}}>
@@ -554,6 +553,7 @@ export default function Home() {
       <BasementSection />
       <VenuesGrid />
       <Beer />
+      <MerchSection />
       <EventsCTA />
       <FindUs />
     </div>
