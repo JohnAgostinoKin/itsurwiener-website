@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Ticker from '@components/Ticker'
+import GameDayHero from '@components/GameDayHero'
 import { useCounter, useScrollReveal } from '@hooks/useScrollReveal'
 
 const fadeUp = (delay = 0) => ({
@@ -60,33 +61,29 @@ function HeroCanvas() {
 // ── Hero ─────────────────────────────────
 function Hero() {
   return (
-    <section id="hero" className="relative h-screen flex flex-col justify-center px-[5vw] overflow-hidden bg-[#04030A] pb-0">
+    <section id="hero" style={{ height: '75vh' }} className="relative flex flex-col justify-center px-[5vw] overflow-hidden bg-[#04030A]">
       <HeroCanvas />
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(245,101,32,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,101,32,0.04) 1px,transparent 1px)', backgroundSize: '80px 80px', animation: 'gridScroll 20s linear infinite' }} />
       <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#04030A]" />
       <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full z-0 pointer-events-none" style={{ background: 'radial-gradient(circle,rgba(245,101,32,0.15),transparent 70%)', filter: 'blur(80px)' }} />
       <div className="relative z-[2]">
         <motion.div className="flex items-center gap-3 font-ui text-[15px] font-bold tracking-[.22em] uppercase text-orange mb-6" {...fadeUp(0.2)}>
-          <span className="w-8 h-0.5 bg-orange" />
-          A Clemson Destination
+          <span className="w-8 h-0.5 bg-orange" />A Clemson Destination
         </motion.div>
         <motion.h1 className="font-display text-[clamp(80px,18vw,260px)] leading-[.85] text-white mb-0" {...fadeUp(0.4)}>
           <span className="glitch relative inline-block" data-text="itsurwiener">
             itsurwiener
+            <sup style={{position:'absolute',top:'-0.05em',right:'-0.35em',fontSize:'0.15em',fontFamily:'Space Grotesk,sans-serif',fontWeight:700,color:'rgba(245,101,32,0.8)',lineHeight:1}}>®</sup>
           </span>
         </motion.h1>
         <motion.h2 className="font-display text-[clamp(28px,4vw,56px)] text-orange leading-none mt-4 mb-3 tracking-wide" {...fadeUp(0.55)}>
-          The Home of The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup>
+          The Home of The Litcher<sup style={{fontSize:"0.38em",verticalAlign:"super",lineHeight:0}}>®</sup>
         </motion.h2>
         <motion.p className="font-cond text-[clamp(13px,1.8vw,20px)] font-light tracking-[.06em] text-cream/45 mb-10" {...fadeUp(0.65)}>
-          Restaurant&nbsp;
-          <span className="text-orange/50">·</span>&nbsp;
-          Sports Bar&nbsp;
-          <span className="text-orange/50">·</span>&nbsp;
-          The Basement Nightclub&nbsp;
-          <span className="text-orange/50">·</span>&nbsp;
-          Huge Outdoor Areas&nbsp;
-          <span className="text-orange/50">·</span>&nbsp;
+          Restaurant&nbsp;<span className="text-orange/50">·</span>&nbsp;
+          Sports Bar&nbsp;<span className="text-orange/50">·</span>&nbsp;
+          The Basement Nightclub&nbsp;<span className="text-orange/50">·</span>&nbsp;
+          Huge Outdoor Areas&nbsp;<span className="text-orange/50">·</span>&nbsp;
           Two 12-Ft LED Walls
         </motion.p>
         <motion.div className="flex gap-4 flex-wrap" {...fadeUp(0.8)}>
@@ -94,11 +91,7 @@ function Hero() {
           <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Book Your Night</Link>
         </motion.div>
       </div>
-      <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2" {...fadeUp(1.2)}>
-        <span className="font-ui text-[10px] tracking-[.25em] uppercase text-orange/50">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-orange to-transparent animate-[scrollBar_1.8s_ease-in-out_infinite]" />
-      </motion.div>
-      <style>{`@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(80px)}}@keyframes scrollBar{0%{height:0;opacity:1}100%{height:48px;opacity:0}}`}</style>
+      <style>{`@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(80px)}}`}</style>
     </section>
   )
 }
@@ -106,7 +99,7 @@ function Hero() {
 // ── The Venue ────────────────────────────
 function Complex() {
   return (
-    <section id="chaos" className="bg-[#08060F] pt-[72px] pb-[80px] px-[5vw]">
+    <section id="chaos" className="bg-[#08060F] pt-[100px] pb-[110px] px-[5vw]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <motion.div {...inView(0)}>
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-4">
@@ -115,35 +108,16 @@ function Complex() {
           <div className="font-display text-[clamp(48px,7vw,88px)] leading-[.88] text-white mb-6">
             More than a restaurant.<br />More than a bar.<br />
             <span className="text-orange">it's</span> <span className="text-orange">Clemson's</span><br />
-            <span className="text-purple-bright" style={{ textShadow: '0 0 20px #9D4EDD,0 0 40px rgba(157,78,221,0.3)', animation: 'neonPulse 2.5s ease-in-out infinite' }}>
-              wildest night.
-            </span>
+            <span className="text-purple-bright" style={{ textShadow: '0 0 20px #9D4EDD,0 0 40px rgba(157,78,221,0.3)', animation: 'neonPulse 2.5s ease-in-out infinite' }}>wildest ride!</span>
           </div>
-          <p className="text-[15px] text-cream/55 leading-[1.85] max-w-[540px]">
-            Five distinct areas. One address. Game day to last call — itsurwiener handles all of it. Sports bar, nightclub, outdoor LED wall, covered patios — there is nothing else like it in this market.
+          <p className="text-[15px] text-cream/75 leading-[1.85] max-w-[540px]">
+            One address, four distinct spaces. Restaurant and Sports Bar on the top level, The Basement Nightclub below. Two covered patios, huge deck and turf area, two 12-ft LED Walls, two outdoor bars, great food, huge drinks — there's nothing else like it in this town!
           </p>
         </motion.div>
-
-        {/* Photo collage */}
-        <motion.div className="grid grid-cols-2 gap-2 h-[480px]" {...inView(0.15)}>
-          {/* Exterior - full left column */}
-          <div className="relative overflow-hidden row-span-2">
-            <img src="/images/venue-exterior.jpg" alt="itsurwiener exterior" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-3 left-3 font-ui text-[9px] font-bold tracking-[.2em] uppercase text-cream/70">Clemson, SC</div>
-          </div>
-          {/* Outdoor crowd - top right */}
-          <div className="relative overflow-hidden">
-            <img src="/images/venue-outdoor.jpg" alt="Outdoor patio crowd" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-3 left-3 font-ui text-[9px] font-bold tracking-[.2em] uppercase text-cream/70">Outdoor</div>
-          </div>
-          {/* Bar crowd - bottom right */}
-          <div className="relative overflow-hidden">
-            <img src="/images/venue-bar.jpg" alt="Game day bar crowd" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-3 left-3 font-ui text-[9px] font-bold tracking-[.2em] uppercase text-cream/70">Game Day</div>
-          </div>
+        <motion.div className="relative overflow-hidden h-[420px]" {...inView(0.15)}>
+          <img src="/images/venue-exterior.jpg" alt="itsurwiener — Clemson, SC" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute bottom-4 left-4 font-display text-[22px] text-white">Clemson, SC</div>
         </motion.div>
       </div>
     </section>
@@ -153,86 +127,68 @@ function Complex() {
 // ── Game Day ─────────────────────────────
 function GameDay() {
   const features = [
-    { icon: '📺', name: '20 TVs Everywhere',     desc: 'You will never miss a play from any seat in the house' },
-    { icon: '🎬', name: '12-Ft Outdoor LED Wall', desc: 'Watch party scale, open air, all season long' },
-    { icon: '🍹', name: 'The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> All Day',   desc: 'The official unofficial drink of Clemson game day' },
-    { icon: '🎵', name: 'The Basement After Dark', desc: "The game ends. The night doesn't." },
+    { icon: '📺', name: '25 TVs Everywhere',            desc: 'You will never miss a play from any seat in the house' },
+    { icon: '🎬', name: 'Two 12-FT LED Walls',           desc: 'One inside and one outside. Take your pick, but come early for best seats.' },
+    { icon: '🥂', name: '$1 Mimosas Every Gameday',      desc: '$1 Mimosas and $2 Jumbo Mimosas every gameday while they last!' },
+    { icon: '🍔', name: 'Gameday Food & Drink Specials', desc: 'Crazy food and drink deals every gameday.' },
+    { icon: '🎵', name: 'Live Music in The Basement',    desc: 'Live music in The Basement before or after the game.' },
+    { icon: '🕙', name: 'Open Early on Gamedays',        desc: 'Open at 10AM on gamedays.' },
   ]
   return (
-    <section id="gameday" className="p-0">
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[90vh]">
+    <section id="gameday" className="p-0 pb-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         <motion.div className="bg-orange flex flex-col justify-center px-[60px] py-[80px] relative overflow-hidden" {...inView(0)}>
           <div className="absolute bottom-[-60px] right-[-60px] font-display text-[380px] text-black/10 leading-none pointer-events-none select-none">🏈</div>
-          <div className="font-ui text-[11px] font-bold tracking-[.25em] uppercase bg-black text-orange inline-block px-4 py-2 mb-7 clip-angled-sm w-fit">Football Season</div>
+          <div className="font-ui text-[11px] font-bold tracking-[.25em] uppercase bg-black text-orange inline-block px-4 py-2 mb-7 clip-angled-sm w-fit">Go Tigers!</div>
           <h2 className="font-display text-[clamp(64px,9vw,130px)] leading-[.85] text-black mb-6">Game Day<br />Done Right.</h2>
-          <p className="text-[15px] text-black/60 max-w-[400px] leading-[1.8] mb-9">ESPN College GameDay has been here. When Clemson kicks off, there's only one place to be. 20 TVs. Outdoor LED wall. The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> flowing. The Basement open after the final whistle.</p>
+          <p className="text-[15px] max-w-[400px] leading-[1.8] mb-9" style={{color:'rgba(253,252,248,0.92)'}}>ESPN College GameDay has been here. When Clemson kicks off, there is only one place to be. 25 TVs. Two LED walls. $1 Mimosas. Live music. The Basement open before and after the final whistle.</p>
           <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</Link>
         </motion.div>
         <motion.div className="bg-[#08060F] flex flex-col" {...inView(0.1)}>
           {features.map(({ icon, name, desc }) => (
-            <div key={name} className="flex items-start gap-5 px-12 py-9 border-b border-orange/[0.08] hover:bg-orange/[0.04] transition-colors duration-200">
-              <span className="text-[28px] mt-1 flex-shrink-0">{icon}</span>
+            <div key={name} className="flex items-start gap-5 px-10 py-6 border-b border-orange/[0.08] last:border-b-0 hover:bg-orange/[0.04] transition-colors duration-200">
+              <span className="text-[22px] mt-1 flex-shrink-0">{icon}</span>
               <div>
-                <div className="font-cond text-[22px] font-black text-white uppercase tracking-wide mb-1">{name}</div>
-                <div className="text-[13px] text-cream/45 leading-relaxed">{desc}</div>
+                <div className="font-cond text-[18px] font-black text-white uppercase tracking-wide mb-0.5">{name}</div>
+                <div className="text-[12px] text-cream/75 leading-relaxed">{desc}</div>
               </div>
             </div>
           ))}
-          <div className="flex-1 flex flex-col justify-center px-12 py-8 bg-orange/[0.04]">
-            <div className="font-display text-[clamp(56px,9vw,120px)] text-orange leading-none mb-1">80K+</div>
-            <div className="font-ui text-[11px] tracking-[.18em] uppercase text-cream/30">Home Game Attendance &nbsp;·&nbsp; All Roads Lead Here</div>
-          </div>
         </motion.div>
       </div>
     </section>
   )
 }
 
-// ── The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> ─────────────────────────
+// ── The Litcher® ─────────────────────────
 function LitcherSection() {
   const [ref, visible] = useScrollReveal(0.4)
   const count = useCounter(60000, 2200, visible)
-  const cards = [
-    { num: '01', title: 'The Only One in the World',      body: 'The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> is federally trademarked. There is no other. It was created here, in Clemson — and it stays ours.' },
-    { num: '02', title: 'Not a Menu Item. The Brand.',    body: 'Over 60,000 served per year. The Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> is the product — the thing people come back for every single time.' },
-    { num: '03', title: 'Multiple Flavors. Always Fresh.', body: "Ask your server what's flowing tonight. Seasonal specials and limited runs keep it interesting." },
-    { num: '04', title: 'Pair It With Damn Good Beer',    body: 'Our house Clemson Lager. Start with a Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup>, chase it with a Damn Good Beer.' },
-  ]
   return (
-    <section id="litcher" className="bg-[#08060F] py-[120px] px-[5vw] relative overflow-hidden">
+    <section id="litcher" className="bg-[#08060F] py-[80px] relative overflow-hidden" style={{paddingLeft:"15vw",paddingRight:"5vw"}}>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display pointer-events-none select-none z-0" style={{ fontSize: '28vw', color: 'rgba(245,101,32,0.025)', whiteSpace: 'nowrap', lineHeight: 1 }}>LITCHER</div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-[1]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-[1]">
         <motion.div {...inView(0)}>
-          <div className="inline-flex items-center gap-2 border border-orange px-5 py-2 mb-6 group hover:bg-orange transition-colors duration-300 cursor-default">
-            <span className="w-[7px] h-[7px] bg-orange rounded-full group-hover:bg-black transition-colors animate-[blink_1.5s_ease-in-out_infinite]" />
-            <span className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange group-hover:text-black transition-colors">Federally Trademarked · Born in Clemson</span>
-          </div>
-          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />Signature Drink</div>
-          <h2 className="font-display text-[clamp(72px,11vw,150px)] leading-[.88] text-white mb-4">The<br />Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup></h2>
-          <p className="text-[15px] text-cream/55 leading-[1.85] mb-8 max-w-[440px]">48 ounces. 4 shots. Served pitcher-style. The only one in the world. The reason people walk through the door and the reason they come back.</p>
-          <div ref={ref} className="border-l-2 border-orange pl-6 mb-8">
-            <div className="font-ui text-[10px] tracking-[.22em] uppercase text-orange/60 mb-1">Total Litchers® Served</div>
-            <div className="font-display text-[clamp(60px,10vw,130px)] text-white leading-none">{count.toLocaleString()}<span className="text-orange">+</span></div>
-          </div>
-          <div className="grid grid-cols-4 gap-px bg-orange/10 border border-orange/10 mb-8">
-            {[['48','Ounces'],['4','Shots'],['∞','Flavors'],['1','TM']].map(([v,l]) => (
-              <div key={l} className="bg-[#0E0B18] py-5 text-center">
-                <span className="font-display text-[30px] text-orange block mb-1">{v}</span>
-                <span className="font-ui text-[10px] tracking-[.15em] uppercase text-cream/35">{l}</span>
-              </div>
-            ))}
+          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />Famous Litchers</div>
+          <h2 className="font-display text-[clamp(60px,9vw,130px)] leading-[.88] text-white mb-4">
+            Home of The<br /><span className="relative inline-block text-orange">Litcher<sup style={{position:'absolute',top:'-0.05em',right:'-0.28em',fontSize:'0.15em',fontFamily:'Space Grotesk,sans-serif',fontWeight:700,color:'rgba(245,101,32,0.8)',lineHeight:1}}>®</sup></span>
+          </h2>
+          <p className="text-[15px] text-cream/75 leading-[1.85] mb-5 max-w-[440px]">
+            There's nothing like it! 48 ounces of pure refreshment in an oversized vessel that shows you mean business and gives you more time for fun instead of waiting in line for another drink. It's a Clemson tradition!
+          </p>
+          <div className="border border-orange/20 px-6 py-3 mb-5 flex items-center justify-center gap-4 w-full max-w-[440px]" style={{background:'rgba(245,101,32,0.05)'}}>
+            <span className="font-display text-[28px] text-orange leading-none">60,000+</span>
+            <span className="font-ui text-[12px] text-cream/70 uppercase tracking-[.12em]">Sold Each Year</span>
           </div>
           <Link to="/the-litcher" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">Learn More →</Link>
         </motion.div>
-        <motion.div className="flex flex-col gap-0" {...inView(0.15)}>
-          {cards.map(({ num, title, body }) => (
-            <div key={num} className="bg-[#0E0B18] border border-orange/[0.08] px-8 py-7 relative overflow-hidden group transition-colors duration-300 hover:bg-orange/[0.04] hover:border-orange/25 border-b-0 last:border-b first:border-t">
-              <div className="absolute top-4 right-5 font-display text-[48px] text-orange/10 leading-none">{num}</div>
-              <div className="font-cond text-[20px] font-black text-white uppercase tracking-wide mb-2">{title}</div>
-              <div className="text-[13px] text-cream/50 leading-[1.7]">{body}</div>
-              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-500 group-hover:w-full" />
-            </div>
-          ))}
+        <motion.div className="relative overflow-hidden" style={{minHeight:'600px', height:'100%'}} {...inView(0.15)}>
+          <img src="/images/litchers.jpg" alt="The Litcher — itsurwiener" className="w-full h-full object-cover" style={{position:'absolute',inset:0,minHeight:'600px'}} />
+          <div className="absolute inset-0" style={{background:'linear-gradient(to top, rgba(8,6,15,0.7) 0%, transparent 50%)'}} />
+          <div className="absolute bottom-6 left-6">
+            <div className="font-display text-[28px] text-white leading-none">The Litcher<sup style={{fontSize:'0.35em',verticalAlign:'super'}}>®</sup></div>
+            <div className="font-ui text-[11px] tracking-[.15em] uppercase text-orange/80 mt-1">Clemson's Signature Drink</div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -241,7 +197,7 @@ function LitcherSection() {
 
 // ── The Basement ─────────────────────────
 function BasementSection() {
-  const features = ['Professional Stage','Dance Floor','Full Sound Rig','12-Ft LED Wall','Full Bar','Private Buyouts']
+  const features = ['Professional Stage','Dance Floor','Full Sound Rig','12-Ft LED Wall','Full Bar','VIP Section w/ Private Bartender','Available for Private Functions and Events']
   return (
     <section id="basement" className="relative min-h-screen flex items-center justify-center overflow-hidden py-[120px] px-[5vw]">
       <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse 60% 70% at 50% 40%,#1a004d,#04030A)' }} />
@@ -249,21 +205,21 @@ function BasementSection() {
         <div key={i} className="absolute top-0 w-[3px] z-[1] pointer-events-none" style={{ left:b.left, height:b.h, background:`linear-gradient(to bottom,transparent,${b.c},transparent)`, transformOrigin:'top center', animation:`beamSweep 4s ease-in-out infinite`, animationDelay:b.d }} />
       ))}
       {Array.from({length:20}).map((_,i) => (
-        <div key={i} className="absolute rounded-full z-[1] pointer-events-none" style={{ width:`${Math.random()*4+2}px`, height:`${Math.random()*4+2}px`, left:`${i*5}%`, background:['rgba(157,78,221,0.6)','rgba(245,101,32,0.5)','rgba(0,245,212,0.4)'][i%3], animation:`particleFloat ${Math.random()*8+6}s linear infinite`, animationDelay:`${i*0.3}s` }} />
+        <div key={i} className="absolute rounded-full z-[1] pointer-events-none" style={{ width:`${(i%3)+2}px`, height:`${(i%3)+2}px`, left:`${i*5}%`, background:['rgba(157,78,221,0.6)','rgba(245,101,32,0.5)','rgba(0,245,212,0.4)'][i%3], animation:`particleFloat ${(i%4)+6}s linear infinite`, animationDelay:`${i*0.3}s` }} />
       ))}
       <motion.div className="relative z-[2] text-center max-w-[800px]" {...inView(0)}>
-        <div className="font-ui text-[11px] font-bold tracking-[.3em] uppercase text-purple-bright/80 mb-4">Lower Level · itsurwiener</div>
-        <div className="font-display leading-[.85] mb-0">
+        <div className="font-ui text-[12px] font-bold tracking-[.2em] uppercase text-purple-bright/80 mb-4">If You Know . . . You Know!</div>
+        <div className="font-display leading-[.85]">
           <span className="block text-[clamp(70px,16vw,220px)] text-white">THE</span>
           <span className="block text-[clamp(70px,16vw,220px)] text-purple-bright" style={{ textShadow:'0 0 40px rgba(157,78,221,0.6),0 0 80px rgba(157,78,221,0.3)' }}>BASEMENT</span>
         </div>
-        <div className="mx-auto my-8 h-[2px] bg-purple-bright" style={{ animation:'lineGlow 2s ease-in-out infinite', width:'80px' }} />
+        <div className="font-display text-[clamp(20px,2.5vw,32px)] text-white/80 mt-4 mb-0 tracking-wide">Live Music Every Weekend</div>
+        <div className="mx-auto my-6 h-[2px] bg-purple-bright" style={{ animation:'lineGlow 2s ease-in-out infinite', width:'80px' }} />
         <div className="flex flex-wrap justify-center gap-3 mb-8">
           {features.map(f => <span key={f} className="font-ui text-[11px] font-medium tracking-[.15em] uppercase border border-purple-bright/30 px-5 py-2.5 text-cream/60 hover:border-purple-bright hover:text-purple-bright transition-all duration-200">{f}</span>)}
         </div>
-        <p className="text-[15px] text-cream/45 leading-[1.85] mb-10 max-w-[500px] mx-auto">Clemson's only purpose-built nightclub. Professional stage, lighting rig, dance floor, and a 12-ft LED wall. When The Basement opens, the night is just beginning.</p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">Book The Basement</Link>
+          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">BOOK NOW!</Link>
           <Link to="/the-basement" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/35 text-cream/60 px-11 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Learn More</Link>
         </div>
       </motion.div>
@@ -272,34 +228,36 @@ function BasementSection() {
   )
 }
 
-// ── Venues Grid ──────────────────────────
+// ── The Destination ───────────────────────
 function VenuesGrid() {
   const venues = [
-    { num:'01', tag:'Upper Level', title:'Restaurant\n& Sports Bar', desc:'20 TVs. Full bar and menu. The game on every screen.', bg:'linear-gradient(135deg,#1a0800,#3a1500,#1a0a00)' },
-    { num:'02', tag:'Lower Level', title:'The Basement\nNightclub',   desc:'Stage · Sound · Lights · 12-ft LED Wall · Dance Floor',    bg:'linear-gradient(135deg,#04001a,#120040,#080030)' },
-    { num:'03', tag:'Outdoor',     title:'Covered\nPatios',           desc:'Two covered all-weather patios. Rain or shine.',           bg:'linear-gradient(135deg,#001a08,#003820,#001408)' },
-    { num:'04', tag:'Outdoor',     title:'Deck, Turf\n& LED Wall',   desc:'Open deck, artificial turf, and a 12-ft LED wall.',        bg:'linear-gradient(135deg,#1a0a00,#2a1a00,#100500)' },
+    { num:'01', tag:'Upper Level', title:'Restaurant & Sports Bar', desc:'25 TVs · Full Bar · Great Food · Game Day HQ',            bg:'/images/sports-bar.jpg' },
+    { num:'02', tag:'Lower Level', title:'The Basement Nightclub',  desc:'Live Music · Stage · Sound · Lights · 12-Ft LED Wall · VIP', bg:'/images/basement.jpg' },
+    { num:'03', tag:'Outdoor',     title:'Covered Patios',          desc:'Two covered all-weather patios · Outdoor bars',             bg:'/images/covered-patios.jpg' },
+    { num:'04', tag:'Outdoor',     title:'Deck, Turf & LED Wall',   desc:'Huge open deck · Artificial turf · 12-Ft LED Wall',         bg:'/images/outdoor-screen.jpg' },
   ]
   return (
     <section id="venues" className="bg-[#0E0B18] py-[100px] px-[5vw]">
       <motion.div className="flex items-end justify-between mb-14 flex-wrap gap-6" {...inView(0)}>
         <div>
-          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />All Venues</div>
-          <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white">Five Spaces.<br />One Address.</h2>
+          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />The Destination</div>
+          <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white">One Address.<br />Four Distinct Spaces.</h2>
         </div>
         <Link to="/venues" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-8 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Explore All</Link>
       </motion.div>
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-0.5" {...inView(0.1)}>
+      <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-4" {...inView(0.1)}>
         {venues.map(({ num, tag, title, desc, bg }) => (
-          <div key={num} className="relative overflow-hidden group" style={{ aspectRatio:'4/3' }}>
-            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]" style={{ background: bg }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#04030A] via-[rgba(4,3,10,0.4)] to-transparent" />
-            <div className="absolute top-5 left-5 font-display text-[14px] tracking-[.1em] text-orange/40">{num}</div>
-            <Link to="/venues" className="absolute top-4 right-4 w-10 h-10 border border-orange/30 flex items-center justify-center text-orange text-lg no-underline opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 hover:bg-orange hover:text-black">→</Link>
-            <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="font-ui text-[9px] font-bold tracking-[.2em] uppercase bg-orange text-black px-2.5 py-1 inline-block mb-2.5 clip-angled-sm">{tag}</div>
-              <div className="font-display text-[clamp(28px,3.5vw,48px)] text-white leading-[.9] mb-2 whitespace-pre-line">{title}</div>
-              <div className="text-[12px] text-cream/50 leading-relaxed max-h-0 overflow-hidden group-hover:max-h-[60px] transition-all duration-500 opacity-0 group-hover:opacity-100">{desc}</div>
+          <div key={num} className="relative border border-orange/10 hover:border-orange/30 transition-colors duration-300 overflow-hidden" style={{ aspectRatio:'3/4', background: bg ? `url(${bg}) center/cover no-repeat` : '#08060F' }}>
+            {bg && <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />}
+            <div className="absolute inset-0 p-6 flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="font-ui text-[9px] font-bold tracking-[.2em] uppercase bg-orange text-black px-3 py-1">{tag}</span>
+                <span className="font-display text-[40px] text-orange/20 leading-none">{num}</span>
+              </div>
+              <div>
+                <h3 className="font-display text-[clamp(26px,3vw,40px)] text-white leading-none mb-2">{title}</h3>
+                <p className="font-ui text-[12px] text-cream/60 tracking-wide">{desc}</p>
+              </div>
             </div>
           </div>
         ))}
@@ -312,33 +270,144 @@ function VenuesGrid() {
 function Beer() {
   return (
     <section id="beer" className="py-[100px] px-[5vw] relative overflow-hidden" style={{ background:'linear-gradient(135deg,#0e0800,#1a0e00,#0e0800)' }}>
-      <motion.div className="flex flex-col lg:flex-row items-center gap-16 border border-orange/15 p-12" {...inView(0)}>
-        <div className="relative flex-shrink-0 flex justify-center">
-          <div className="w-40 h-56 rounded-xl flex flex-col items-center justify-center relative" style={{ background:'linear-gradient(160deg,#CC0000,#F66733,#CC0000)', boxShadow:'0 30px 80px rgba(245,101,32,0.4),0 0 40px rgba(245,101,32,0.2) inset', animation:'canWobble 5s ease-in-out infinite' }}>
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[70%] h-3 bg-white/15 rounded" />
-            <div className="text-center px-3">
-              <div className="font-display text-[26px] text-white/95 block tracking-wide">DAMN GOOD</div>
-              <div className="font-cond text-[10px] font-black tracking-[.2em] text-white/70 uppercase block mt-1">BEER</div>
-              <div className="font-ui text-[8px] tracking-[.12em] text-white/45 mt-2 block">itsurwiener's · Clemson Lager</div>
-            </div>
-          </div>
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full pointer-events-none" style={{ background:'radial-gradient(circle,rgba(245,101,32,0.25),transparent 70%)', filter:'blur(24px)' }} />
+      <motion.div className="flex flex-col lg:flex-row gap-8 border border-orange/15 p-12 items-stretch" {...inView(0)}
+        style={{ minHeight: '500px' }}>
+
+        {/* Beer can — 20% */}
+        <div className="flex items-center justify-center lg:w-[20%] flex-shrink-0">
+          <img src="/images/beer.png" alt="Damn Good Beer"
+            style={{ height: '480px', width: 'auto', display: 'block', objectFit: 'contain' }} />
         </div>
-        <div className="flex-1">
-          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />House Beer</div>
-          <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white mb-3"><span className="text-orange">Damn</span><br />Good Beer.</h2>
-          <div className="font-cond text-[17px] font-bold tracking-[.15em] uppercase text-cream/40 mb-5">Clemson Lager · itsurwiener's Restaurant & Bar</div>
-          <p className="text-[15px] text-cream/50 leading-[1.8] max-w-[460px] mb-7">Our beer. Brewed for Clemson. Sold only here. Pair it with the Litcher<sup style={{fontSize:"0.55em",verticalAlign:"super",lineHeight:0}}>®</sup> or let it stand alone. Either way: it's damn good.</p>
-          <div className="flex gap-8">
-            {[['4.5%','ABV'],['16oz','Can'],['Lager','Style']].map(([v,l]) => (
-              <div key={l} className="text-center">
-                <span className="font-display text-[32px] text-orange block leading-none">{v}</span>
-                <span className="font-ui text-[10px] tracking-[.15em] uppercase text-cream/35 mt-1 block">{l}</span>
-              </div>
-            ))}
+
+        {/* Text — 50% */}
+        <div className="lg:w-[50%] flex flex-col justify-center">
+          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3">
+            <span className="w-6 h-0.5 bg-orange" />House Beer
+          </div>
+          <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white mb-3">
+            <span className="text-orange">Damn</span><br />Good Beer
+          </h2>
+          <div className="font-cond text-[17px] font-bold tracking-[.15em] uppercase text-cream/40 mb-5">
+            Clemson Lager · 4.5% ABV · 16 OZ
+          </div>
+          <p className="text-[15px] text-cream/75 leading-[1.8] mb-7">
+            Our beer. Brewed for Clemson. Sold only here. Pair it with the Litcher<sup style={{fontSize:"0.38em",verticalAlign:"super",lineHeight:0}}>®</sup> or let it stand alone. Either way: it's damn good.
+          </p>
+          <div className="font-display text-[clamp(36px,5vw,72px)] text-orange leading-none">
+            $2 Tall Boys — Always!
           </div>
         </div>
+
+        {/* Video — 30% */}
+        <div className="lg:w-[30%] flex-shrink-0 relative overflow-hidden border border-orange/20" style={{ minHeight: '400px' }}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover' }}
+          >
+            <source src="/images/videos/beer.mp4" type="video/mp4" />
+          </video>
+        </div>
+
       </motion.div>
+    </section>
+  )
+}
+
+// ── Merch Section ────────────────────────
+function MerchSection() {
+  return (
+    <section id="merch" className="bg-[#08060F] py-[100px] px-[5vw]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        {/* Image */}
+        <motion.div className="relative overflow-hidden" style={{ aspectRatio:'7/5' }} {...inView(0)}>
+          <img
+            src="/images/merch.jpg"
+            alt="itsurwiener Merch"
+            className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#08060F]/60" />
+        </motion.div>
+
+        {/* Text */}
+        <motion.div {...inView(0.15)}>
+          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-4">
+            <span className="w-6 h-0.5 bg-orange" />Rep The Wien
+          </div>
+          <h2 className="font-display text-[clamp(48px,7vw,96px)] leading-[.88] text-white mb-5">
+            Shop Official<br /><span className="text-orange">Wien Merch</span>
+          </h2>
+          <p className="text-[15px] text-cream/75 leading-[1.85] max-w-[460px] mb-8">
+            Make a fashion statement with itsurwiener T-Shirts, Sweatshirts, Hats and more! We feature quality "Comfort Colors" apparel.
+          </p>
+          <Link to="/merch" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">
+            Shop Now!
+          </Link>
+        </motion.div>
+
+      </div>
+    </section>
+  )
+}
+
+// ── Eats Section ─────────────────────────
+function EatsSection() {
+  const foods = [
+    { src: '/images/burger.jpg',  label: 'Hand-Formed Burgers',     rotate: '-6deg',  z: 10 },
+    { src: '/images/tenders.jpg', label: "Clemson's Best Tenders",  rotate: '0deg',   z: 20 },
+    { src: '/images/fries.jpg',   label: 'Fresh-Cut Fries',         rotate: '6deg',   z: 10 },
+  ]
+  return (
+    <section id="eats" className="bg-[#04030A] py-[100px] px-[5vw] overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        {/* Text */}
+        <motion.div {...inView(0)}>
+          <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-4">
+            <span className="w-6 h-0.5 bg-orange" />The Food
+          </div>
+          <h2 className="font-display text-[clamp(40px,6vw,80px)] leading-[.9] text-white mb-6">
+            Gameday and Everyday . . .<br />
+            <span className="text-orange">Best Eats in Town.</span>
+          </h2>
+          <p className="text-[15px] text-cream/75 leading-[1.85] max-w-[480px] mb-10">
+            All-Beef Dogs, fresh Hand-Formed Burgers, Clemson's Best Chicken Tenders, Fresh-Cut Fries, over 100 Toppings and much more. Kitchen open late, too!
+          </p>
+          <div className="flex gap-4 flex-wrap">
+            <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
+              See Full Menu
+            </Link>
+            <a href="#" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
+              Order Online
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Angled image gallery */}
+        <motion.div className="relative flex items-center justify-center" style={{ height: '520px' }} {...inView(0.15)}>
+          {foods.map(({ src, label, rotate, z }, i) => (
+            <div
+              key={label}
+              className="absolute shadow-2xl overflow-hidden border-4 border-white/10 hover:z-30 hover:scale-105 transition-transform duration-300"
+              style={{
+                width: '240px',
+                transform: `rotate(${rotate}) translateX(${(i - 1) * 260}px)`,
+                zIndex: z,
+                aspectRatio: '1/1',
+              }}
+            >
+              <img src={src} alt={label} className="w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+                <span className="font-display text-[16px] text-white">{label}</span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+      </div>
     </section>
   )
 }
@@ -359,7 +428,7 @@ function EventsCTA() {
         <motion.div {...inView(0)}>
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />Private Events</div>
           <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white mb-5">Your Night.<br />Our Stage.</h2>
-          <p className="text-[15px] text-cream/55 leading-[1.85] mb-8 max-w-[440px]">From game day group reservations to full venue buyouts — itsurwiener hosts events that need a venue with real range.</p>
+          <p className="text-[15px] text-cream/75 leading-[1.85] mb-5 max-w-[440px]">From game day group reservations to full venue buyouts — itsurwiener hosts events that need a venue with real range.</p>
           <div className="flex flex-col gap-0 border border-orange/10">
             {types.map(({ icon, label }) => (
               <div key={label} className="flex items-center gap-4 px-6 py-5 border-b border-orange/[0.06] last:border-b-0 hover:bg-orange/[0.04] hover:pl-9 transition-all duration-300 group relative">
@@ -399,10 +468,10 @@ function EventsCTA() {
 // ── Find Us ──────────────────────────────
 function FindUs() {
   const items = [
-    { icon:'📍', label:'Address',          value:'Clemson, South Carolina',  sub:'Downtown Clemson · Home of Clemson University' },
-    { icon:'🕐', label:'Hours',            value:'Open 4 nights a week',      sub:'Follow @itsurwiener for current schedule' },
-    { icon:'📞', label:'Phone',            value:'(864) 722-5001',            href:'tel:8647225001' },
-    { icon:'✉️', label:'Events',           value:'info@itsurwiener.com',      href:'mailto:info@itsurwiener.com' },
+    { icon:'📍', label:'Address', value:'101 Keith Street, Clemson, SC 29631', sub:'Downtown Clemson · Home of Clemson University' },
+    { icon:'🕐', label:'Hours',   value:'Wed 4PM–12AM · Thu–Sat 11AM–2AM', sub:'Kitchen open late' },
+    { icon:'📞', label:'Phone',   value:'(864) 722-5001',          href:'tel:8647225001' },
+    { icon:'✉️', label:'Email',   value:'info@itsurwiener.com',    href:'mailto:info@itsurwiener.com' },
   ]
   return (
     <section id="findus" className="bg-[#04030A] py-[100px] px-[5vw]">
@@ -419,18 +488,27 @@ function FindUs() {
                 <div>
                   <div className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange mb-1">{label}</div>
                   {href ? <a href={href} className="text-[14px] text-cream no-underline hover:text-orange transition-colors duration-200">{value}</a> : <div className="text-[14px] text-cream">{value}</div>}
-                  {sub && <div className="text-[11px] text-orange/35 mt-0.5">{sub}</div>}
+                  {sub && <div className="text-[12px] text-cream/60 mt-0.5">{sub}</div>}
                 </div>
               </div>
             ))}
           </div>
           <div className="flex gap-3 mt-8">
-            {['📸','👥','🎵'].map((icon, i) => (
-              <a key={i} href="#" className="w-11 h-11 border border-orange/15 flex items-center justify-center text-[18px] no-underline hover:bg-orange/10 hover:border-orange hover:-translate-y-1 transition-all duration-200">{icon}</a>
-            ))}
+            <a href="https://facebook.com/itsurwiener" target="_blank" rel="noreferrer" aria-label="Facebook"
+              className="w-11 h-11 border border-orange/40 flex items-center justify-center text-orange no-underline hover:bg-orange hover:text-black hover:-translate-y-1 transition-all duration-200">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com/itsurwiener" target="_blank" rel="noreferrer" aria-label="Instagram"
+              className="w-11 h-11 border border-orange/40 flex items-center justify-center text-orange no-underline hover:bg-orange hover:text-black hover:-translate-y-1 transition-all duration-200">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@itsurwiener" target="_blank" rel="noreferrer" aria-label="TikTok"
+              className="w-11 h-11 border border-orange/40 flex items-center justify-center text-orange no-underline hover:bg-orange hover:text-black hover:-translate-y-1 transition-all duration-200">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.95a8.16 8.16 0 004.77 1.52V7.01a4.85 4.85 0 01-1-.32z"/></svg>
+            </a>
           </div>
         </div>
-        <div className="bg-[#0E0B18] min-h-[400px] flex items-center justify-center relative overflow-hidden">
+        <div className="min-h-[400px] flex items-center justify-center relative overflow-hidden" style={{background:"#0E0B18",backgroundImage:"url(https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/-82.8374,34.6834,14,0/600x400?access_token=pk.placeholder)",backgroundSize:"cover",backgroundPosition:"center"}}>
           <div className="absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(245,101,32,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(245,101,32,0.06) 1px,transparent 1px)', backgroundSize:'40px 40px' }} />
           <div className="relative z-[1] text-center">
             <div className="w-6 h-6 bg-orange rounded-[50%_50%_50%_0] mx-auto mb-5" style={{ transform:'rotate(-45deg)', boxShadow:'0 0 0 6px rgba(245,101,32,0.2),0 0 0 16px rgba(245,101,32,0.06)', animation:'pinBounce 2s ease-in-out infinite' }} />
@@ -450,39 +528,31 @@ export default function Home() {
     <div className="bg-[#04030A]">
       <Hero />
       <Ticker
-        items={[
-          "Dogs, Burgers & Beer",
-          "Big Litchers",
-          "Clemson's Best Chicken Tenders",
-          "Red Bull Litchers",
-          "Live Music in The Basement",
-          "Huge Deck and Turf Area",
-          "Saturday $1 Mimosas",
-          "Double 12Ft LED Walls",
-          "16 Beers on Tap",
-          "Damn Good Beer",
-          "Green Tea Bottles",
-          "No Better Place to Watch The Game!",
-        ]}
-        variant="purple"
+        items={["Dogs, Burgers & Beer","Famous Litchers","Clemson's Best Chicken Tenders","Red Bull Litchers","Live Music in The Basement","Huge Deck and Turf Area","Saturday $1 Mimosas","Double 12Ft LED Walls","16 Beers on Tap","Damn Good Beer","Green Tea Bottles","No Better Place to Watch The Game!"]}
+        variant="orange"
         speed={35}
       />
       <Complex />
+      <GameDayHero />
       <GameDay />
-      <Ticker items={["29,545 Students","Clemson University","80K Game Day","Your Night Starts Here","Open 4 Nights a Week","Private Events Available"]} variant="dark" reverse speed={26} />
+      <MerchSection />
+      <EatsSection />
+      <div className="py-10 bg-[#04030A]">
+        <div className="overflow-hidden py-[22px]" style={{background:'#9D4EDD'}}>
+          <div className="inline-flex whitespace-nowrap" style={{animation:'ticker 30s linear infinite'}}>
+            {["The Home of The Litcher®","Famous Litchers","Red Bull Litchers","Green Tea Litchers","Margarita Litchers","Mojito Litchers","Corona Litchers","High Noon Litchers","Surfside Litchers","Cosmic Litchers","Filthy Dirty Soda Litchers","Specialty Litchers","and more…",
+              "The Home of The Litcher®","Famous Litchers","Red Bull Litchers","Green Tea Litchers","Margarita Litchers","Mojito Litchers","Corona Litchers","High Noon Litchers","Surfside Litchers","Cosmic Litchers","Filthy Dirty Soda Litchers","Specialty Litchers","and more…"
+            ].map((item, i) => (
+              <span key={i} className="font-display text-[24px] tracking-[.06em] text-white inline-flex items-center px-10">
+                {item}<span className="ml-10 opacity-60">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
       <LitcherSection />
       <BasementSection />
       <VenuesGrid />
-      <div className="bg-orange overflow-hidden">
-        <div className="inline-flex whitespace-nowrap" style={{ animation:'ticker 20s linear infinite' }}>
-          {['CELEBRATE HARD','GAME DAY','THE LITCHER®','DAMN GOOD BEER','THE BASEMENT',"CLEMSON'S NIGHT",
-            'CELEBRATE HARD','GAME DAY','THE LITCHER®','DAMN GOOD BEER','THE BASEMENT',"CLEMSON'S NIGHT"].map((t,i) => (
-            <span key={i} className="font-display text-[clamp(60px,10vw,130px)] text-black leading-none inline-flex items-center gap-10 px-14">
-              {t}<span className="w-4 h-4 rounded-full bg-black flex-shrink-0" />
-            </span>
-          ))}
-        </div>
-      </div>
       <Beer />
       <EventsCTA />
       <FindUs />
