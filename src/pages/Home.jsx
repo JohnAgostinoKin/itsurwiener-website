@@ -114,8 +114,8 @@ function Complex() {
             One address, four distinct spaces. Restaurant and Sports Bar on the top level, The Basement Nightclub below. Two covered patios, huge deck and turf area, two 12-ft LED Walls, two outdoor bars, great food, huge drinks — there's nothing else like it in this town!
           </p>
         </motion.div>
-        <motion.div className="relative overflow-hidden h-[420px]" {...inView(0.15)}>
-          <img src="/images/venue-exterior.jpg" alt="itsurwiener — Clemson, SC" className="w-full h-full object-contain hover:scale-[1.04] transition-transform duration-700" />
+        <motion.div className="relative overflow-hidden" style={{ aspectRatio:'3/4' }} {...inView(0.15)}>
+          <img src="/images/venue-exterior.jpg" alt="itsurwiener — Clemson, SC" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-700" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute bottom-4 left-4 font-display text-[22px] text-white">Clemson, SC</div>
         </motion.div>
