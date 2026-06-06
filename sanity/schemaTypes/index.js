@@ -2,5 +2,6 @@ import menuCategory from './menuCategory'
 import menuItem from './menuItem'
 import globalAddon from './globalAddon'
 import event from './event'
+import product from './product'
 
-export const schemaTypes = [menuCategory, menuItem, globalAddon, event]
+export const schemaTypes = [menuCategory, menuItem, globalAddon, event, product]
