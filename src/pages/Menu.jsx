@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { client } from '@/lib/sanity'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -20,48 +21,77 @@ const categoryImages = {
 const menu = {
   starters: {
     label: 'Starters', icon: '⚡', color: '#F56520',
+    showcase: { name: 'Chicken-n-Waffle Cone', price: '9.99', desc: 'Popcorn Chicken served in a crispy Waffle Cone with maple syrup. The perfect one-hand appetizer when your other hand is holding a Litcher®.' },
     items: [
       { name: 'Fried Pickles',          price: 'Sm $8.99 / Lg $12.99', desc: 'Golden-fried dill pickle chips with your choice of dipping sauce.' },
-      { name: 'Fried Mozz Sticks',      price: '$9.99', desc: 'Crispy breaded mozzarella sticks, hot and stringy. Served with marinara.' },
+      { name: 'Fried Mozz Sticks',      price: '6 Pc $9.99 / 10 Pc $13.99', desc: 'Crispy breaded mozzarella sticks, hot and stringy. Served with marinara.' },
       { name: 'Pretzels & Beer Cheese', price: '$9.99', desc: 'Warm soft pretzels served with our house-made beer cheese dip.' },
-      { name: 'Pretzel Trio',           price: '$13.99', desc: '3 Soft Pretzels served with Beer Cheese, Queso Cheese, and Hot Honey Mustard.', badge: 'Fan Fave' },
+      { name: 'Pretzel Trio',           price: '$14.99', desc: '3 Soft Pretzels served with Beer Cheese, Queso Cheese, and Hot Honey Mustard.', badge: 'Fan Fave' },
       { name: 'Popcorn Chicken',        price: 'Sm $9.99 / Lg $14.99', desc: 'Bite-sized crispy chicken pieces fried to perfection. Great for sharing.' },
-      { name: 'Thin-Cut Onion Rings',   price: '$9.99', desc: 'Light, crispy, perfectly seasoned thin-cut onion rings.' },
-      { name: 'Spinach Artichoke Dip',  price: '$10.99', desc: 'Creamy hot spinach and artichoke dip served with tortilla chips.' },
-      { name: 'Build Your Own Nachos',  price: '$12.99', desc: 'Loaded nachos your way with 100+ toppings. Add Grilled, Fried, Buffalo, or Blackened Tenders +$4.99' },
+      { name: 'Thin-Cut Onion Rings',   price: 'Sm $9.99 / Lg $13.99', desc: 'Light, crispy, perfectly seasoned thin-cut onion rings.' },
+      { name: 'Spinach Artichoke Dip',  price: '$11.99', desc: 'Creamy hot spinach and artichoke dip served with tortilla chips.' },
+      { name: 'Build Your Own Nachos',  price: '$13.99', desc: 'Loaded nachos your way with 100+ toppings.', addons: [{label:'Add Tenders (Grilled, Fried, Buffalo or Blackened)', price:'+$5.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
     ]
   },
   dogs: {
     label: 'Famous Dogs', icon: '🌭', color: '#9D4EDD',
     note: 'All dogs served with Unlimited Toppings — 100+ to choose from',
+    dogsHero: {
+      sizes: [
+        { label: 'All Beef Dog', price: '$5.49', desc: 'Our classic all-beef frank with unlimited toppings.' },
+        { label: '2 Dog Deal',   price: '$9.99', desc: 'Two all-beef franks — best deal on the menu.' },
+        { label: 'Jumbo Dog',    price: '$6.99', desc: 'A bigger, bolder frank for serious dog lovers.' },
+      ]
+    },
     items: [
-      { name: 'All Beef Dog',    price: '$4.99',  desc: 'Our classic all-beef frank grilled to order with unlimited toppings your way.' },
-      { name: '2 All-Beef Dogs', price: '$9.99',  desc: 'Double up on the classic — two all-beef franks with unlimited toppings.' },
-      { name: 'Jumbo Dog',       price: '$6.99',  desc: 'A bigger, bolder all-beef frank for serious dog lovers.' },
-      { name: 'Bird Dog',        price: '$4.99',  desc: 'Savory chicken sausage with unlimited toppings.' },
-      { name: 'Mild Italian',    price: '$6.99',  desc: 'Juicy mild Italian sausage with all your favorite toppings.' },
-      { name: 'Hot Italian',     price: '$6.99',  desc: 'Spicy Italian sausage with a kick. Handle it.' },
-      { name: 'Corn Dog',        price: '$5.99',  desc: 'Classic deep-fried corn dog. A timeless favorite.' },
-      { name: 'Bratwurst',       price: '$6.99',  desc: 'German-style bratwurst grilled perfectly. Goes great with beer cheese.' },
+      { name: 'Bird Dog',        price: '$5.99', desc: 'Savory chicken sausage with unlimited toppings.' },
+      { name: 'Italian Sausage', price: '$6.99', desc: 'Grilled Italian sausage — choose Mild or Hot. Goes great with beer cheese and peppers.' },
+      { name: 'Corn Dog',        price: '$5.99', desc: 'Classic deep-fried corn dog. A timeless favorite.' },
+      { name: 'Bratwurst',       price: '$6.99', desc: 'German-style bratwurst grilled perfectly. Goes great with beer cheese.' },
     ],
-    extras: [{ text: 'Make any item a Basket with Fresh-Cut Fries', price: '+$5.99', sub: 'Sub Tots or Sweets for $1' }]
+    basket: { price: '+$5.99', sub: 'Substitute Tots or Sweet Potato Fries for $1' },
+    categoryAddons: [
+      { label: 'Sub Gluten Free Bun', price: '+$1.50' },
+    ],
+    extras: []
   },
   burgers: {
     label: 'Burgers', icon: '🍔', color: '#F56520',
     note: '100% Fresh Ground Beef · ½ LB Hand-Formed · Unlimited Toppings',
+    basket: { price: '+$5.99', sub: 'Substitute Tots or Sweet Potato Fries for $1' },
+    categoryAddons: [
+      { label: 'Sub Gluten Free Bun',   price: '+$1.50' },
+      { label: 'Sub Plant-Based Patty', price: '+$1.00' },
+      { label: 'Add Cheese',            price: '+$0.99' },
+      { label: 'Add Bacon',             price: '+$2.99' },
+      { label: 'Double Meat',           price: '+$3.99' },
+    ],
+    categoryOptions: [
+      { groupLabel: 'Cheese Options', options: ['American','Cheddar','Swiss','Pepper Jack','Provolone'] },
+    ],
     items: [
       { name: 'Classic Burger',        price: '$9.99',  desc: 'Half-pound of fresh-ground beef your way. Add Cheese +.99 · Bacon +2.99 · Double Meat +3.99' },
-      { name: 'Mushroom Swiss Burger', price: '$10.99', desc: 'Juicy burger topped with sautéed mushrooms and melted Swiss cheese.' },
-      { name: 'Pub Burger',            price: '$11.99', desc: 'Loaded with crispy thin-cut onion rings and our house beer cheese sauce.' },
-      { name: 'Hawaiian Burger',       price: '$10.99', desc: 'Pepper Jack cheese and grilled pineapple for a sweet and spicy combo.' },
-      { name: 'Barnyard Burger',       price: '$11.99', desc: 'Our classic burger topped with hand-battered chicken tenders. A crowd favorite.' },
-      { name: 'Fried Pickle Burger',   price: '$10.99', desc: 'Stacked high with crispy fried dill pickles and all the fixings.' },
+      { name: 'Mushroom Swiss Burger', price: '$11.99', desc: 'Juicy burger topped with sautéed mushrooms and melted Swiss cheese.' },
+      { name: 'Pub Burger',            price: '$12.99', desc: 'Loaded with crispy thin-cut onion rings and our house beer cheese sauce.' },
+      { name: 'Hawaiian Burger',       price: '$11.99', desc: 'Pepper Jack cheese and grilled pineapple for a sweet and spicy combo.' },
+      { name: 'Barnyard Burger',       price: '$12.99', desc: 'Our classic burger topped with hand-battered chicken tenders. A crowd favorite.' },
+      { name: 'Fried Pickle Burger',   price: '$11.99', desc: 'Stacked high with crispy fried dill pickles and all the fixings.' },
     ],
-    extras: [{ text: 'Sub Plant-Based Patty on any burger', price: '+$1' }]
+    extras: []
   },
   smashburgers: {
     label: 'SmashBurgers', icon: '💪', color: '#9D4EDD',
     note: '⅓ Pound Fresh Smashed Ground Beef · Unlimited Toppings',
+    basket: { price: '+$5.99', sub: 'Substitute Tots or Sweet Potato Fries for $1' },
+    categoryAddons: [
+      { label: 'Sub Gluten Free Bun',  price: '+$1.50' },
+      { label: 'Add Cheese',           price: '+$0.99' },
+      { label: 'Add Bacon',            price: '+$2.99' },
+      { label: 'Double Smash Patty',   price: '+$3.99' },
+    ],
+    categoryOptions: [
+      { groupLabel: 'Cheese Options', options: ['American','Cheddar','Swiss','Pepper Jack','Provolone'] },
+    ],
     items: [
       { name: 'Classic Smash',        price: '$9.99',  desc: 'Fresh smash patty with American cheese and unlimited toppings.' },
       { name: 'Bacon Smash',          price: '$11.99', desc: 'Fresh smash patty with American cheese, crispy bacon and unlimited toppings.' },
@@ -117,6 +147,7 @@ const menu = {
       { name: 'Pulled Pork Fry Pie',        price: '$13.99', desc: 'Slow-cooked pulled pork over fresh fries, Ched-Jack cheese, and our triple BBQ sauce.' },
       { name: 'Buffalo Chicken Fry Pie',    price: '$14.99', desc: 'Spicy buffalo popcorn chicken over fries with Ched-Jack cheese and garlic aioli.' },
       { name: 'Bacon Cheeseburger Fry Pie', price: '$15.99', desc: 'Burger meat, crispy bacon, Ched-Jack cheese, and pickles piled on our fresh-cut fries.' },
+      { name: 'Fried Cheese Fry Pie',       price: '$14.99', desc: 'Fried Mozzarella Sticks and Marinara Sauce over our fresh-cut fries.' },
     ]
   },
   tacos: {
@@ -140,12 +171,12 @@ const menu = {
   sides: {
     label: 'Sides & Salads', icon: '🥗', color: '#F56520',
     items: [
-      { name: 'Fresh-Cut Fries',    price: 'Reg $5.99 / Lg $10.99', desc: 'Hand-cut and fried in 100% peanut oil. Add Toppings Sm $2.99/Lg $5.99 · Add Bacon Sm $2.99/Lg $5.99.' },
-      { name: 'Tater Tots',         price: 'Reg $6.99 / Lg $11.99', desc: 'Crispy golden tater tots. Add Toppings Sm $2.99/Lg $5.99 · Add Bacon Sm $2.99/Lg $5.99.' },
-      { name: 'Sweet Potato Fries', price: 'Reg $6.99 / Lg $11.99', desc: 'Sweet and crispy sweet potato fries. Add Toppings Sm $2.99/Lg $5.99 · Add Bacon Sm $2.99/Lg $5.99.' },
-      { name: 'House Salad',        price: '$9.99',  desc: 'Fresh house salad with unlimited toppings. Add Grilled, Fried, Buffalo, or Blackened Tenders +$4.99.' },
-      { name: 'Taco Salad',         price: '$10.99', desc: 'Our signature taco salad with unlimited toppings. Add Grilled, Fried, Buffalo, or Blackened Tenders +$4.99.' },
-      { name: 'Side Salad',         price: '$4.99',  desc: 'A simple fresh side salad — the perfect lighter option.' },
+      { name: 'Fresh-Cut Fries',    price: 'Reg $5.99 / Lg $10.99', desc: 'Hand-cut and fried in 100% peanut oil.', addons: [{label:'Add Toppings (Sm)', price:'+$2.99'},{label:'Add Toppings (Lg)', price:'+$5.99'},{label:'Add Bacon Bits (Sm)', price:'+$2.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
+      { name: 'Tater Tots',         price: 'Reg $6.99 / Lg $11.99', desc: 'Crispy golden tater tots.', addons: [{label:'Add Toppings (Sm)', price:'+$2.99'},{label:'Add Toppings (Lg)', price:'+$5.99'},{label:'Add Bacon Bits (Sm)', price:'+$2.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
+      { name: 'Sweet Potato Fries', price: 'Reg $6.99 / Lg $11.99', desc: 'Sweet and crispy sweet potato fries.', addons: [{label:'Add Toppings (Sm)', price:'+$2.99'},{label:'Add Toppings (Lg)', price:'+$5.99'},{label:'Add Bacon Bits (Sm)', price:'+$2.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
+      { name: 'House Salad',        price: '$9.99',  desc: 'Fresh house salad with unlimited toppings.', addons: [{label:'Add Tenders (Grilled, Fried, Buffalo or Blackened)', price:'+$5.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
+      { name: 'Taco Salad',         price: '$10.99', desc: 'Our signature taco salad with unlimited toppings.', addons: [{label:'Add Tenders (Grilled, Fried, Buffalo or Blackened)', price:'+$5.99'},{label:'Add Bacon Bits (Lg)', price:'+$5.99'}] },
+      { name: 'Side Salad',         price: '$4.99',  desc: 'A simple fresh side salad — the perfect lighter option.', addons: [{label:'Add Bacon Bits (Sm)', price:'+$2.99'}] },
     ]
   },
   desserts: {
@@ -158,7 +189,10 @@ const menu = {
 }
 
 const categoryOrder = ['starters','dogs','burgers','smashburgers','chicken','frypies','tacos','combos','sides','desserts']
-const categories = categoryOrder.map(key => ({ key, label: menu[key].label }))
+const categories = [
+  ...categoryOrder.filter(k => k !== 'toppings').map(key => ({ key, label: menu[key].label })),
+  { key: 'toppings', label: 'Toppings' }
+]
 
 // ── ITEM CARD ─────────────────────────────────────────────────────
 function ItemCard({ item, color, index }) {
@@ -183,9 +217,39 @@ function ItemCard({ item, color, index }) {
           <span className="font-display text-[26px] flex-shrink-0 leading-none mt-0.5" style={{ color }}>{item.price}</span>
         </div>
         {item.desc && <p className="text-[13px] text-cream/80 leading-[1.65]">{item.desc}</p>}
+        {item.addons?.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {item.addons.map((a,i) => (
+              <span key={i} className="font-ui text-[11px] border border-white/10 px-2 py-0.5 text-cream/55">
+                {a.label} <span className="text-orange">{a.price}</span>
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       <div className="h-[2px] w-0 group-hover:w-full transition-all duration-500" style={{ background: color }} />
     </motion.div>
+  )
+}
+
+// ── DOGS HERO CARD ────────────────────────────────────────────────
+function DogsHeroCard({ data, color }) {
+  return (
+    <div className="rounded-sm border-2 p-7 mb-4 hover:border-orange/50 transition-all duration-300" style={{ borderColor: color, background: 'rgba(157,78,221,0.06)' }}>
+      <div className="text-center mb-6">
+        <h3 className="font-display leading-none mb-1" style={{ fontSize: 'clamp(32px,4vw,52px)', color }}>All Beef Dogs</h3>
+        <p className="text-[13px] text-cream/65">Our signature all-beef franks — grilled to order with unlimited toppings</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {data.sizes.map(({ label, price, desc }) => (
+          <div key={label} className="text-center border border-white/10 px-5 py-5 hover:border-orange/30 transition-colors duration-200" style={{ background: 'rgba(255,255,255,0.03)' }}>
+            <div className="font-display text-[clamp(20px,2.5vw,30px)] text-white mb-1 leading-none">{label}</div>
+            <div className="font-display text-[clamp(36px,5vw,56px)] leading-none mb-2" style={{ color }}>{price}</div>
+            <div className="font-ui text-[11px] text-cream/50 leading-snug">{desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
@@ -252,7 +316,10 @@ function MenuSection({ id, data }) {
         </div>
       )}
 
-      {/* Chicken special layout */}
+      {/* Dogs hero card */}
+      {data.dogsHero && <DogsHeroCard data={data.dogsHero} color={data.color} />}
+
+      {/* Item cards grid */}
       {data.chickenCards ? (
         <div className="flex flex-col gap-4">
           {/* Tenders card */}
@@ -292,6 +359,116 @@ function MenuSection({ id, data }) {
           </div>
         </div>
       ))}
+
+      {/* Basket callout */}
+      {data.basket && (
+        <div className="mt-4 border-2 border-orange/30 px-6 py-5 rounded-sm flex items-center justify-between gap-6 flex-wrap" style={{ background: 'rgba(245,101,32,0.06)' }}>
+          <div>
+            <div className="font-display text-[clamp(24px,3vw,40px)] text-white leading-none">Make it a Basket</div>
+            <div className="font-ui text-[14px] text-cream/70 mt-1">Add Fresh-Cut Fries to any item</div>
+            <div className="font-ui text-[13px] text-orange/80 mt-1 tracking-wide">{data.basket.sub}</div>
+          </div>
+          <div className="font-display text-[clamp(40px,6vw,72px)] text-orange flex-shrink-0">{data.basket.price}</div>
+        </div>
+      )}
+
+      {/* Category-wide Add-ons */}
+      {data.categoryAddons?.length > 0 && (
+        <div className="mt-4 rounded-sm border border-white/[0.06] px-5 py-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+          <div className="font-ui text-[10px] font-bold tracking-[.2em] uppercase text-orange/70 mb-3">Add-ons Available on Any Item</div>
+          <div className="flex flex-wrap gap-3">
+            {data.categoryAddons.map((a, i) => (
+              <div key={i} className="flex items-center gap-2 border border-white/10 px-3 py-2 rounded-sm">
+                <span className="font-cond text-[15px] font-bold text-white">{a.label}</span>
+                <span className="font-display text-[16px] text-orange">{a.price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Category-wide Options (e.g. Cheese Choices) */}
+      {data.categoryOptions?.length > 0 && data.categoryOptions.map((group, i) => (
+        <div key={i} className="mt-3 rounded-sm border border-white/[0.06] px-5 py-4" style={{ background: 'rgba(255,255,255,0.03)' }}>
+          <div className="font-ui text-[10px] font-bold tracking-[.2em] uppercase text-cream/40 mb-2">{group.groupLabel}</div>
+          <div className="flex flex-wrap gap-2">
+            {group.options.map(opt => (
+              <span key={opt} className="font-ui text-[12px] border border-white/10 px-3 py-1 text-cream/65">{opt}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      {/* Category-wide Variants */}
+      {data.categoryVariants?.length > 0 && (
+        <div className="mt-3 rounded-sm border border-white/[0.06] px-5 py-3" style={{ background: 'rgba(255,255,255,0.03)' }}>
+          <div className="font-ui text-[10px] font-bold tracking-[.2em] uppercase text-cream/40 mb-2">Available Styles</div>
+          <p className="text-[13px] text-cream/65">{data.categoryVariants.join(' · ')}</p>
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
+
+// ── TOPPINGS SECTION ─────────────────────────────────────────────
+function ToppingsSection() {
+  const toppings = [
+    'Ketchup','Yellow Mustard','Brown Mustard','Dijon Mustard','Honey Mustard','Hot Honey Mustard',
+    'Mayo','Spicy Mayo','Old Bay Mayo','Roasted Pepper Mayo','Cilantro Lime Mayo','Garlic Aioli',
+    'Horseradish Sauce','Itsurwiener Sauce','BBQ Sauce','Sweet BBQ Sauce','Mustard BBQ Sauce','Buffalo Sauce',
+    'Carolina Heat','Nashville Hot','Sriracha','Honey Sriracha','Teriyaki Sauce','Balsamic Glaze',
+    'Soy Sauce','Worcestershire Sauce','Tobasco Sauce','Hot Sauce (Asst.)','Cocktail Sauce','Tartar Sauce',
+    'Olive Oil','Red Wine Vinegar','Malt Vinegar','Ranch','Spicy Ranch','Avocado Ranch',
+    'Parmesan Peppercorn','Italian (Fat Free)','Creamy Italian','Caesar','Greek','French',
+    '1000 Island','Blue Cheese Dressing','Balsamic Vinaigrette','Raspberry Vinaigrette (Fat Free)','Honey','Dill Relish',
+    'Sweet Relish','Chicago (Neon Green) Relish','Giardiniera','Sport Peppers','Banana Peppers','Fresh Jalapeños',
+    'Sliced Jalapeños','Diced Jalapeños','Green Olives','Black Olives','Roasted Red Peppers','Artichoke Hearts',
+    'Salsa','Pico de Gallo','Corn Salsa','Black Bean Salsa','Sour Cream','Cole Slaw',
+    'Diced Onions','Diced Red Onions','Diced Tomatoes','Dill Pickles','Bread & Butter Pickles','Lettuce',
+    'Spinach','Sliced Tomatoes','Onions','Mushrooms','Shredded Cheddar-Jack','Shredded Mozzarella',
+    'Feta','Blue Cheese Crumbles','Parmesan','Salt','Black Pepper','Garlic Salt',
+    'Crushed Red Pepper','Italian Seasoning','Chili Powder','Blackened Seasoning','Seasoned Salt','Celery Salt',
+    'Cinnamon','Brown Sugar','Onion Powder','Steak Seasoning','Homemade Chili','Taco Beef',
+    'Taco Chicken','Sauteed Mushrooms','Beer Peppers and Onions','Caramelized Onions','Black Beans','Baked Beans',
+    'Sauerkraut','Mac-N-Cheese','Mashed Potatoes','Brown Gravy','Country Gravy','Marinara Sauce','Queso','Guinness Beer Cheese',
+  ]
+
+  return (
+    <motion.div
+      className="mb-16 scroll-mt-28"
+      id="toppings"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {/* Header */}
+      <div className="relative overflow-hidden mb-8 rounded-sm flex items-center px-8" style={{ height: '200px', background: 'linear-gradient(135deg,#1a004d,#04030A)' }}>
+        <div>
+          <h2 className="font-display leading-none" style={{ fontSize: 'clamp(44px,6vw,80px)', color: '#9D4EDD' }}>
+            Unlimited Toppings
+          </h2>
+          <p className="font-ui text-[12px] text-cream/75 tracking-[.12em] uppercase mt-2">
+            Choose from over 100 toppings — included with every dog, burger, nacho, salad & more
+          </p>
+        </div>
+      </div>
+
+      {/* Toppings grid */}
+      <div className="rounded-sm border border-white/[0.06] p-6 md:p-8" style={{ background: 'rgba(157,78,221,0.05)' }}>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-2">
+          {toppings.map(t => (
+            <div key={t} className="flex items-center gap-2 py-1.5 border-b border-white/[0.04]">
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#9D4EDD' }} />
+              <span className="font-ui text-[13px] text-cream/80">{t}</span>
+            </div>
+          ))}
+        </div>
+        <p className="font-ui text-[11px] text-cream/35 tracking-[.1em] uppercase mt-6 text-center">
+          Toppings subject to change · Ask your server about today's selections
+        </p>
+      </div>
     </motion.div>
   )
 }
@@ -299,6 +476,54 @@ function MenuSection({ id, data }) {
 // ── PAGE ─────────────────────────────────────────────────────────
 export default function Menu() {
   const [active, setActive] = useState('starters')
+  const [sanityMenu, setSanityMenu] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  // Slug → hardcoded key mapping
+  const slugMap = {
+    'starters': 'starters', 'famous-dogs': 'dogs', 'burgers': 'burgers',
+    'smashburgers': 'smashburgers', 'chicken': 'chicken', 'fry-pies': 'frypies',
+    'tacos': 'tacos', 'super-combos': 'combos', 'sides-salads': 'sides', 'desserts': 'desserts'
+  }
+
+  useEffect(() => {
+    client.fetch(`*[_type == "menuCategory"] | order(sortOrder asc) {
+      title, "slug": slug.current, color, note, showcase, sortOrder,
+      categoryVariants, categoryAddons, categoryOptions,
+      "items": *[_type == "menuItem" && references(^._id) && available == true] | order(sortOrder asc) {
+        name, price, description, badge, sizes, variants, addons, options
+      }
+    }`).then(data => {
+      if (data && data.length > 0) {
+        // Merge Sanity content into hardcoded layout structure
+        const merged = { ...menu }
+        data.forEach(cat => {
+          const key = slugMap[cat.slug]
+          if (!key || !merged[key]) return
+          merged[key] = {
+            ...merged[key],                          // keep layout (dogsHero, chickenCards, basket, etc.)
+            color: cat.color || merged[key].color,
+            note:  cat.note  || merged[key].note,
+            showcase: cat.showcase || merged[key].showcase,
+            categoryAddons:  cat.categoryAddons?.length  ? cat.categoryAddons  : merged[key].categoryAddons,
+            categoryOptions: cat.categoryOptions?.length ? cat.categoryOptions : merged[key].categoryOptions,
+            categoryVariants:cat.categoryVariants?.length? cat.categoryVariants: merged[key].categoryVariants,
+            items: cat.items?.length
+              ? cat.items.map(item => ({
+                  name:   item.name,
+                  price:  item.price,
+                  desc:   item.description,
+                  badge:  item.badge,
+                  addons: item.addons || merged[key].items?.find(i => i.name === item.name)?.addons || [],
+                }))
+              : merged[key].items,
+          }
+        })
+        setSanityMenu(merged)
+      }
+      setLoading(false)
+    }).catch(() => setLoading(false))
+  }, [])
 
   const scrollTo = (key) => {
     setActive(key)
@@ -341,7 +566,8 @@ export default function Menu() {
 
       {/* Content */}
       <div className="px-[5vw] py-16 max-w-[1100px] mx-auto">
-        {categoryOrder.map(key => <MenuSection key={key} id={key} data={menu[key]} />)}
+        {categoryOrder.filter(k => k !== 'toppings').map(key => <MenuSection key={key} id={key} data={(sanityMenu || menu)[key]} />)}
+        <ToppingsSection />
 
         <div className="border border-orange/20 p-10 text-center" style={{ background: 'rgba(245,101,32,0.04)' }}>
           <h3 className="font-display text-[clamp(36px,5vw,64px)] text-white mb-3">Ready to Order?</h3>

@@ -1,0 +1,18 @@
+export default {
+  name: 'event',
+  title: 'Event',
+  type: 'document',
+  fields: [
+    { name: 'bandName',    title: 'Band / Artist Name', type: 'string',  validation: R => R.required() },
+    { name: 'date',        title: 'Date',                type: 'date',    options: { dateFormat: 'MMMM D, YYYY' }, validation: R => R.required() },
+    { name: 'time',        title: 'Door / Show Time',    type: 'string',  description: 'e.g. Doors 8PM · Show 9PM', validation: R => R.required() },
+    { name: 'ticketPrice', title: 'Ticket Price',        type: 'string',  description: 'e.g. $10 · Free · $15 Advance / $20 Door' },
+    { name: 'ticketUrl',   title: 'Ticket Link',         type: 'url',     description: 'Link to buy tickets (optional)' },
+    { name: 'genre',       title: 'Genre / Type',        type: 'string',  description: 'e.g. Live Rock · DJ Night · Country' },
+    { name: 'image',       title: 'Band / Event Photo',  type: 'image',   options: { hotspot: true } },
+    { name: 'featured',    title: 'Featured Event',      type: 'boolean', initialValue: false },
+    { name: 'soldOut',     title: 'Sold Out',            type: 'boolean', initialValue: false },
+  ],
+  orderings: [{ title: 'Date Upcoming', name: 'dateAsc', by: [{ field: 'date', direction: 'asc' }] }],
+  preview: { select: { title: 'bandName', subtitle: 'date' } }
+}
