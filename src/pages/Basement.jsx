@@ -12,9 +12,9 @@ const inView = (delay = 0) => ({
 
 const features = [
   { title: 'Live Music',         desc: 'Live bands and performers every weekend. Clemson\'s best live music venue.' },
-  { title: 'DJ Nights',          desc: 'When the band wraps, the DJ takes over. The party does not stop.' },
-  { title: 'Full Bar',           desc: 'Complete bar service including our Famous Litchers® and $2 Tall Boys.' },
-  { title: 'Private Events',     desc: 'Book The Basement for your next private event, birthday, or corporate function.' },
+  { title: 'DJ Nights',          desc: 'DJs takes charge and the party does not stop.' },
+  { title: 'Full Bar',           desc: 'Complete bar service including our Famous Litchers®, $2 Tall Boys, and more.' },
+  { title: 'Private Events',     desc: 'Book The Basement for your next private event, birthday, or function.' },
   { title: 'Late Night Kitchen', desc: 'Full kitchen open late. Fuel up without leaving the party.' },
   { title: 'Exclusive Vibe',     desc: 'A separate space from the restaurant. Once you\'re in, you\'ll know why.' },
 ]
@@ -108,12 +108,12 @@ export default function Basement() {
               className="mb-6 max-w-full"
               style={{ width: 'clamp(320px,55vw,750px)', height: 'auto' }} />
             <p className="font-cond text-[clamp(18px,2.5vw,28px)] text-cream/60 max-w-[600px] mb-10 tracking-wide">
-              Live music every weekend. Clemson's best kept secret — hiding right below the restaurant.
+              Live music every weekend. Clemson's hottest night spot — hiding right in plain sight.
             </p>
             <div className="flex gap-4 flex-wrap">
               <a href="mailto:info@itsurwiener.com?subject=Basement Booking"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-                Book The Basement
+                Book An Event
               </a>
               <a href="tel:8647225001"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
@@ -135,10 +135,10 @@ export default function Basement() {
               If You Know<span className="text-purple-bright">.</span><span className="text-orange">.</span><span className="text-purple-bright">.</span><br />You Know<span className="text-orange">!</span>
             </h2>
             <p className="text-[15px] text-cream/75 leading-[1.9] mb-5">
-              Tucked beneath itsurwiener, The Basement is Clemson's premier live music and nightlife venue. It's not just a bar — it's an experience. The kind of place that locals keep to themselves.
+              The Basement is Clemson's premier live music and nightlife venue. Not just another bar — it's an experience.
             </p>
             <p className="text-[15px] text-cream/75 leading-[1.9] mb-8">
-              Live bands, DJs, late-night eats, and the full itsurwiener bar — all in one underground space that hits different after dark.
+              Live Bands, DJs, 12ft LED Wall, Professional Sound and Lights, Dance Floor, and a fully stocked oversized Bar — all in one underground space that hits different after dark.
             </p>
             <div className="grid grid-cols-2 gap-3">
               {['Live Music Every Weekend','Full Bar Service','Late Night Kitchen','Private Events'].map(item => (
@@ -162,15 +162,15 @@ export default function Basement() {
       </section>
 
       {/* Purple ticker */}
-      <div className="overflow-hidden py-5 border-y border-purple-bright/20" style={{ background: '#522D80' }}>
-        <div className="inline-flex whitespace-nowrap" style={{ animation: 'ticker 30s linear infinite' }}>
-          {Array(3).fill(['Live Music Every Weekend','The Basement','Clemson\'s Best Nightlife','Book Your Event','DJs & Live Bands','Full Bar Service','Late Night Kitchen','If You Know...You Know']).flat().map((item, i) => (
-            <span key={i} className="font-display text-[22px] tracking-[.06em] text-white inline-flex items-center px-8">
-              {item}<span className="ml-8 opacity-50">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
+<div className="overflow-hidden py-5 border-y border-purple-bright/20" style={{ background: '#522D80' }}>
+  <div className="inline-flex whitespace-nowrap" style={{ animation: 'ticker 30s linear infinite' }}>
+    {Array(3).fill(['Clemson\'s Only Music Venue','Live Music Every Weekend','VIP Section','DJs','Live Bands','Comedy Shows','Karaoke','Special Events','Clemson\'s Best Nightlife','Full Bar','Late Night Food','If You Know...You Know']).flat().map((item, i) => (
+      <span key={i} className="font-display text-[22px] tracking-[.06em] text-white inline-flex items-center px-8">
+        {item}<span className="ml-8 opacity-50">✦</span>
+      </span>
+    ))}
+  </div>
+</div>
 
       {/* Features */}
       <section className="px-[5vw] py-[100px]" style={{ background: 'linear-gradient(180deg,#08060F,#04030A)' }}>
@@ -273,7 +273,7 @@ export default function Basement() {
               Book The<br /><span className="text-orange">Basement</span>
             </h2>
             <p className="text-[15px] text-cream/75 leading-[1.9] mb-8">
-              Available for private events, birthday parties, corporate functions, and more. Exclusive access to the full space, full bar, and kitchen. Contact us to discuss your event and get a custom quote.
+              Available for private events, birthday parties, corporate functions, and more. Several plans available. Contact us to discuss your event and get a custom quote.
             </p>
             <div className="flex gap-4 flex-wrap">
               <a href="mailto:info@itsurwiener.com?subject=Basement Booking"
@@ -289,10 +289,11 @@ export default function Basement() {
 
           <motion.div {...inView(0.15)} className="grid grid-cols-1 gap-4">
             {[
-              { label: 'Birthday Parties',    desc: 'Make it a night to remember. Private bar and exclusive access.' },
+              { label: 'VIP Section',         desc: 'Exclusive area, stage-right. Private bar and exclusive access.' },
+              { label: 'Birthday Parties',    desc: 'Make it a night to remember. Front row tables available.' },
               { label: 'Corporate Events',    desc: 'Team outings and company events in a one-of-a-kind venue.' },
               { label: 'Band Bookings',       desc: 'Looking to play The Basement? Reach out to our booking team.' },
-              { label: 'Custom Events',       desc: 'Something else in mind? We\'ll make it happen.' },
+              { label: 'Custom Events',       desc: 'If you can think it up, we can make it happen.' },
             ].map((item, i) => (
               <motion.div key={item.label} {...inView(i * 0.08)}
                 className="flex items-start gap-4 border border-white/[0.06] p-4 hover:border-orange/25 transition-all duration-200"

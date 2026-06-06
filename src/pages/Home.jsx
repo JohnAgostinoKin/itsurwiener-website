@@ -87,8 +87,8 @@ function Hero() {
           Two 12-Ft LED Walls
         </motion.p>
         <motion.div className="flex gap-4 flex-wrap" {...fadeUp(0.8)}>
-          <Link to="/#chaos" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">Enter the Complex</Link>
-          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Book Your Night</Link>
+          <Link to="/#chaos" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">START YOUR JOURNEY</Link>
+          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">LIVE MUSIC</Link>
         </motion.div>
       </div>
       <style>{`@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(80px)}}`}</style>
@@ -141,7 +141,9 @@ function GameDay() {
           <div className="absolute bottom-[-60px] right-[-60px] font-display text-[380px] text-black/10 leading-none pointer-events-none select-none">🏈</div>
           <div className="font-ui text-[11px] font-bold tracking-[.25em] uppercase bg-black text-orange inline-block px-4 py-2 mb-7 clip-angled-sm w-fit">Go Tigers!</div>
           <h2 className="font-display text-[clamp(64px,9vw,130px)] leading-[.85] text-black mb-6">Game Day<br />Done Right.</h2>
-          <p className="text-[15px] max-w-[400px] leading-[1.8] mb-9" style={{color:'rgba(253,252,248,0.92)'}}>ESPN College GameDay has been here. When Clemson kicks off, there is only one place to be. 25 TVs. Two LED walls. $1 Mimosas. Live music. The Basement open before and after the final whistle.</p>
+          <p className="text-[15px] max-w-[400px] leading-[1.8] mb-9" style={{color:'rgba(253,252,248,0.92)'}}>There's no better place to watch the game — and it's not even close. Clemson's legendary sports bar loaded with LED walls, big screens, and full surround sound puts you as close to Death Valley as you can get without a ticket.<br />$1 Mimosas, $2 Wien Beer Tall Boys, Gameday Brunch, and the best fans in college football.<br />
+
+But itsurwiener isn't just a place to watch — it's a place to be. One address. One decision. No better place.<br />GO TIGERS!</p>
           <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</Link>
         </motion.div>
         <motion.div className="bg-[#08060F] flex flex-col" {...inView(0.1)}>

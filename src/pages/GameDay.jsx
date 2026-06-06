@@ -27,9 +27,9 @@ const schedule = [
 const features = [
   { title: 'Every Game Live',       desc: 'Every Clemson game on our massive screens. Never miss a play.' },
   { title: '$2 Tall Boys All Day',  desc: 'Damn Good Beer flowing all game long. Ice cold, every game.' },
-  { title: 'Full Kitchen Open',     desc: "Clemson's best tenders, dogs, burgers & more. Kitchen open all game." },
+  { title: 'Full Kitchen Open',     desc: "Clemson's best tenders, dogs, burgers & more. Kitchen open late." },
   { title: 'Game Day Audio',        desc: 'Full surround sound. Feel like you\'re in Death Valley.' },
-  { title: 'Game Day Specials',     desc: 'Drink specials and bucket deals all season long.' },
+  { title: 'Game Day Specials',     desc: 'Drink specials and deals all season long.' },
   { title: 'Best Seat In Clemson',  desc: 'Multiple screens, great sightlines, no bad seats.' },
 ]
 
@@ -110,11 +110,11 @@ export default function GameDay() {
               Game<br /><span className="text-orange">Day</span>
             </h1>
             <p className="font-cond text-[clamp(18px,2.5vw,28px)] text-cream/60 max-w-[600px] mb-10 tracking-wide">
-              Every Clemson game. Every screen. $2 Tall Boys all day. Best food in Clemson. 101 Keith Street.
+              Every Clemson game. Every screen. $2 Tall Boys all day. Best food in town.
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-                See The Menu
+                See Menu
               </Link>
               <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
                 (864) 722-5001
@@ -130,7 +130,7 @@ export default function GameDay() {
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(245,101,32,0.4) 30px,rgba(245,101,32,0.4) 31px)' }} />
         <motion.div {...inView(0)} className="relative z-[1] text-center">
           <div className="inline-block font-ui text-[10px] font-bold tracking-[.3em] uppercase px-4 py-2 mb-6 border border-orange/30 text-orange">
-            Game Day Special · Every Home Game
+            Game Day Special · Every Gameday
           </div>
           <h2 className="font-display text-[clamp(72px,18vw,220px)] leading-[.82] text-white mb-2">
             $1<br /><span className="text-orange">Mimosas</span>
@@ -181,10 +181,10 @@ export default function GameDay() {
             <div className="font-display text-[clamp(36px,6vw,72px)] text-white leading-none">
               $2 Tall Boys — <span className="text-orange">All Day.</span>
             </div>
-            <p className="text-cream/55 mt-2 text-[14px]">Plus game day specials and bucket deals all season long.</p>
+            <p className="text-cream/55 mt-2 text-[14px]">Plus game day deals all season long.</p>
           </div>
           <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 flex-shrink-0">
-            Full Menu
+            Food Menu
           </Link>
         </div>
       </div>
@@ -198,7 +198,7 @@ export default function GameDay() {
           <h2 className="font-display text-[clamp(40px,6vw,80px)] leading-none text-white mb-2">
             Clemson Tigers<br /><span className="text-orange">Schedule</span>
           </h2>
-          <p className="text-cream/45 text-[14px]">We're watching every game. Come watch with us.</p>
+          <p className="text-cream/45 text-[14px]">We'll be watching every game. Come watch with us.</p>
         </motion.div>
 
         <div className="flex gap-3 mb-8 flex-wrap">
@@ -218,7 +218,7 @@ export default function GameDay() {
 
         <div className="mt-6 text-center">
           <p className="font-ui text-[11px] text-cream/25 tracking-[.1em] uppercase">
-            All times Eastern · Schedule subject to change · TBA games announced closer to season
+            All times Eastern · Schedule subject to change · TBA games times when announced. 
           </p>
         </div>
       </section>
@@ -230,9 +230,6 @@ export default function GameDay() {
           <h2 className="font-display text-[clamp(40px,7vw,100px)] leading-none text-white mb-4">
             We'll Save<br />You A Seat<span className="text-orange">.</span>
           </h2>
-          <p className="text-cream/55 text-[15px] mb-8 max-w-[500px] mx-auto">
-            101 Keith Street · Clemson, SC<br />Wed 4PM–12AM · Thu–Sat 11AM–2AM
-          </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
               Get Directions

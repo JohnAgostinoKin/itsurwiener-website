@@ -100,17 +100,17 @@ export default function Litcher() {
         <div className="relative z-[1] px-[5vw] w-full pt-32">
           <motion.div {...inView(0)}>
             <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-purple-bright mb-5">
-              <span className="w-8 h-0.5 bg-purple-bright" />itsurwiener · Clemson, SC
+              <span className="w-8 h-0.5 bg-purple-bright" />Itsurwiener · Clemson, SC
             </div>
             <h1 className="font-display leading-[.82] text-white mb-6" style={{ fontSize: 'clamp(72px,16vw,200px)' }}>
               Home of<br />The<br /><span className="text-purple-bright">Litcher</span><sup style={{ fontSize: '0.15em', verticalAlign: 'top', fontFamily: 'Space Grotesk,sans-serif', fontWeight: 700, color: 'rgba(157,78,221,0.8)' }}>®</sup>
             </h1>
             <p className="font-cond text-[clamp(18px,2.5vw,28px)] text-cream/60 max-w-[620px] mb-10 tracking-wide">
-              Clemson's most iconic drink. Built right here. Served nowhere else. Over 60,000 poured and counting.
+              Clemson's most iconic drink. Built right here. Served right here. Over 60,000 sold each year.
             </p>
             <div className="flex gap-4 flex-wrap">
               <a href="#menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-                See The Menu
+                See Litcher Menu
               </a>
               <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
                 Get Directions
@@ -182,7 +182,7 @@ export default function Litcher() {
               What Is A<br /><span className="text-orange">Litcher?</span>
             </h2>
             <p className="text-[15px] text-cream/75 leading-[1.9] mb-6">
-              The Litcher® is itsurwiener's signature house cocktail — invented right here in Clemson and served nowhere else on earth. It's our most popular drink by a mile and has become a Clemson tradition.
+              The Litcher® is Itsurwiener's signature house cocktail — invented right here in Clemson and served nowhere else on earth. It's our most popular drink by a mile and has become a Clemson tradition.
             </p>
             <p className="text-[15px] text-cream/75 leading-[1.9] mb-8">
               Choose from dozens of flavors — from classic Popular Litchers to Red Bull Litchers, Margarita Litchers, Mojito Litchers, and more. One sip and you'll know why people drive to Clemson just for these.
