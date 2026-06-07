@@ -47,8 +47,8 @@ function EventCard({ event, index }) {
 
         {/* Event image (if exists) */}
         {event.image && (
-          <div className="flex-shrink-0 w-[140px] hidden sm:block overflow-hidden border-r border-white/[0.06]">
-            <img src={event.image} alt={event.bandName} className="w-full h-full object-cover opacity-80 group-hover:scale-[1.04] transition-transform duration-500" />
+          <div className="flex-shrink-0 w-[130px] hidden sm:flex items-center justify-center overflow-hidden border-r border-white/[0.06]" style={{ background: 'rgba(0,0,0,0.4)' }}>
+            <img src={event.image} alt={event.bandName} className="w-full h-full object-contain" />
           </div>
         )}
 
@@ -71,8 +71,8 @@ function EventCard({ event, index }) {
           )}
 
           {/* Price + CTA row */}
-          <div className="flex items-center justify-between flex-wrap gap-3 mt-auto pt-3 border-t border-white/[0.05]">
-            <div className="font-cond text-[16px] font-bold text-orange uppercase tracking-wide">
+          <div className="flex items-start justify-between flex-wrap gap-3 mt-auto pt-3 border-t border-white/[0.05]">
+            <div className="font-cond text-[14px] font-bold text-orange uppercase tracking-wide leading-snug max-w-[300px]">
               {event.ticketPrice || 'Free'}
             </div>
             {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
