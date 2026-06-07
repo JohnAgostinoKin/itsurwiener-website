@@ -138,7 +138,7 @@ function GameDay() {
     <section id="gameday" className="p-0 pb-16">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <motion.div className="bg-orange flex flex-col justify-center px-[60px] py-[80px] relative overflow-hidden" {...inView(0)}>
-          <div className="absolute bottom-[-60px] right-[-60px] font-display text-[380px] text-black/10 leading-none pointer-events-none select-none">🏈</div>
+          <div className="absolute bottom-[-60px] right-[-60px] font-display text-[380px] text-black/10 leading-none pointer-events-none select-none hidden md:block">🏈</div>
           <div className="font-ui text-[11px] font-bold tracking-[.25em] uppercase bg-black text-orange inline-block px-4 py-2 mb-7 clip-angled-sm w-fit">Go Tigers!</div>
           <h2 className="font-display text-[clamp(64px,9vw,130px)] leading-[.85] text-black mb-6">Game Day<br />Done Right.</h2>
           <p className="text-[15px] max-w-[400px] leading-[1.8] mb-9" style={{color:'rgba(253,252,248,0.92)'}}>There's no better place to watch the game — and it's not even close. Clemson's legendary sports bar loaded with LED walls, big screens, and full surround sound puts you as close to Death Valley as you can get without a ticket.<br />$1 Mimosas, $2 Wien Beer Tall Boys, Gameday Brunch, and the best fans in college football.<br />
@@ -184,8 +184,8 @@ function LitcherSection() {
           </div>
           <Link to="/the-litcher" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">Learn More →</Link>
         </motion.div>
-        <motion.div className="relative overflow-hidden" style={{minHeight:'600px', height:'100%'}} {...inView(0.15)}>
-          <img src="/images/litchers.jpg" alt="The Litcher — itsurwiener" className="w-full h-full object-cover" style={{position:'absolute',inset:0,minHeight:'600px'}} />
+        <motion.div className="relative overflow-hidden" style={{minHeight:'320px', height:'100%'}} {...inView(0.15)}>
+          <img src="/images/litchers.jpg" alt="The Litcher — itsurwiener" className="w-full h-full object-cover" style={{position:'absolute',inset:0,minHeight:'320px'}} />
           <div className="absolute inset-0" style={{background:'linear-gradient(to top, rgba(8,6,15,0.7) 0%, transparent 50%)'}} />
           <div className="absolute bottom-6 left-6">
             <div className="font-display text-[28px] text-white leading-none">The Litcher<sup style={{fontSize:'0.35em',verticalAlign:'super'}}>®</sup></div>
@@ -274,14 +274,10 @@ function Beer() {
     <section id="beer" className="py-[100px] px-[5vw] relative overflow-hidden" style={{ background:'linear-gradient(135deg,#0e0800,#1a0e00,#0e0800)' }}>
       <motion.div className="flex flex-col lg:flex-row gap-8 border border-orange/15 p-12 items-stretch" {...inView(0)}
         style={{ minHeight: '500px' }}>
-
-        {/* Beer can — 20% */}
         <div className="flex items-center justify-center lg:w-[20%] flex-shrink-0">
           <img src="/images/beer.png" alt="Damn Good Beer"
             style={{ height: '480px', width: 'auto', display: 'block', objectFit: 'contain' }} />
         </div>
-
-        {/* Text — 50% */}
         <div className="lg:w-[50%] flex flex-col justify-center">
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3">
             <span className="w-6 h-0.5 bg-orange" />House Beer
@@ -299,20 +295,11 @@ function Beer() {
             $2 Tall Boys — Always!
           </div>
         </div>
-
-        {/* Video — 30% */}
         <div className="lg:w-[30%] flex-shrink-0 relative overflow-hidden border border-orange/20" style={{ minHeight: '400px' }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover' }}
-          >
+          <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover' }}>
             <source src="/images/videos/beer.mp4" type="video/mp4" />
           </video>
         </div>
-
       </motion.div>
     </section>
   )
@@ -323,18 +310,10 @@ function MerchSection() {
   return (
     <section id="merch" className="bg-[#08060F] py-[100px] px-[5vw]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-        {/* Image */}
         <motion.div className="relative overflow-hidden" style={{ aspectRatio:'7/5' }} {...inView(0)}>
-          <img
-            src="/images/merch.jpg"
-            alt="itsurwiener Merch"
-            className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700"
-          />
+          <img src="/images/merch.jpg" alt="itsurwiener Merch" className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#08060F]/60" />
         </motion.div>
-
-        {/* Text */}
         <motion.div {...inView(0.15)}>
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-4">
             <span className="w-6 h-0.5 bg-orange" />Rep The Wien
@@ -349,7 +328,6 @@ function MerchSection() {
             Shop Now!
           </Link>
         </motion.div>
-
       </div>
     </section>
   )
@@ -358,15 +336,13 @@ function MerchSection() {
 // ── Eats Section ─────────────────────────
 function EatsSection() {
   const foods = [
-    { src: '/images/burger.jpg',  label: 'Hand-Formed Burgers',     rotate: '-6deg',  z: 10 },
-    { src: '/images/tenders.jpg', label: "Clemson's Best Tenders",  rotate: '0deg',   z: 20 },
-    { src: '/images/fries.jpg',   label: 'Fresh-Cut Fries',         rotate: '6deg',   z: 10 },
+    { src: '/images/burger.jpg',  label: 'Hand-Formed Burgers',    rotate: '-6deg', z: 10 },
+    { src: '/images/tenders.jpg', label: "Clemson's Best Tenders", rotate: '0deg',  z: 20 },
+    { src: '/images/fries.jpg',   label: 'Fresh-Cut Fries',        rotate: '6deg',  z: 10 },
   ]
   return (
     <section id="eats" className="bg-[#04030A] py-[100px] px-[5vw] overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-        {/* Text */}
         <motion.div {...inView(0)}>
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-4">
             <span className="w-6 h-0.5 bg-orange" />The Food
@@ -387,20 +363,10 @@ function EatsSection() {
             </a>
           </div>
         </motion.div>
-
-        {/* Angled image gallery */}
         <motion.div className="relative flex items-center justify-center" style={{ height: '520px' }} {...inView(0.15)}>
           {foods.map(({ src, label, rotate, z }, i) => (
-            <div
-              key={label}
-              className="absolute shadow-2xl overflow-hidden border-4 border-white/10 hover:z-30 hover:scale-105 transition-transform duration-300"
-              style={{
-                width: '240px',
-                transform: `rotate(${rotate}) translateX(${(i - 1) * 260}px)`,
-                zIndex: z,
-                aspectRatio: '1/1',
-              }}
-            >
+            <div key={label} className="absolute shadow-2xl overflow-hidden border-4 border-white/10 hover:z-30 hover:scale-105 transition-transform duration-300"
+              style={{ width: '240px', transform: `rotate(${rotate}) translateX(${(i - 1) * 260}px)`, zIndex: z, aspectRatio: '1/1' }}>
               <img src={src} alt={label} className="w-full h-full object-cover" />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
                 <span className="font-display text-[16px] text-white">{label}</span>
@@ -408,7 +374,6 @@ function EatsSection() {
             </div>
           ))}
         </motion.div>
-
       </div>
     </section>
   )
@@ -472,8 +437,8 @@ function FindUs() {
   const items = [
     { icon:'📍', label:'Address', value:'101 Keith Street, Clemson, SC 29631', sub:'Downtown Clemson · Home of Clemson University' },
     { icon:'🕐', label:'Hours',   value:'Wed 4PM–12AM · Thu–Sat 11AM–2AM', sub:'Kitchen open late' },
-    { icon:'📞', label:'Phone',   value:'(864) 722-5001',          href:'tel:8647225001' },
-    { icon:'✉️', label:'Email',   value:'info@itsurwiener.com',    href:'mailto:info@itsurwiener.com' },
+    { icon:'📞', label:'Phone',   value:'(864) 722-5001', href:'tel:8647225001' },
+    { icon:'✉️', label:'Email',   value:'info@itsurwiener.com', href:'mailto:info@itsurwiener.com' },
   ]
   return (
     <section id="findus" className="bg-[#04030A] py-[100px] px-[5vw]">
