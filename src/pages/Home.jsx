@@ -363,7 +363,19 @@ function EatsSection() {
             </a>
           </div>
         </motion.div>
-        <motion.div className="relative flex items-center justify-center" style={{ height: '520px' }} {...inView(0.15)}>
+        {/* Mobile: simple grid */}
+        <motion.div className="grid grid-cols-3 gap-3 lg:hidden" {...inView(0.15)}>
+          {foods.map(({ src, label }) => (
+            <div key={label} className="relative overflow-hidden border-2 border-white/10" style={{ aspectRatio: '1/1' }}>
+              <img src={src} alt={label} className="w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                <span className="font-display text-[12px] text-white leading-tight">{label}</span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+        {/* Desktop: angled gallery */}
+        <motion.div className="relative hidden lg:flex items-center justify-center" style={{ height: '520px' }} {...inView(0.15)}>
           {foods.map(({ src, label, rotate, z }, i) => (
             <div key={label} className="absolute shadow-2xl overflow-hidden border-4 border-white/10 hover:z-30 hover:scale-105 transition-transform duration-300"
               style={{ width: '240px', transform: `rotate(${rotate}) translateX(${(i - 1) * 260}px)`, zIndex: z, aspectRatio: '1/1' }}>
