@@ -24,7 +24,7 @@ function BasementEvents() {
 
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0]
-    client.fetch(`*[_type == "event" && date >= $today] | order(date asc) [0...4] {
+    client.fetch(`*[_type == "event" && date >= $today && eventType == "show"] | order(date asc) [0...4] {
       bandName, date, time, ticketPrice, ticketUrl, lineleapUrl, soldOut
     }`, { today }).then(data => setEvents(data || [])).catch(() => {})
   }, [])

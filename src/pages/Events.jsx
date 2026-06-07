@@ -95,11 +95,12 @@ export default function Events() {
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('upcoming')
+  const [typeFilter, setTypeFilter] = useState('all')
 
   useEffect(() => {
     client.fetch(`*[_type == "event"] | order(date asc) {
       bandName, date, time, ticketPrice, ticketUrl, lineleapUrl,
-      genre, description, featured, soldOut,
+      genre, description, featured, soldOut, eventType,
       "image": image.asset->url
     }`).then(data => {
       setEvents(data || [])
@@ -110,7 +111,8 @@ export default function Events() {
   const today = new Date().toISOString().split('T')[0]
   const upcoming = events.filter(e => e.date >= today)
   const past     = events.filter(e => e.date <  today)
-  const displayed = filter === 'upcoming' ? upcoming : past
+  const byTime = filter === 'upcoming' ? upcoming : past
+  const displayed = typeFilter === 'all' ? byTime : byTime.filter(e => e.eventType === typeFilter)
 
   return (
     <div className="bg-[#04030A] min-h-screen">
@@ -136,9 +138,9 @@ export default function Events() {
       <section className="px-[5vw] py-16 max-w-[900px] mx-auto">
 
         {/* Filter row */}
-        <div className="flex gap-3 mb-10 flex-wrap items-center justify-between">
-          <div className="flex gap-3">
-            {[['upcoming','Upcoming Shows'],['past','Past Shows']].map(([val, label]) => (
+        <div className="flex gap-3 mb-6 flex-wrap items-center justify-between">
+          <div className="flex gap-3 flex-wrap">
+            {[['upcoming','Upcoming'],['past','Past']].map(([val, label]) => (
               <button key={val} onClick={() => setFilter(val)}
                 className={`font-ui text-[11px] font-bold tracking-[.15em] uppercase px-5 py-2.5 border transition-all duration-200 ${
                   filter === val ? 'bg-purple-bright text-white border-purple-bright' : 'text-cream/60 border-white/15 hover:border-purple-bright/40 hover:text-white bg-transparent'
@@ -151,6 +153,17 @@ export default function Events() {
             className="font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-orange/30 text-orange px-5 py-2.5 no-underline hover:bg-orange hover:text-black transition-all duration-200">
             Book Your Band
           </a>
+        </div>
+        {/* Type filter */}
+        <div className="flex gap-2 mb-10">
+          {[['all','All Events'],['show','Shows'],['event','Watch Parties & Events']].map(([val, label]) => (
+            <button key={val} onClick={() => setTypeFilter(val)}
+              className={`font-ui text-[11px] font-bold tracking-[.12em] uppercase px-4 py-2 border transition-all duration-200 ${
+                typeFilter === val ? 'bg-orange text-black border-orange' : 'text-cream/50 border-white/10 hover:border-orange/40 hover:text-white bg-transparent'
+              }`}>
+              {label}
+            </button>
+          ))}
         </div>
 
         {loading && (
