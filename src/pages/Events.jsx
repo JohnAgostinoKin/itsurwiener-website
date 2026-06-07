@@ -36,37 +36,46 @@ function EventCard({ event, index }) {
 
       <div className="flex items-stretch gap-0">
         {/* Date block */}
-        <div className="flex flex-col items-center justify-center px-5 py-5 border-r border-white/[0.06] flex-shrink-0 min-w-[80px]"
+        <div className="flex flex-col items-center justify-center px-4 py-5 border-r border-white/[0.06] flex-shrink-0 w-[80px]"
           style={{ background: 'rgba(157,78,221,0.08)' }}>
           <div className="font-ui text-[11px] font-bold tracking-[.15em] text-purple-bright">{month}</div>
-          <div className="font-display text-[48px] text-white leading-none">{day}</div>
+          <div className="font-display text-[44px] text-white leading-none">{day}</div>
           <div className="font-ui text-[9px] text-cream/40 tracking-[.1em] uppercase mt-0.5">{dow.slice(0,3)}</div>
         </div>
 
-        {/* Info */}
-        <div className="flex-1 p-5 flex flex-col justify-center">
-          <div className="font-display text-[clamp(22px,3vw,36px)] text-white leading-none mb-1 group-hover:text-purple-bright transition-colors duration-200">
-            {event.bandName}
+        {/* Info — takes all remaining space */}
+        <div className="flex-1 p-5 flex flex-col justify-between gap-3 min-w-0">
+          {/* Top: name + meta */}
+          <div>
+            <div className="font-display text-[clamp(20px,2.5vw,32px)] text-white leading-tight mb-1 group-hover:text-purple-bright transition-colors duration-200 break-words">
+              {event.bandName}
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="font-ui text-[12px] text-cream/55">{event.time}</span>
+              {event.genre && <span className="font-ui text-[10px] border border-white/10 px-2 py-0.5 text-cream/40 uppercase tracking-wider">{event.genre}</span>}
+            </div>
+            {event.description && (
+              <p className="text-[13px] text-cream/60 mt-2 leading-relaxed">{event.description}</p>
+            )}
           </div>
-          <div className="flex items-center gap-3 flex-wrap mt-1">
-            <span className="font-ui text-[12px] text-cream/55">{event.time}</span>
-            {event.genre && <span className="font-ui text-[10px] border border-white/10 px-2 py-0.5 text-cream/40 uppercase tracking-wider">{event.genre}</span>}
-          </div>
-          {event.description && <p className="text-[12px] text-cream/45 mt-2 leading-relaxed max-w-[400px]">{event.description}</p>}
-        </div>
 
-        {/* Ticket */}
-        <div className="flex flex-col items-end justify-center px-5 py-5 flex-shrink-0 gap-3">
-          <div className="font-display text-[clamp(20px,2.5vw,32px)] text-orange text-right">{event.ticketPrice || 'Free'}</div>
-          {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
-            <a href={event.lineleapUrl || event.ticketUrl} target="_blank" rel="noreferrer"
-              className="font-ui text-[10px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-4 py-2 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
-              {event.lineleapUrl ? 'LineLeap' : 'Get Tickets'}
-            </a>
-          )}
-          {event.soldOut && (
-            <span className="font-ui text-[10px] uppercase tracking-wider text-white/30">Sold Out</span>
-          )}
+          {/* Bottom: price + ticket button */}
+          <div className="flex items-center justify-between flex-wrap gap-3 pt-2 border-t border-white/[0.05]">
+            <div className="font-display text-[24px] text-orange leading-none">
+              {event.ticketPrice || 'Free'}
+            </div>
+            <div className="flex items-center gap-3">
+              {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
+                <a href={event.lineleapUrl || event.ticketUrl} target="_blank" rel="noreferrer"
+                  className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-2 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap">
+                  {event.lineleapUrl ? '🎟 LineLeap' : 'Get Tickets'}
+                </a>
+              )}
+              {event.soldOut && (
+                <span className="font-ui text-[10px] uppercase tracking-wider text-white/30">Sold Out</span>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
