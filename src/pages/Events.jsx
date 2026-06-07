@@ -47,8 +47,8 @@ function EventCard({ event, index }) {
 
         {/* Event image (if exists) */}
         {event.image && (
-          <div className="flex-shrink-0 hidden sm:block overflow-hidden border-r border-white/[0.06]" style={{ width: '160px', background: 'rgba(0,0,0,0.5)', alignSelf: 'stretch' }}>
-            <img src={event.image} alt={event.bandName} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+          <div className="flex-shrink-0 hidden sm:block overflow-hidden border-r border-white/[0.06]" style={{ background: 'rgba(0,0,0,0.5)', alignSelf: 'stretch' }}>
+            <img src={event.image} alt={event.bandName} style={{ height: '100%', width: 'auto', display: 'block', maxWidth: '200px' }} />
           </div>
         )}
 
