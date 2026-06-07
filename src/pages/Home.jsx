@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Ticker from '@components/Ticker'
 import GameDayHero from '@components/GameDayHero'
 import { useCounter, useScrollReveal } from '@hooks/useScrollReveal'
+import { client } from '@/lib/sanity'
 
 const fadeUp = (delay = 0) => ({
   initial:    { opacity: 0, y: 30 },
@@ -501,6 +502,76 @@ function FindUs() {
   )
 }
 
+
+// ── Special Events ───────────────────────
+function SpecialEvents() {
+  const [events, setEvents] = useState([])
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0]
+    client.fetch(`*[_type == "event" && date >= $today && eventType == "event"] | order(date asc) [0...4] {
+      bandName, date, time, ticketPrice, lineleapUrl, ticketUrl, description
+    }`, { today }).then(data => setEvents(data || [])).catch(() => {})
+  }, [])
+
+  if (events.length === 0) return null
+
+  return (
+    <section className="px-[5vw] py-[80px]" style={{ background: 'linear-gradient(180deg,#08060F,#04030A)' }}>
+      <motion.div {...inView(0)}>
+        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+          <div>
+            <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3">
+              <span className="w-6 h-0.5 bg-orange" />Coming Up
+            </div>
+            <h2 className="font-display text-[clamp(36px,5vw,64px)] leading-none text-white">
+              Special <span className="text-orange">Events</span>
+            </h2>
+          </div>
+          <Link to="/events" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-orange/30 text-orange px-5 py-2.5 no-underline hover:bg-orange hover:text-black transition-all duration-200">
+            All Events
+          </Link>
+        </div>
+        <div className="flex flex-col gap-2">
+          {events.map((e, i) => {
+            const d = new Date(e.date + 'T00:00:00')
+            const month = d.toLocaleString('default', { month: 'short' }).toUpperCase()
+            const day = d.getDate()
+            const dow = d.toLocaleString('default', { weekday: 'short' }).toUpperCase()
+            return (
+              <motion.div key={e.date + e.bandName}
+                className="flex items-stretch border border-white/[0.07] overflow-hidden hover:border-orange/25 transition-all duration-200"
+                style={{ background: 'rgba(255,255,255,0.03)' }}
+                initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}>
+                <div className="flex flex-col items-center justify-center px-4 py-4 border-r border-white/[0.06] min-w-[70px]" style={{ background: 'rgba(245,101,32,0.08)' }}>
+                  <div className="font-ui text-[9px] font-bold tracking-[.12em] text-orange">{month}</div>
+                  <div className="font-display text-[36px] text-white leading-none">{day}</div>
+                  <div className="font-ui text-[8px] text-cream/35 tracking-[.1em]">{dow}</div>
+                </div>
+                <div className="flex-1 px-5 py-4">
+                  <div className="font-display text-[clamp(18px,2.5vw,28px)] text-white leading-none">{e.bandName}</div>
+                  {e.time && <div className="font-ui text-[11px] text-cream/45 mt-0.5">{e.time}</div>}
+                  {e.description && <p className="text-[12px] text-cream/50 mt-1.5 leading-relaxed">{e.description}</p>}
+                </div>
+                <div className="px-5 py-4 flex-shrink-0 flex flex-col items-end justify-center gap-2">
+                  {e.ticketPrice && <span className="font-cond text-[15px] font-bold text-orange uppercase">{e.ticketPrice}</span>}
+                  {(e.lineleapUrl || e.ticketUrl) && (
+                    <a href={e.lineleapUrl || e.ticketUrl} target="_blank" rel="noreferrer"
+                      className="font-ui text-[10px] font-bold tracking-[.12em] uppercase bg-orange text-black px-3 py-1.5 no-underline hover:bg-white transition-all duration-200">
+                      {e.lineleapUrl ? 'LineLeap' : 'Tickets'}
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+      </motion.div>
+    </section>
+  )
+}
+
 // ── HOME ─────────────────────────────────
 export default function Home() {
   return (
@@ -514,6 +585,7 @@ export default function Home() {
       <Complex />
       <GameDayHero />
       <GameDay />
+      <SpecialEvents />
       <EatsSection />
       <div className="py-10 bg-[#04030A]">
         <div className="overflow-hidden py-[22px]" style={{background:'#9D4EDD'}}>
