@@ -123,7 +123,7 @@ export default function Events() {
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(157,78,221,0.5) 40px,rgba(157,78,221,0.5) 41px)' }} />
         <div className="relative z-[1]">
           <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-purple-bright mb-4">
-            <span className="w-8 h-0.5 bg-purple-bright" />The Basement · Live Music
+            <span className="w-8 h-0.5 bg-purple-bright" />Live Music | Watch Parties | Shows
           </div>
           <h1 className="font-display text-[clamp(64px,12vw,160px)] leading-[.85] text-white mb-4">
             Live<br /><span className="text-purple-bright">Events</span>
