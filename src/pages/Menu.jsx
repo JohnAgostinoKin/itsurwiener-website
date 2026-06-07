@@ -113,6 +113,7 @@ const menu = {
       { name: 'Smashed Tots Melt',   price: '$9.99', desc: 'Yellow and White American with smashed tater tots inside.' },
     ]
   },
+  chicken: {
     label: 'Chicken', icon: '🍗', color: '#F56520',
     note: "Clemson's Best · Hand-Battered & Deep Fried to Order",
     showcase: { name: 'Chicken & Waffle', price: '10.99', desc: 'A crispy hand-battered tender on a golden waffle. Clemson comfort food at its finest.' },
