@@ -101,7 +101,18 @@ const menu = {
       { name: 'Mushroom Swiss Smash', price: '$12.99', desc: 'Fresh smash patty with Swiss cheese and unlimited toppings.' },
     ]
   },
-  chicken: {
+  melts: {
+    label: 'Grilled Melts', icon: '🧀', color: '#F56520',
+    note: 'All Melts Served on Grilled Texas Toast',
+    basket: { price: '+$5.99', sub: 'Substitute Tots or Sweet Potato Fries for $1' },
+    items: [
+      { name: 'Classic Melt',        price: '$6.99', desc: 'Yellow and White American Cheese on Texas Toast.' },
+      { name: 'Three Cheese Melt',   price: '$7.99', desc: 'Cheddar, White American and Swiss on Texas Toast.' },
+      { name: 'Fried Pickle Melt',   price: '$8.99', desc: 'Yellow and White American with crispy fried pickles inside.' },
+      { name: 'Bacon Cheddar Melt',  price: '$9.99', desc: 'Loaded with Bacon and Cheddar Cheese.' },
+      { name: 'Smashed Tots Melt',   price: '$9.99', desc: 'Yellow and White American with smashed tater tots inside.' },
+    ]
+  },
     label: 'Chicken', icon: '🍗', color: '#F56520',
     note: "Clemson's Best · Hand-Battered & Deep Fried to Order",
     showcase: { name: 'Chicken & Waffle', price: '10.99', desc: 'A crispy hand-battered tender on a golden waffle. Clemson comfort food at its finest.' },
@@ -188,7 +199,7 @@ const menu = {
   }
 }
 
-const categoryOrder = ['starters','dogs','burgers','smashburgers','chicken','frypies','tacos','combos','sides','desserts']
+const categoryOrder = ['starters','dogs','burgers','smashburgers','melts','chicken','frypies','tacos','combos','sides','desserts']
 const categories = [
   ...categoryOrder.filter(k => k !== 'toppings').map(key => ({ key, label: menu[key].label })),
   { key: 'toppings', label: 'Toppings' }
