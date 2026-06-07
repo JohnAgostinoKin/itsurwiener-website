@@ -52,15 +52,16 @@ function EventCard({ event, index }) {
             <span className="font-ui text-[12px] text-cream/55">{event.time}</span>
             {event.genre && <span className="font-ui text-[10px] border border-white/10 px-2 py-0.5 text-cream/40 uppercase tracking-wider">{event.genre}</span>}
           </div>
+          {event.description && <p className="text-[12px] text-cream/45 mt-2 leading-relaxed max-w-[400px]">{event.description}</p>}
         </div>
 
         {/* Ticket */}
         <div className="flex flex-col items-end justify-center px-5 py-5 flex-shrink-0 gap-3">
           <div className="font-display text-[clamp(20px,2.5vw,32px)] text-orange text-right">{event.ticketPrice || 'Free'}</div>
-          {event.ticketUrl && !event.soldOut && (
-            <a href={event.ticketUrl} target="_blank" rel="noreferrer"
-              className="font-ui text-[10px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-4 py-2 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap">
-              Get Tickets
+          {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
+            <a href={event.lineleapUrl || event.ticketUrl} target="_blank" rel="noreferrer"
+              className="font-ui text-[10px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-4 py-2 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
+              {event.lineleapUrl ? 'LineLeap' : 'Get Tickets'}
             </a>
           )}
           {event.soldOut && (
@@ -80,7 +81,7 @@ export default function Events() {
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0]
     client.fetch(`*[_type == "event"] | order(date asc) {
-      bandName, date, time, ticketPrice, ticketUrl, genre, featured, soldOut
+      bandName, date, time, ticketPrice, ticketUrl, lineleapUrl, genre, description, featured, soldOut
     }`).then(data => {
       setEvents(data || [])
       setLoading(false)

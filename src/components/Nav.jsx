@@ -3,13 +3,13 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
-  { label: 'Venues',              to: '/venues' },
-  { label: 'Game Day',            to: '/game-day' },
-  { label: 'Home of The Litcher', to: '/the-litcher' },
-  { label: 'The Basement',        to: '/the-basement' },
-  { label: 'Menu',                to: '/menu' },
-  { label: 'Merch',               to: '/merch' },
-  { label: 'Find Us',             to: '/#findus' },
+  { label: 'Game Day',   to: '/game-day' },
+  { label: 'Litcher',    to: '/the-litcher' },
+  { label: 'Basement',   to: '/the-basement' },
+  { label: 'Events',     to: '/events' },
+  { label: 'Menu',       to: '/menu' },
+  { label: 'Merch',      to: '/merch' },
+  { label: 'Find Us',    to: '/#findus' },
 ]
 
 export default function Nav() {
@@ -32,7 +32,7 @@ export default function Nav() {
           its<span className="animate-[logoFlash_3s_infinite]">ur</span>wiener
         </Link>
 
-        <ul className="hidden lg:flex gap-7 list-none">
+        <ul className="hidden lg:flex gap-5 list-none">
           {links.map(({ label, to }) => (
             <li key={label}>
               <NavLink to={to}

@@ -25,7 +25,7 @@ function BasementEvents() {
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0]
     client.fetch(`*[_type == "event" && date >= $today] | order(date asc) [0...4] {
-      bandName, date, time, ticketPrice, ticketUrl, soldOut
+      bandName, date, time, ticketPrice, ticketUrl, lineleapUrl, soldOut
     }`, { today }).then(data => setEvents(data || [])).catch(() => {})
   }, [])
 
@@ -47,7 +47,6 @@ function BasementEvents() {
             Full Calendar
           </Link>
         </div>
-
         <div className="flex flex-col gap-2">
           {events.map(e => {
             const d = new Date(e.date + 'T00:00:00')
@@ -69,10 +68,10 @@ function BasementEvents() {
                 </div>
                 <div className="px-5 flex-shrink-0 flex items-center gap-3">
                   <span className="font-display text-[22px] text-orange">{e.ticketPrice || 'Free'}</span>
-                  {e.ticketUrl && !e.soldOut && (
-                    <a href={e.ticketUrl} target="_blank" rel="noreferrer"
+                  {(e.lineleapUrl || e.ticketUrl) && !e.soldOut && (
+                    <a href={e.lineleapUrl || e.ticketUrl} target="_blank" rel="noreferrer"
                       className="font-ui text-[10px] font-bold tracking-[.12em] uppercase bg-purple-bright text-white px-3 py-1.5 no-underline hover:bg-orange hover:text-black transition-all duration-200">
-                      Tickets
+                      {e.lineleapUrl ? 'LineLeap' : 'Tickets'}
                     </a>
                   )}
                 </div>
@@ -97,13 +96,11 @@ export default function Basement() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 100% 60% at 50% 100%, rgba(4,3,10,1) 20%, transparent 80%), radial-gradient(ellipse 100% 60% at 50% 0%, rgba(4,3,10,0.9) 20%, transparent 80%), radial-gradient(ellipse 60% 40% at 50% 50%, rgba(82,45,128,0.25) 0%, transparent 100%)' }} />
         <div className="absolute top-0 left-1/4 w-px h-full opacity-20" style={{ background: 'linear-gradient(180deg,transparent,#9D4EDD,transparent)' }} />
         <div className="absolute top-0 right-1/3 w-px h-full opacity-15" style={{ background: 'linear-gradient(180deg,transparent,#F56520,transparent)' }} />
-
         <div className="relative z-[1] px-[5vw] w-full pt-32">
           <motion.div {...inView(0)}>
             <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-white mb-5">
               <span className="w-8 h-0.5 bg-white" />If You Know . . . You Know
             </div>
-            {/* Logo replaces heading */}
             <img src="/images/basement-logo.png" alt="The Basement"
               className="mb-6 max-w-full"
               style={{ width: 'clamp(320px,55vw,750px)', height: 'auto' }} />
@@ -149,7 +146,6 @@ export default function Basement() {
               ))}
             </div>
           </motion.div>
-
           <motion.div {...inView(0.15)} className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
             <img src="/images/basement.jpg" alt="The Basement" className="w-full h-full object-cover" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg,rgba(82,45,128,0.4),transparent 60%)' }} />
@@ -162,15 +158,15 @@ export default function Basement() {
       </section>
 
       {/* Purple ticker */}
-<div className="overflow-hidden py-5 border-y border-purple-bright/20" style={{ background: '#522D80' }}>
-  <div className="inline-flex whitespace-nowrap" style={{ animation: 'ticker 30s linear infinite' }}>
-    {Array(3).fill(['Clemson\'s Only Music Venue','Live Music Every Weekend','VIP Section','DJs','Live Bands','Comedy Shows','Karaoke','Special Events','Clemson\'s Best Nightlife','Full Bar','Late Night Food','If You Know...You Know']).flat().map((item, i) => (
-      <span key={i} className="font-display text-[22px] tracking-[.06em] text-white inline-flex items-center px-8">
-        {item}<span className="ml-8 opacity-50">✦</span>
-      </span>
-    ))}
-  </div>
-</div>
+      <div className="overflow-hidden py-5 border-y border-purple-bright/20" style={{ background: '#522D80' }}>
+        <div className="inline-flex whitespace-nowrap" style={{ animation: 'ticker 30s linear infinite' }}>
+          {Array(3).fill(['Clemson\'s Only Music Venue','Live Music Every Weekend','VIP Section','DJs','Live Bands','Comedy Shows','Karaoke','Special Events','Clemson\'s Best Nightlife','Full Bar','Late Night Food','If You Know...You Know']).flat().map((item, i) => (
+            <span key={i} className="font-display text-[22px] tracking-[.06em] text-white inline-flex items-center px-8">
+              {item}<span className="ml-8 opacity-50">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* Features */}
       <section className="px-[5vw] py-[100px]" style={{ background: 'linear-gradient(180deg,#08060F,#04030A)' }}>
@@ -182,7 +178,6 @@ export default function Basement() {
             The Full<br /><span className="text-purple-bright">Experience</span>
           </h2>
         </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <motion.div key={f.title} {...inView(i * 0.07)}
@@ -217,13 +212,11 @@ export default function Basement() {
       {/* VIP Section */}
       <section className="px-[5vw] py-[100px]" style={{ background: 'linear-gradient(180deg,#04030A,#08060F)' }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-[1200px] mx-auto">
-
           <motion.div {...inView(0.15)} className="relative overflow-hidden order-2 lg:order-1" style={{ aspectRatio:'3/4' }}>
             <img src="/images/vip-section.jpg" alt="VIP Section" className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg,rgba(82,45,128,0.3),transparent 60%)' }} />
             <div className="absolute top-4 left-4 font-ui text-[10px] font-bold tracking-[.2em] uppercase px-3 py-1.5" style={{ background: '#9D4EDD', color: 'white' }}>VIP Access</div>
           </motion.div>
-
           <motion.div {...inView(0)} className="order-1 lg:order-2">
             <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-purple-bright mb-4">
               <span className="w-6 h-0.5 bg-purple-bright" />Elevated Experience
@@ -239,10 +232,10 @@ export default function Basement() {
             </p>
             <div className="grid grid-cols-1 gap-3 mb-8">
               {[
-                { label: 'Private Bartender',   desc: 'Your own dedicated bartender for the night.' },
-                { label: 'Reserved Seating',    desc: 'Exclusive lounge seating for your entire group.' },
-                { label: 'Bottle Service',      desc: 'Premium bottle service available on request.' },
-                { label: 'Custom Packages',     desc: 'Tailored packages for any size group or occasion.' },
+                { label: 'Private Bartender', desc: 'Your own dedicated bartender for the night.' },
+                { label: 'Reserved Seating',  desc: 'Exclusive lounge seating for your entire group.' },
+                { label: 'Bottle Service',    desc: 'Premium bottle service available on request.' },
+                { label: 'Custom Packages',   desc: 'Tailored packages for any size group or occasion.' },
               ].map(item => (
                 <div key={item.label} className="flex items-start gap-4 border border-purple-bright/15 px-4 py-3" style={{ background: 'rgba(157,78,221,0.05)' }}>
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-bright flex-shrink-0 mt-2" />
@@ -258,7 +251,6 @@ export default function Basement() {
               Reserve VIP
             </a>
           </motion.div>
-
         </div>
       </section>
 
@@ -286,14 +278,13 @@ export default function Basement() {
               </a>
             </div>
           </motion.div>
-
           <motion.div {...inView(0.15)} className="grid grid-cols-1 gap-4">
             {[
-              { label: 'VIP Section',         desc: 'Exclusive area, stage-right. Private bar and exclusive access.' },
-              { label: 'Birthday Parties',    desc: 'Make it a night to remember. Front row tables available.' },
-              { label: 'Corporate Events',    desc: 'Team outings and company events in a one-of-a-kind venue.' },
-              { label: 'Band Bookings',       desc: 'Looking to play The Basement? Reach out to our booking team.' },
-              { label: 'Custom Events',       desc: 'If you can think it up, we can make it happen.' },
+              { label: 'VIP Section',      desc: 'Exclusive area, stage-right. Private bar and exclusive access.' },
+              { label: 'Birthday Parties', desc: 'Make it a night to remember. Front row tables available.' },
+              { label: 'Corporate Events', desc: 'Team outings and company events in a one-of-a-kind venue.' },
+              { label: 'Band Bookings',    desc: 'Looking to play The Basement? Reach out to our booking team.' },
+              { label: 'Custom Events',    desc: 'If you can think it up, we can make it happen.' },
             ].map((item, i) => (
               <motion.div key={item.label} {...inView(i * 0.08)}
                 className="flex items-start gap-4 border border-white/[0.06] p-4 hover:border-orange/25 transition-all duration-200"
