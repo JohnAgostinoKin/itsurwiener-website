@@ -129,7 +129,7 @@ export default function Events() {
             Live<br /><span className="text-purple-bright">Events</span>
           </h1>
           <p className="font-cond text-[clamp(16px,2vw,24px)] text-cream/55 max-w-[600px] tracking-wide">
-            Live Bands, DJs, Watch Parties, Events and Shows accross all venue areas.
+            Live Bands, DJs, Watch Parties, Events and Shows across all venue areas.
           </p>
         </div>
       </div>
