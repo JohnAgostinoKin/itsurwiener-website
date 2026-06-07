@@ -14,67 +14,76 @@ function EventCard({ event, index }) {
   const d = new Date(event.date + 'T00:00:00')
   const month = d.toLocaleString('default', { month: 'short' }).toUpperCase()
   const day   = d.getDate()
-  const dow   = d.toLocaleString('default', { weekday: 'long' })
+  const dow   = d.toLocaleString('default', { weekday: 'short' }).toUpperCase()
 
   return (
     <motion.div
       className={`relative border overflow-hidden group transition-all duration-300 ${
-        event.featured ? 'border-orange/50 md:col-span-2' : 'border-white/[0.07] hover:border-purple-bright/30'
+        event.featured ? 'border-orange/50' : 'border-white/[0.07] hover:border-purple-bright/30'
       }`}
-      style={{ background: event.featured ? 'rgba(245,101,32,0.06)' : 'rgba(255,255,255,0.03)' }}
+      style={{ background: event.featured ? 'rgba(245,101,32,0.05)' : 'rgba(255,255,255,0.03)' }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
+      transition={{ duration: 0.4, delay: (index % 4) * 0.06 }}
     >
       {event.featured && (
-        <div className="absolute top-0 left-0 font-ui text-[9px] font-bold tracking-[.2em] uppercase px-3 py-1.5" style={{ background: '#F56520', color: '#04030A' }}>Featured</div>
+        <div className="font-ui text-[9px] font-bold tracking-[.2em] uppercase px-3 py-1.5 text-center w-full" style={{ background: '#F56520', color: '#04030A' }}>
+          Featured Event
+        </div>
       )}
       {event.soldOut && (
         <div className="absolute top-0 right-0 font-ui text-[9px] font-bold tracking-[.2em] uppercase px-3 py-1.5 bg-white/10 text-white/50">Sold Out</div>
       )}
 
-      <div className="flex items-stretch gap-0">
-        {/* Date block */}
-        <div className="flex flex-col items-center justify-center px-4 py-5 border-r border-white/[0.06] flex-shrink-0 w-[80px]"
+      <div className="flex items-stretch">
+        {/* Date column */}
+        <div className="flex flex-col items-center justify-center px-5 py-6 border-r border-white/[0.06] flex-shrink-0 w-[86px]"
           style={{ background: 'rgba(157,78,221,0.08)' }}>
-          <div className="font-ui text-[11px] font-bold tracking-[.15em] text-purple-bright">{month}</div>
-          <div className="font-display text-[44px] text-white leading-none">{day}</div>
-          <div className="font-ui text-[9px] text-cream/40 tracking-[.1em] uppercase mt-0.5">{dow.slice(0,3)}</div>
+          <div className="font-ui text-[10px] font-bold tracking-[.15em] text-purple-bright">{month}</div>
+          <div className="font-display text-[48px] text-white leading-none">{day}</div>
+          <div className="font-ui text-[9px] text-cream/40 tracking-[.1em] uppercase mt-1">{dow}</div>
         </div>
 
-        {/* Info — takes all remaining space */}
-        <div className="flex-1 p-5 flex flex-col justify-between gap-3 min-w-0">
-          {/* Top: name + meta */}
+        {/* Event image (if exists) */}
+        {event.image && (
+          <div className="flex-shrink-0 w-[140px] hidden sm:block overflow-hidden border-r border-white/[0.06]">
+            <img src={event.image} alt={event.bandName} className="w-full h-full object-cover opacity-80 group-hover:scale-[1.04] transition-transform duration-500" />
+          </div>
+        )}
+
+        {/* Main info */}
+        <div className="flex-1 p-5 flex flex-col gap-2 min-w-0">
           <div>
-            <div className="font-display text-[clamp(20px,2.5vw,32px)] text-white leading-tight mb-1 group-hover:text-purple-bright transition-colors duration-200 break-words">
+            <h3 className="font-display text-[clamp(20px,2.8vw,34px)] text-white leading-tight group-hover:text-purple-bright transition-colors duration-200">
               {event.bandName}
-            </div>
-            <div className="flex items-center gap-3 flex-wrap">
+            </h3>
+            <div className="flex items-center gap-3 flex-wrap mt-1">
               <span className="font-ui text-[12px] text-cream/55">{event.time}</span>
-              {event.genre && <span className="font-ui text-[10px] border border-white/10 px-2 py-0.5 text-cream/40 uppercase tracking-wider">{event.genre}</span>}
+              {event.genre && (
+                <span className="font-ui text-[10px] border border-white/10 px-2 py-0.5 text-cream/40 uppercase tracking-wider">{event.genre}</span>
+              )}
             </div>
-            {event.description && (
-              <p className="text-[13px] text-cream/60 mt-2 leading-relaxed">{event.description}</p>
-            )}
           </div>
 
-          {/* Bottom: price + ticket button */}
-          <div className="flex items-center justify-between flex-wrap gap-3 pt-2 border-t border-white/[0.05]">
-            <div className="font-display text-[24px] text-orange leading-none">
+          {event.description && (
+            <p className="text-[13px] text-cream/65 leading-relaxed">{event.description}</p>
+          )}
+
+          {/* Price + CTA row */}
+          <div className="flex items-center justify-between flex-wrap gap-3 mt-auto pt-3 border-t border-white/[0.05]">
+            <div className="font-cond text-[16px] font-bold text-orange uppercase tracking-wide">
               {event.ticketPrice || 'Free'}
             </div>
-            <div className="flex items-center gap-3">
-              {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
-                <a href={event.lineleapUrl || event.ticketUrl} target="_blank" rel="noreferrer"
-                  className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-2 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap">
-                  {event.lineleapUrl ? '🎟 LineLeap' : 'Get Tickets'}
-                </a>
-              )}
-              {event.soldOut && (
-                <span className="font-ui text-[10px] uppercase tracking-wider text-white/30">Sold Out</span>
-              )}
-            </div>
+            {(event.lineleapUrl || event.ticketUrl) && !event.soldOut && (
+              <a href={event.lineleapUrl || event.ticketUrl} target="_blank" rel="noreferrer"
+                className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-2.5 no-underline hover:bg-orange hover:text-black transition-all duration-200 whitespace-nowrap">
+                {event.lineleapUrl ? 'Get Tickets on LineLeap' : 'Get Tickets'}
+              </a>
+            )}
+            {event.soldOut && (
+              <span className="font-ui text-[11px] uppercase tracking-wider text-white/30 border border-white/10 px-4 py-2">Sold Out</span>
+            )}
           </div>
         </div>
       </div>
@@ -88,9 +97,10 @@ export default function Events() {
   const [filter, setFilter] = useState('upcoming')
 
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0]
     client.fetch(`*[_type == "event"] | order(date asc) {
-      bandName, date, time, ticketPrice, ticketUrl, lineleapUrl, genre, description, featured, soldOut
+      bandName, date, time, ticketPrice, ticketUrl, lineleapUrl,
+      genre, description, featured, soldOut,
+      "image": image.asset->url
     }`).then(data => {
       setEvents(data || [])
       setLoading(false)
@@ -123,9 +133,9 @@ export default function Events() {
       </div>
 
       {/* Events list */}
-      <section className="px-[5vw] py-16 max-w-[1100px] mx-auto">
+      <section className="px-[5vw] py-16 max-w-[900px] mx-auto">
 
-        {/* Filter */}
+        {/* Filter row */}
         <div className="flex gap-3 mb-10 flex-wrap items-center justify-between">
           <div className="flex gap-3">
             {[['upcoming','Upcoming Shows'],['past','Past Shows']].map(([val, label]) => (
@@ -158,8 +168,11 @@ export default function Events() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {displayed.map((event, i) => <EventCard key={event.date + event.bandName} event={event} index={i} />)}
+        {/* Single column event list */}
+        <div className="flex flex-col gap-3">
+          {displayed.map((event, i) => (
+            <EventCard key={event.date + event.bandName} event={event} index={i} />
+          ))}
         </div>
 
       </section>
