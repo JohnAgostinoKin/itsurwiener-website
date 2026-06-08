@@ -50,12 +50,12 @@ export const router = createBrowserRouter([
       { path: 'merch',        element: <Merch /> },
       { path: 'events',       element: <Events /> },
       { path: '*',            element: <NotFound /> },
-      <Route path="/privacy" element={<PrivacyPolicy />} />
-<Route path="/terms" element={<TermsOfUse />} />
-<Route path="/refund-policy" element={<RefundCancellationPolicy />} />
-<Route path="/venue-terms" element={<VenueEventTerms />} />
-<Route path="/cookies" element={<CookiePolicy />} />
-<Route path="/accessibility" element={<AccessibilityStatement />} />
-],
+{ path: '/privacy',        element: <PrivacyPolicy /> },
+{ path: '/terms',          element: <TermsOfUse /> },
+{ path: '/refund-policy',  element: <RefundCancellationPolicy /> },
+{ path: '/venue-terms',    element: <VenueEventTerms /> },
+{ path: '/cookies',        element: <CookiePolicy /> },
+{ path: '/accessibility',  element: <AccessibilityStatement /> },
+{ path: '*',               element: <NotFound /> },],
   },
 ])
