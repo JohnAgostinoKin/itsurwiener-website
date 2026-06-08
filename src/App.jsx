@@ -13,12 +13,6 @@ import Menu     from '@pages/Menu'
 import Merch    from '@pages/Merch'
 import Events   from '@pages/Events'
 import NotFound from '@pages/NotFound'
-import PrivacyPolicy from "./legal/PrivacyPolicy";
-import TermsOfUse from "./legal/TermsOfUse";
-import RefundCancellationPolicy from "./legal/RefundCancellationPolicy";
-import VenueEventTerms from "./legal/VenueEventTerms";
-import CookiePolicy from "./legal/CookiePolicy";
-import AccessibilityStatement from "./legal/AccessibilityStatement";
 
 // ── Root layout wraps every page ──
 function RootLayout() {
@@ -50,12 +44,6 @@ export const router = createBrowserRouter([
       { path: 'merch',        element: <Merch /> },
       { path: 'events',       element: <Events /> },
       { path: '*',            element: <NotFound /> },
-{ path: '/privacy',        element: <PrivacyPolicy /> },
-{ path: '/terms',          element: <TermsOfUse /> },
-{ path: '/refund-policy',  element: <RefundCancellationPolicy /> },
-{ path: '/venue-terms',    element: <VenueEventTerms /> },
-{ path: '/cookies',        element: <CookiePolicy /> },
-{ path: '/accessibility',  element: <AccessibilityStatement /> },
-{ path: '*',               element: <NotFound /> },],
+    ],
   },
 ])
