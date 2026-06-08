@@ -14,19 +14,19 @@ const products = [
   {
     id: 'tshirt-classic', category: 'tees',
     name: 'Classic Tee', desc: 'The original itsurwiener tee. Comfort Colors 100% cotton.',
-    price: 24.99, image: '/images/merch.jpg',
+    price: 24.99, image: null,
     sizes: ['S','M','L','XL','2XL'], colors: ['Black','Orange','Purple'],
   },
   {
     id: 'tshirt-litcher', category: 'tees',
     name: 'Home of The Litcher® Tee', desc: 'Rep the most iconic drink in Clemson. Comfort Colors.',
-    price: 26.99, image: '/images/merch.jpg',
+    price: 26.99, image: null,
     sizes: ['S','M','L','XL','2XL'], colors: ['Black','Purple'],
   },
   {
     id: 'tshirt-gameday', category: 'tees',
     name: 'Game Day Tee', desc: 'The official itsurwiener game day shirt. Go Tigers.',
-    price: 24.99, image: '/images/merch.jpg',
+    price: 24.99, image: null,
     sizes: ['S','M','L','XL','2XL'], colors: ['Orange','Black'],
   },
 
@@ -34,13 +34,13 @@ const products = [
   {
     id: 'hoodie-classic', category: 'hoodies',
     name: 'Classic Hoodie', desc: 'Heavyweight Comfort Colors hoodie. Built for Clemson winters.',
-    price: 54.99, image: '/images/merch.jpg',
+    price: 54.99, image: null,
     sizes: ['S','M','L','XL','2XL'], colors: ['Black','Grey','Purple'],
   },
   {
     id: 'crewneck-classic', category: 'hoodies',
     name: 'Classic Crewneck', desc: 'Premium Comfort Colors crewneck sweatshirt.',
-    price: 44.99, image: '/images/merch.jpg',
+    price: 44.99, image: null,
     sizes: ['S','M','L','XL','2XL'], colors: ['Black','Orange','Purple'],
   },
 
@@ -48,13 +48,13 @@ const products = [
   {
     id: 'hat-snapback', category: 'hats',
     name: 'itsurwiener Snapback', desc: 'Structured snapback hat. One size fits most.',
-    price: 28.99, image: '/images/merch.jpg',
+    price: 28.99, image: null,
     sizes: null, colors: ['Black','Orange'],
   },
   {
     id: 'hat-dad', category: 'hats',
     name: 'Wien Dad Hat', desc: 'Unstructured cotton dad hat with embroidered logo.',
-    price: 24.99, image: '/images/merch.jpg',
+    price: 24.99, image: null,
     sizes: null, colors: ['Black','Khaki'],
   },
 
@@ -62,25 +62,25 @@ const products = [
   {
     id: 'sticker-pack', category: 'souvenirs',
     name: 'Sticker Pack', desc: '5 premium vinyl stickers. Waterproof, weatherproof.',
-    price: 8.99, image: '/images/merch.jpg',
+    price: 8.99, image: null,
     sizes: null, colors: null,
   },
   {
     id: 'decal-car', category: 'souvenirs',
     name: 'Car Decal', desc: 'Large vinyl car decal. Makes the tailgate official.',
-    price: 6.99, image: '/images/merch.jpg',
+    price: 6.99, image: null,
     sizes: null, colors: null,
   },
   {
     id: 'koozie', category: 'souvenirs',
     name: 'Wien Koozie', desc: 'Keep your Tall Boy cold. Neoprene can cooler.',
-    price: 7.99, image: '/images/merch.jpg',
+    price: 7.99, image: null,
     sizes: null, colors: ['Black','Orange'],
   },
   {
     id: 'pint-glass', category: 'souvenirs',
     name: 'Pint Glass', desc: 'Etched itsurwiener pint glass. 16oz.',
-    price: 14.99, image: '/images/merch.jpg',
+    price: 14.99, image: null,
     sizes: null, colors: null,
   },
 
@@ -88,19 +88,19 @@ const products = [
   {
     id: 'gift-card-25', category: 'giftcards',
     name: 'Gift Card — $25', desc: 'The perfect gift for any Clemson fan.',
-    price: 25.00, image: '/images/merch.jpg',
+    price: 25.00, image: null,
     sizes: null, colors: null,
   },
   {
     id: 'gift-card-50', category: 'giftcards',
     name: 'Gift Card — $50', desc: 'Good for food, drinks, merch — anything.',
-    price: 50.00, image: '/images/merch.jpg',
+    price: 50.00, image: null,
     sizes: null, colors: null,
   },
   {
     id: 'gift-card-100', category: 'giftcards',
     name: 'Gift Card — $100', desc: 'Go big. They deserve it.',
-    price: 100.00, image: '/images/merch.jpg',
+    price: 100.00, image: null,
     sizes: null, colors: null,
   },
 ]
@@ -133,15 +133,22 @@ function ProductCard({ product }) {
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
     >
-      {/* Product image */}
-      <div className="relative overflow-hidden aspect-square bg-[#08060F]">
-        <img src={product.image} alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 opacity-80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="absolute bottom-3 left-3">
-          <span className="font-display text-[28px] text-orange leading-none">${product.price.toFixed(2)}</span>
+      {/* Product image — only show if real image exists */}
+      {product.image ? (
+        <div className="relative overflow-hidden aspect-square bg-[#08060F]">
+          <img src={product.image} alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute bottom-3 left-3">
+            <span className="font-display text-[28px] text-orange leading-none">${product.price.toFixed(2)}</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center justify-between px-5 pt-5">
+          <span className="font-display text-[32px] text-orange leading-none">${product.price.toFixed(2)}</span>
+          <span className="font-ui text-[10px] font-bold tracking-[.15em] uppercase text-cream/25 border border-white/10 px-2 py-1">Photo Coming Soon</span>
+        </div>
+      )}
 
       {/* Info */}
       <div className="p-5">
@@ -200,6 +207,76 @@ function ProductCard({ product }) {
   )
 }
 
+
+function GiftCardSelector({ products }) {
+  const [amount, setAmount] = useState(products[0]?.price || 25)
+  const selected = products.find(p => p.price === amount) || products[0]
+  if (!selected) return null
+
+  return (
+    <motion.div
+      className="border border-orange/30 overflow-hidden group transition-all duration-300 md:col-span-2 lg:col-span-3"
+      style={{ background: 'rgba(245,101,32,0.04)' }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      <div className="flex flex-col md:flex-row items-stretch">
+        {/* Left — visual */}
+        <div className="md:w-[280px] flex-shrink-0 flex flex-col items-center justify-center p-10 border-b md:border-b-0 md:border-r border-orange/15"
+          style={{ background: 'linear-gradient(135deg,rgba(245,101,32,0.12),rgba(82,45,128,0.12))' }}>
+          <div className="font-display text-[80px] leading-none text-orange mb-2">🎁</div>
+          <div className="font-display text-[clamp(32px,4vw,52px)] text-white leading-none text-center">
+            itsurwiener<br /><span className="text-orange">Gift Card</span>
+          </div>
+          <div className="font-ui text-[11px] tracking-[.15em] uppercase text-cream/40 mt-3 text-center">
+            Good for food, drinks & merch
+          </div>
+        </div>
+
+        {/* Right — selector */}
+        <div className="flex-1 p-8 flex flex-col justify-between gap-6">
+          <div>
+            <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange/70 mb-4">Select Amount</div>
+            <div className="flex flex-wrap gap-3">
+              {products.sort((a,b) => a.price - b.price).map(p => (
+                <button key={p.price} onClick={() => setAmount(p.price)}
+                  className={`font-display text-[28px] px-5 py-2 border transition-all duration-200 ${
+                    amount === p.price
+                      ? 'border-orange text-orange bg-orange/10'
+                      : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'
+                  }`}>
+                  ${p.price}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-[13px] text-cream/55 mb-6 leading-relaxed">
+              {selected.desc || 'The perfect gift for any Clemson fan. Redeemable for food, drinks, and merch at itsurwiener.'}
+            </p>
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="font-display text-[48px] text-orange leading-none">${amount}</div>
+              <button
+                className="snipcart-add-item font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
+                data-item-id={selected.id || `gift-card-${amount}`}
+                data-item-price={amount}
+                data-item-url="/merch"
+                data-item-name={`itsurwiener Gift Card — $${amount}`}
+                data-item-description={`itsurwiener Gift Card - $${amount} value`}
+                data-item-image={selected.image || '/images/merch.jpg'}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Merch() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [sanityProducts, setSanityProducts] = useState(null)
@@ -218,7 +295,7 @@ export default function Merch() {
   const activeProducts = (sanityProducts || products).map(p => ({
     ...p,
     desc: p.desc || p.description,
-    image: p.image || '/images/merch.jpg',
+    image: p.image || null,
   }))
 
   const filtered = activeCategory === 'all'
