@@ -123,13 +123,13 @@ export default function Events() {
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(157,78,221,0.5) 40px,rgba(157,78,221,0.5) 41px)' }} />
         <div className="relative z-[1]">
           <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-purple-bright mb-4">
-            <span className="w-8 h-0.5 bg-purple-bright" />Live Music | Watch Parties | Shows
+            <span className="w-8 h-0.5 bg-purple-bright" />The Basement · Live Music
           </div>
           <h1 className="font-display text-[clamp(64px,12vw,160px)] leading-[.85] text-white mb-4">
             Live<br /><span className="text-purple-bright">Events</span>
           </h1>
           <p className="font-cond text-[clamp(16px,2vw,24px)] text-cream/55 max-w-[600px] tracking-wide">
-            Live Bands, DJs, Watch Parties, Events and Shows across all venue areas.
+            Live bands and DJs every weekend at The Basement. 101 Keith Street, Clemson SC.
           </p>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default function Events() {
               </button>
             ))}
           </div>
-          <a href="mailto:info@itsurwiener.com?subject=Band Booking"
+          <a href="/booking"
             className="font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-orange/30 text-orange px-5 py-2.5 no-underline hover:bg-orange hover:text-black transition-all duration-200">
             Book Your Band
           </a>
@@ -200,7 +200,7 @@ export default function Events() {
           <p className="text-cream/55 text-[15px] mb-8 max-w-[480px] mx-auto">
             We book live bands and performers every weekend. Reach out and let's talk.
           </p>
-          <a href="mailto:info@itsurwiener.com?subject=Band Booking"
+          <a href="/booking"
             className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
             Contact Us
           </a>

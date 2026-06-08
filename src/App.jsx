@@ -20,6 +20,7 @@ import TermsOfUse              from './legal/TermsOfUse'
 import RefundCancellationPolicy from './legal/RefundCancellationPolicy'
 import VenueEventTerms         from './legal/VenueEventTerms'
 import AccessibilityStatement  from './legal/AccessibilityStatement'
+import BookingInquiry          from '@pages/BookingInquiry'
 
 function RootLayout() {
   return (
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
       { path: 'refund-policy', element: <RefundCancellationPolicy /> },
       { path: 'venue-terms',   element: <VenueEventTerms /> },
       { path: 'accessibility', element: <AccessibilityStatement /> },
+      { path: 'booking',        element: <BookingInquiry /> },
       { path: '*',             element: <NotFound /> },
     ],
   },
