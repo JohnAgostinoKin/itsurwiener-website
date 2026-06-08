@@ -31,7 +31,21 @@ export default function Footer() {
 
       </div>
 
-      <div className="mt-8 pt-6 border-t border-orange/[0.08] flex justify-end">
+      <div className="mt-8 pt-6 border-t border-orange/[0.08] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+          {[
+            { label: 'Privacy Policy',    to: '/privacy' },
+            { label: 'Terms of Use',      to: '/terms' },
+            { label: 'Refund Policy',     to: '/refund-policy' },
+            { label: 'Venue & Event Terms', to: '/venue-terms' },
+            { label: 'Accessibility',     to: '/accessibility' },
+          ].map(({ label, to }) => (
+            <Link key={label} to={to}
+              className="font-ui text-[10px] text-cream/35 no-underline hover:text-cream/70 transition-colors duration-200 tracking-[.08em]">
+              {label}
+            </Link>
+          ))}
+        </div>
         <div className="font-ui text-[12px] text-cream/70">
           Copyright 2026 Itsurwiener — All Rights Reserved.
         </div>
