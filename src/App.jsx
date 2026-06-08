@@ -14,7 +14,13 @@ import Merch    from '@pages/Merch'
 import Events   from '@pages/Events'
 import NotFound from '@pages/NotFound'
 
-// ── Root layout wraps every page ──
+// Legal
+import PrivacyPolicy           from './legal/PrivacyPolicy'
+import TermsOfUse              from './legal/TermsOfUse'
+import RefundCancellationPolicy from './legal/RefundCancellationPolicy'
+import VenueEventTerms         from './legal/VenueEventTerms'
+import AccessibilityStatement  from './legal/AccessibilityStatement'
+
 function RootLayout() {
   return (
     <>
@@ -29,21 +35,25 @@ function RootLayout() {
   )
 }
 
-// ── Router ──
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     children: [
-      { index: true,          element: <Home /> },
-      { path: 'venues',       element: <Venues /> },
-      { path: 'game-day',     element: <GameDay /> },
-      { path: 'the-litcher',  element: <Litcher /> },
-      { path: 'the-basement', element: <Basement /> },
-      { path: 'menu',         element: <Menu /> },
-      { path: 'merch',        element: <Merch /> },
-      { path: 'events',       element: <Events /> },
-      { path: '*',            element: <NotFound /> },
+      { index: true,           element: <Home /> },
+      { path: 'venues',        element: <Venues /> },
+      { path: 'game-day',      element: <GameDay /> },
+      { path: 'the-litcher',   element: <Litcher /> },
+      { path: 'the-basement',  element: <Basement /> },
+      { path: 'menu',          element: <Menu /> },
+      { path: 'merch',         element: <Merch /> },
+      { path: 'events',        element: <Events /> },
+      { path: 'privacy',       element: <PrivacyPolicy /> },
+      { path: 'terms',         element: <TermsOfUse /> },
+      { path: 'refund-policy', element: <RefundCancellationPolicy /> },
+      { path: 'venue-terms',   element: <VenueEventTerms /> },
+      { path: 'accessibility', element: <AccessibilityStatement /> },
+      { path: '*',             element: <NotFound /> },
     ],
   },
 ])
