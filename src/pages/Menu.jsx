@@ -584,12 +584,23 @@ export default function Menu() {
         {categoryOrder.filter(k => k !== 'toppings').map(key => <MenuSection key={key} id={key} data={(sanityMenu || menu)[key]} />)}
         <ToppingsSection />
 
+        {/* Allergy Warning */}
+        <div className="border border-orange/20 p-6 mb-6" style={{ background: 'rgba(245,101,32,0.04)' }}>
+          <div className="font-cond text-[18px] font-bold text-orange uppercase tracking-wide mb-3">⚠ Allergy & Dietary Information</div>
+          <p className="text-[13px] text-cream/65 leading-[1.8] mb-2">
+            <strong className="text-cream/90">Peanut Oil Notice:</strong> Our fresh-cut fries and other fried items are cooked in 100% peanut oil. If you have a peanut allergy, please inform your server before ordering.
+          </p>
+          <p className="text-[13px] text-cream/65 leading-[1.8]">
+            Our kitchen handles common allergens including wheat, dairy, eggs, soy, tree nuts, and shellfish. Cross-contamination is possible. Please notify your server of any food allergies or dietary restrictions. For detailed allergen information, ask a manager.
+          </p>
+        </div>
+
         <div className="border border-orange/20 p-10 text-center" style={{ background: 'rgba(245,101,32,0.04)' }}>
           <h3 className="font-display text-[clamp(36px,5vw,64px)] text-white mb-3">Ready to Order?</h3>
           <p className="text-cream/80 mb-6 text[15px]">Order online for pickup or come in and we'll take care of you.</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a href="https://www.doordash.com/store/itsurwiener-restaurant-and-bar-clemson-475097/12786218/" target="_blank" rel="noreferrer" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">Order Online</a>
-            <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Find Us</Link>
+            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Find Us</a>
           </div>
         </div>
       </div>

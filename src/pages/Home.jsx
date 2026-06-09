@@ -148,9 +148,9 @@ function GameDay() {
 But itsurwiener isn't just a place to watch — it's a place to be. One address. One decision. No better place.<br />GO TIGERS!</p>
           <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</Link>
         </motion.div>
-        <motion.div className="bg-[#08060F] flex flex-col flex-1" {...inView(0.1)}>
+        <motion.div className="bg-[#08060F] flex flex-col h-full justify-between" {...inView(0.1)}>
           {features.map(({ icon, name, desc }) => (
-            <div key={name} className="flex items-start gap-5 px-10 py-6 border-b border-orange/[0.08] last:border-b-0 hover:bg-orange/[0.04] transition-colors duration-200">
+            <div key={name} className="flex items-center gap-5 px-10 py-0 border-b border-orange/[0.08] last:border-b-0 hover:bg-orange/[0.04] transition-colors duration-200 flex-1 min-h-0">
               <span className="text-[22px] mt-1 flex-shrink-0">{icon}</span>
               <div>
                 <div className="font-cond text-[18px] font-black text-white uppercase tracking-wide mb-0.5">{name}</div>
@@ -495,7 +495,7 @@ function FindUs() {
             <div className="w-6 h-6 bg-orange rounded-[50%_50%_50%_0] mx-auto mb-5" style={{ transform:'rotate(-45deg)', boxShadow:'0 0 0 6px rgba(245,101,32,0.2),0 0 0 16px rgba(245,101,32,0.06)', animation:'pinBounce 2s ease-in-out infinite' }} />
             <div className="font-display text-[28px] text-white mb-1">itsurwiener</div>
             <div className="font-ui text-[12px] tracking-[.15em] uppercase text-orange/55 mb-5">Clemson, South Carolina</div>
-            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange no-underline border-b border-orange pb-0.5 hover:opacity-60 transition-opacity">Get Directions →</a>
+            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange no-underline border-b border-orange pb-0.5 hover:opacity-60 transition-opacity">Find Us →</a>
           </div>
         </div>
       </motion.div>

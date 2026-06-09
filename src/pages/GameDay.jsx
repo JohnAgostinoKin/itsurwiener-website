@@ -138,9 +138,7 @@ export default function GameDay() {
             People line up for these. Get here early — doors open at 10 AM on game days and the mimosas flow until they don't.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-              (864) 722-5001
-            </a>
+            <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Get Directions
             </a>
