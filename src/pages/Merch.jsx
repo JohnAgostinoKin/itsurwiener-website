@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
 import { motion } from 'framer-motion'
 
@@ -134,25 +135,27 @@ function ProductCard({ product }) {
       transition={{ duration: 0.4 }}
     >
       {/* Product image — only show if real image exists */}
-      {product.image ? (
-        <div className="relative overflow-hidden aspect-square bg-[#08060F]">
-          <img src={product.image} alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <div className="absolute bottom-3 left-3">
-            <span className="font-display text-[28px] text-orange leading-none">${product.price.toFixed(2)}</span>
+      <Link to={`/merch/${product.id || product._id}`} className="block no-underline">
+        {product.image ? (
+          <div className="relative overflow-hidden aspect-square bg-[#08060F]">
+            <img src={product.image} alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-3 left-3">
+              <span className="font-display text-[28px] text-orange leading-none">${product.price.toFixed(2)}</span>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="flex items-center justify-between px-5 pt-5">
-          <span className="font-display text-[32px] text-orange leading-none">${product.price.toFixed(2)}</span>
-          <span className="font-ui text-[10px] font-bold tracking-[.15em] uppercase text-cream/25 border border-white/10 px-2 py-1">Photo Coming Soon</span>
-        </div>
-      )}
+        ) : (
+          <div className="flex items-center justify-between px-5 pt-5">
+            <span className="font-display text-[32px] text-orange leading-none">${product.price.toFixed(2)}</span>
+            <span className="font-ui text-[10px] font-bold tracking-[.15em] uppercase text-cream/25 border border-white/10 px-2 py-1">Photo Coming Soon</span>
+          </div>
+        )}
+      </Link>
 
       {/* Info */}
       <div className="p-5">
-        <h3 className="font-cond text-[20px] font-black text-white uppercase tracking-wide leading-none mb-1 group-hover:text-orange transition-colors duration-200">{product.name}</h3>
+        <Link to={`/merch/${product.id || product._id}`} className="no-underline"><h3 className="font-cond text-[20px] font-black text-white uppercase tracking-wide leading-none mb-1 group-hover:text-orange transition-colors duration-200 cursor-pointer">{product.name}</h3></Link>
         <p className="text-[12px] text-cream/55 mb-4 leading-snug">{product.desc}</p>
 
         {/* Color selector */}
