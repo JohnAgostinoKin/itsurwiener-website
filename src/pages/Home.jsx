@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Ticker from '@components/Ticker'
+import CallButton from '@components/CallButton'
 import GameDayHero from '@components/GameDayHero'
 import { useCounter, useScrollReveal } from '@hooks/useScrollReveal'
 import { client } from '@/lib/sanity'
@@ -147,7 +148,7 @@ function GameDay() {
 But itsurwiener isn't just a place to watch — it's a place to be. One address. One decision. No better place.<br />GO TIGERS!</p>
           <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</Link>
         </motion.div>
-        <motion.div className="bg-[#08060F] flex flex-col" {...inView(0.1)}>
+        <motion.div className="bg-[#08060F] flex flex-col flex-1" {...inView(0.1)}>
           {features.map(({ icon, name, desc }) => (
             <div key={name} className="flex items-start gap-5 px-10 py-6 border-b border-orange/[0.08] last:border-b-0 hover:bg-orange/[0.04] transition-colors duration-200">
               <span className="text-[22px] mt-1 flex-shrink-0">{icon}</span>
@@ -168,7 +169,7 @@ function LitcherSection() {
   const [ref, visible] = useScrollReveal(0.4)
   const count = useCounter(60000, 2200, visible)
   return (
-    <section id="litcher" className="bg-[#08060F] py-[80px] relative overflow-hidden" style={{paddingLeft:"15vw",paddingRight:"5vw"}}>
+    <section id="litcher" className="bg-[#08060F] py-[80px] relative overflow-hidden px-[5vw]">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display pointer-events-none select-none z-0" style={{ fontSize: '28vw', color: 'rgba(245,101,32,0.025)', whiteSpace: 'nowrap', lineHeight: 1 }}>LITCHER</div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-[1]">
         <motion.div {...inView(0)}>
@@ -467,7 +468,7 @@ function FindUs() {
                 <div className="w-11 h-11 bg-orange/[0.08] border border-orange/15 flex items-center justify-center text-[18px] flex-shrink-0 group-hover:bg-orange/15 transition-colors duration-200">{icon}</div>
                 <div>
                   <div className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange mb-1">{label}</div>
-                  {href ? <a href={href} className="text-[14px] text-cream no-underline hover:text-orange transition-colors duration-200">{value}</a> : <div className="text-[14px] text-cream">{value}</div>}
+                  {href && href.startsWith("tel:") ? <CallButton className="text-[14px] text-cream no-underline hover:text-orange transition-colors duration-200 bg-transparent cursor-pointer text-left p-0 border-0" /> : href ? <a href={href} className="text-[14px] text-cream no-underline hover:text-orange transition-colors duration-200">{value}</a> : <div className="text-[14px] text-cream">{value}</div>}
                   {sub && <div className="text-[12px] text-cream/60 mt-0.5">{sub}</div>}
                 </div>
               </div>

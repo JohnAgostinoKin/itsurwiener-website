@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import CallButton from '@components/CallButton'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
@@ -246,7 +247,7 @@ export default function Basement() {
                 </div>
               ))}
             </div>
-            <a href="mailto:info@itsurwiener.com?subject=VIP Section Booking"
+            <a href="/vip"
               className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300 inline-block">
               Reserve VIP
             </a>
@@ -268,14 +269,11 @@ export default function Basement() {
               Available for private events, birthday parties, corporate functions, and more. Several plans available. Contact us to discuss your event and get a custom quote.
             </p>
             <div className="flex gap-4 flex-wrap">
-              <a href="mailto:info@itsurwiener.com?subject=Basement Booking"
+              <a href="/#events-cta"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-                Email Us
+                Book an Event
               </a>
-              <a href="tel:8647225001"
-                className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
-                (864) 722-5001
-              </a>
+              <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             </div>
           </motion.div>
           <motion.div {...inView(0.15)} className="grid grid-cols-1 gap-4">
@@ -307,16 +305,10 @@ export default function Basement() {
           <h2 className="font-display text-[clamp(52px,10vw,130px)] leading-[.88] text-white mb-10">
             See You<br />Down <span className="text-purple-bright">There.</span>
           </h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="mailto:info@itsurwiener.com?subject=Basement Booking"
-              className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-              Book The Basement
-            </a>
-            <Link to="/events"
-              className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
-              See Events
+          <Link to="/events"
+              className="font-ui text-[14px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-14 py-5 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
+              See All Events
             </Link>
-          </div>
         </motion.div>
       </section>
 
