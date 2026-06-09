@@ -8,17 +8,22 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [size, setSize] = useState('')
   const [color, setColor] = useState('')
+  const [amount, setAmount] = useState(null)
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
     client.fetch(`*[_type == "product" && _id == $id][0] {
       _id, name, category, price, description,
       "image": image.asset->url,
-      sizes, colors, featured, available
+      sizes, colors, featured, available, denominations
     }`, { id }).then(data => {
       setProduct(data)
       if (data?.sizes?.length) setSize(data.sizes[2] || data.sizes[0])
       if (data?.colors?.length) setColor(data.colors[0])
+      if (data?.denominations?.length) {
+        const sorted = [...data.denominations].map(Number).sort((a,b) => a-b)
+        setAmount(sorted[1] || sorted[0])
+      }
     })
   }, [id])
 
@@ -66,6 +71,21 @@ export default function ProductDetail() {
             <p className="text-[15px] text-cream/70 leading-[1.8] border-t border-white/[0.06] pt-6">{product.description}</p>
           )}
 
+          {/* Denomination selector for gift cards */}
+          {product.denominations?.length > 0 && (
+            <div>
+              <div className="font-ui text-[9px] font-bold tracking-[.15em] uppercase text-cream/40 mb-3">Select Amount: <span className="text-orange">${amount}</span></div>
+              <div className="flex gap-3 flex-wrap">
+                {[...product.denominations].map(Number).sort((a,b) => a-b).map(d => (
+                  <button key={d} onClick={() => setAmount(d)}
+                    className={`font-display text-[28px] px-5 py-2 border transition-all duration-200 ${Number(amount) === d ? 'border-orange text-orange bg-orange/10' : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'}`}>
+                    ${d}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Color selector */}
           {product.colors?.length > 0 && (
             <div>
@@ -99,10 +119,10 @@ export default function ProductDetail() {
           {/* Add to cart */}
           <button onClick={handleAdd}
             className={`snipcart-add-item w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 border transition-all duration-200 mt-2 ${added ? 'bg-orange/20 border-orange text-orange' : 'bg-orange text-black border-orange hover:bg-white'}`}
-            data-item-id={`${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}`}
-            data-item-price={product.price}
+            data-item-id={`${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}${amount ? `-${amount}` : ''}`}
+            data-item-price={amount || product.price}
             data-item-url={`/merch/${product._id}`}
-            data-item-name={`${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}`}
+            data-item-name={`${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}${amount ? ` — $${amount}` : ''}`}
             data-item-description={product.description || ''}
             data-item-image={product.image || ''}
           >
