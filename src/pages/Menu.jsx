@@ -226,7 +226,7 @@ function ItemCard({ item, color, index }) {
               <span className="font-ui text-[9px] font-bold tracking-[.15em] uppercase px-2 py-0.5 rounded-sm" style={{ background: color, color: '#04030A' }}>{item.badge}</span>
             )}
           </div>
-          <span className="font-display text-[26px] flex-shrink-0 leading-none mt-0.5" style={{ color }}>{item.price}</span>
+          <span className={`flex-shrink-0 leading-none mt-0.5 ${item.price?.includes('/') ? 'font-cond text-[15px] font-bold text-right' : 'font-display text-[26px]'}`} style={{ color }}>{item.price}</span>
         </div>
         {item.desc && <p className="text-[13px] text-cream/80 leading-[1.65]">{item.desc}</p>}
         {item.addons?.length > 0 && (
@@ -585,7 +585,7 @@ export default function Menu() {
           <h3 className="font-display text-[clamp(36px,5vw,64px)] text-white mb-3">Ready to Order?</h3>
           <p className="text-cream/80 mb-6 text[15px]">Order online for pickup or come in and we'll take care of you.</p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="#" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">Order Online</a>
+            <a href="https://www.doordash.com/store/itsurwiener-restaurant-and-bar-clemson-475097/12786218/" target="_blank" rel="noreferrer" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">Order Online</a>
             <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Find Us</Link>
           </div>
         </div>
