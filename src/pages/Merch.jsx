@@ -211,9 +211,9 @@ function ProductCard({ product }) {
 function GiftCardSelector({ products }) {
   const giftCard = products[0]
   if (!giftCard) return null
-  const amounts = giftCard.denominations?.length
-    ? [...giftCard.denominations].sort((a,b) => a - b)
-    : [10, 25, 50, 100, 500]
+  const amounts = (giftCard.denominations?.length
+    ? [...giftCard.denominations]
+    : [10, 25, 50, 100, 500]).map(Number).sort((a,b) => a - b)
   const [amount, setAmount] = useState(amounts[1] || amounts[0])
 
   return (
@@ -245,7 +245,7 @@ function GiftCardSelector({ products }) {
               {products.sort((a,b) => a.price - b.price).map(p => (
                 <button key={p.price} onClick={() => setAmount(p.price)}
                   className={`font-display text-[28px] px-5 py-2 border transition-all duration-200 ${
-                    amount === p.price
+                    Number(amount) === Number(p)
                       ? 'border-orange text-orange bg-orange/10'
                       : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'
                   }`}>
