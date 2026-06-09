@@ -288,7 +288,7 @@ export default function Merch() {
   const [sanityProducts, setSanityProducts] = useState(null)
 
   useEffect(() => {
-    client.fetch(`*[_type == "product" && available == true] | order(sortOrder asc) {
+    client.fetch(`*[_type == "product" && available == true] | order(category asc, sortOrder asc) {
       "id": _id,
       name, category, price, description,
       "image": image.asset->url,
@@ -358,10 +358,7 @@ export default function Merch() {
           {filtered.map(product => <ProductCard key={product.id} product={product} />)}
         </div>
 
-        {/* Photo placeholder note */}
-        <div className="mt-12 border border-orange/15 px-6 py-5 text-center" style={{ background: 'rgba(245,101,32,0.04)' }}>
-          <p className="font-ui text-[12px] text-cream/40 tracking-[.1em] uppercase">Product photos coming soon · Placeholder images shown</p>
-        </div>
+
       </div>
 
     </div>

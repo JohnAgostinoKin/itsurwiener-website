@@ -28,7 +28,7 @@ const features = [
   { title: 'Every Game Live',       desc: 'Every Clemson game on our massive screens. Never miss a play.' },
   { title: '$2 Tall Boys All Day',  desc: 'Damn Good Beer flowing all game long. Ice cold, every game.' },
   { title: 'Full Kitchen Open',     desc: "Clemson's best tenders, dogs, burgers & more. Kitchen open late." },
-  { title: 'Game Day Audio',        desc: 'Full surround sound. Feel like you\'re in Death Valley.' },
+  { title: 'Game Day Audio',        desc: "Full surround sound. Feel like you're in Death Valley." },
   { title: 'Game Day Specials',     desc: 'Drink specials and deals all season long.' },
   { title: 'Best Seat In Clemson',  desc: 'Multiple screens, great sightlines, no bad seats.' },
 ]
@@ -115,7 +115,7 @@ export default function GameDay() {
             <div className="flex gap-4 flex-wrap">
               <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
                 See Menu
-              </Link>
+              </a>
               <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
                 (864) 722-5001
               </a>
@@ -123,7 +123,6 @@ export default function GameDay() {
           </motion.div>
         </div>
       </div>
-
 
       {/* $1 Mimosa Callout */}
       <section className="px-[5vw] py-[80px] relative overflow-hidden" style={{ background: 'linear-gradient(135deg,#1a0a00,#04030A,#1a0a00)' }}>
@@ -143,9 +142,9 @@ export default function GameDay() {
             <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
               (864) 722-5001
             </a>
-            <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
+            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Get Directions
-            </Link>
+            </a>
           </div>
         </motion.div>
       </section>
@@ -185,7 +184,7 @@ export default function GameDay() {
           </div>
           <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 flex-shrink-0">
             Food Menu
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -218,7 +217,7 @@ export default function GameDay() {
 
         <div className="mt-6 text-center">
           <p className="font-ui text-[11px] text-cream/25 tracking-[.1em] uppercase">
-            All times Eastern · Schedule subject to change · TBA games times when announced. 
+            All times Eastern · Schedule subject to change · TBA games times when announced.
           </p>
         </div>
       </section>
@@ -231,9 +230,9 @@ export default function GameDay() {
             We'll Save<br />You A Seat<span className="text-orange">.</span>
           </h2>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
+            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
               Get Directions
-            </Link>
+            </a>
             <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Call Us
             </a>

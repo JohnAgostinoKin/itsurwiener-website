@@ -9,13 +9,9 @@ const inView = (delay = 0) => ({
   transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }
 })
 
-// ── MENU DATA ────────────────────────────────────────────────────
 const sections = [
   {
-    title: 'Popular Litchers',
-    price: '$12',
-    color: '#F56520',
-    badge: null,
+    title: 'Popular Litchers', price: '$12', color: '#F56520', badge: null,
     items: [
       { name: 'Electric Lemonade',    desc: 'Vodka, Sprite, Sour, Blue' },
       { name: 'Blue Motorcycle',      desc: 'Vodka, Gin, Rum, Tequila, Triple Sec, Sour, Sprite, Blue' },
@@ -39,10 +35,7 @@ const sections = [
     ]
   },
   {
-    title: 'Red Bull Litchers',
-    price: '$15',
-    color: '#9D4EDD',
-    badge: null,
+    title: 'Red Bull Litchers', price: '$15', color: '#9D4EDD', badge: null,
     items: [
       { name: 'The Electric Bull',    desc: 'Vodka, Red Bull, Sour, Blue' },
       { name: 'The Bull Breeze',      desc: 'Vodka, Red Bull, Pineapple, Cran' },
@@ -56,10 +49,7 @@ const sections = [
     ]
   },
   {
-    title: 'Premium Red Bull Litchers',
-    price: '$18',
-    color: '#F56520',
-    badge: null,
+    title: 'Premium Red Bull Litchers', price: '$18', color: '#F56520', badge: null,
     items: [
       { name: 'Sweet Tart Bull',        desc: 'Citrus Vodka, Sprite, Sour, Red Bull' },
       { name: 'Vitamin C Bull',         desc: "Deep Eddy's Orange Vodka, OJ, Yellow Bull" },
@@ -74,20 +64,18 @@ const sections = [
 ]
 
 const pitcherSections = [
-  { title: 'Lemonade Litchers', price: '$12', color: '#F56520', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
-  { title: 'Mojito Litchers',   price: '$12', color: '#9D4EDD', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
-  { title: 'Margarita Litchers',price: '$12', color: '#F56520', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
+  { title: 'Lemonade Litchers',      price: '$12', color: '#F56520', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
+  { title: 'Mojito Litchers',        price: '$12', color: '#9D4EDD', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
+  { title: 'Margarita Litchers',     price: '$12', color: '#F56520', flavors: ['Classic','Strawberry','Mango','Passion Fruit'] },
   { title: 'Jolly Rancher Litchers', price: '$12', color: '#9D4EDD', flavors: ['Sour Apple','Watermelon'] },
 ]
 
 const specialties = [
-  { name: 'Specialty Litchers',  price: '$13', desc: 'Cosmic Litcher · Clemson Sleeptight', badge: 'Ask Your Server' },
-  { name: 'Corona-Rita Litcher',  price: '$16', desc: 'Classic Margarita Litcher with Corona Light Float', badge: 'Fan Fave' },
+  { name: 'Specialty Litchers', price: '$13', desc: 'Cosmic Litcher · Clemson Sleeptight', badge: 'Ask Your Server' },
+  { name: 'Corona-Rita Litcher', price: '$16', desc: 'Classic Margarita Litcher with Corona Light Float', badge: 'Fan Fave' },
 ]
 
 export default function Litcher() {
-  const [activeSection, setActiveSection] = useState(0)
-
   return (
     <div className="bg-[#04030A] min-h-screen overflow-hidden">
 
@@ -112,14 +100,13 @@ export default function Litcher() {
               <a href="#menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
                 See Litcher Menu
               </a>
-              <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
+              <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
                 Get Directions
               </Link>
             </div>
           </motion.div>
         </div>
       </div>
-
 
       {/* Litcher Image Ticker */}
       <div className="overflow-hidden py-6 border-y border-purple-bright/10" style={{ background: '#04030A' }}>
@@ -140,7 +127,6 @@ export default function Litcher() {
             { src: '/images/clear-litcher.png',         label: 'Classic Litcher' },
             { src: '/images/green-apple-litcher.png',   label: 'Green Apple Litcher' },
             { src: '/images/corona-litcher.png',        label: 'Corona-Rita Litcher' },
-            // Duplicate for seamless loop
             { src: '/images/red-litcher.png',          label: 'Strawberry Litcher' },
             { src: '/images/blue-litcher.png',          label: 'Blue Litcher' },
             { src: '/images/yellow-marg-litcher.png',   label: 'Margarita Litcher' },
@@ -158,11 +144,7 @@ export default function Litcher() {
             { src: '/images/corona-litcher.png',        label: 'Corona-Rita Litcher' },
           ].map((img, i) => (
             <div key={i} className="flex-shrink-0 relative group" style={{ width: '240px', height: '320px' }}>
-              <img
-                src={img.src}
-                alt={img.label}
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-              />
+              <img src={img.src} alt={img.label} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
               <div className="absolute bottom-0 left-0 right-0 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <span className="font-ui text-[10px] font-bold tracking-[.12em] uppercase text-purple-bright">{img.label}</span>
               </div>
@@ -225,10 +207,8 @@ export default function Litcher() {
           </h2>
         </motion.div>
 
-        {/* Main sections */}
         {sections.map((section, si) => (
           <motion.div key={section.title} {...inView(0)} className="mb-14">
-            {/* Section header */}
             <div className="flex items-baseline gap-4 mb-6 pb-4 border-b-2" style={{ borderColor: section.color }}>
               {section.badge && (
                 <span className="font-ui text-[9px] font-bold tracking-[.15em] uppercase px-2 py-1" style={{ background: section.color, color: '#04030A' }}>{section.badge}</span>
@@ -238,18 +218,13 @@ export default function Litcher() {
               </h3>
               <div className="font-display text-[clamp(28px,4vw,52px)] text-white/60 ml-auto flex-shrink-0">{section.price}</div>
             </div>
-
-            {/* Items grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {section.items.map((item, i) => (
                 <motion.div key={item.name}
                   className="group border border-white/[0.06] p-4 hover:border-purple-bright/25 transition-all duration-200"
                   style={{ background: i % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.05)' }}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: (i % 6) * 0.04 }}
-                >
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: (i % 6) * 0.04 }}>
                   <div className="font-cond text-[20px] font-black text-white uppercase tracking-wide leading-none mb-1 group-hover:text-purple-bright transition-colors duration-200">{item.name}</div>
                   <div className="text-[12px] text-cream/55 leading-snug">{item.desc}</div>
                 </motion.div>
@@ -258,7 +233,7 @@ export default function Litcher() {
           </motion.div>
         ))}
 
-        {/* Pitcher/flavor sections */}
+        {/* Flavorful Litchers */}
         <motion.div {...inView(0)} className="mb-14">
           <div className="flex items-baseline gap-4 mb-6 pb-4 border-b-2 border-orange">
             <h3 className="font-display text-[clamp(32px,4vw,60px)] leading-none text-orange">
@@ -266,16 +241,14 @@ export default function Litcher() {
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {pitcherSections.map((ps, i) => (
+            {pitcherSections.map((ps) => (
               <div key={ps.title} className="border border-white/[0.06] p-5" style={{ background: 'rgba(255,255,255,0.03)' }}>
                 <div className="flex items-baseline justify-between mb-3">
                   <div className="font-display text-[clamp(22px,3vw,36px)] leading-none" style={{ color: ps.color }}>{ps.title}<sup style={{ fontSize: '0.2em', fontFamily: 'Space Grotesk,sans-serif', fontWeight: 700 }}>®</sup></div>
                   <div className="font-display text-[28px] text-white/60">{ps.price}</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {ps.flavors.map(f => (
-                    <span key={f} className="font-ui text-[12px] border border-white/10 px-3 py-1 text-cream/65">{f}</span>
-                  ))}
+                  {ps.flavors.map(f => <span key={f} className="font-ui text-[12px] border border-white/10 px-3 py-1 text-cream/65">{f}</span>)}
                 </div>
               </div>
             ))}
@@ -310,7 +283,7 @@ export default function Litcher() {
             You Have To<br />Try <span className="text-purple-bright">One.</span>
           </h2>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
+            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
               Get Directions
             </Link>
             <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">

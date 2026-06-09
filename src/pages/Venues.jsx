@@ -116,7 +116,7 @@ export default function Venues() {
                   className="font-ui text-[12px] font-bold tracking-[.18em] uppercase px-8 py-3.5 no-underline clip-angled inline-block transition-colors duration-200"
                   style={{ background: venue.color, color: '#04030A' }}>
                   {venue.linkLabel} →
-                </Link>
+                </a>
               </div>
             </motion.div>
           ))}
@@ -134,12 +134,12 @@ export default function Venues() {
             101 Keith Street · Clemson, SC · Wed 4PM–12AM · Thu–Sat 11AM–2AM
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link to="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
+            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
               Get Directions
-            </Link>
+            </a>
             <Link to="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Book an Event
-            </Link>
+            </a>
           </div>
         </motion.div>
       </section>
