@@ -403,7 +403,7 @@ function EventsCTA() {
     {icon:'🔒',label:'Full Venue Buyouts'},
   ]
   return (
-    <section id="events-cta" className="bg-[#0E0B18] py-[100px] px-[5vw]">
+    <section id="events-cta" className="bg-[#0E0B18] py-[100px] px-[5vw]" style={{ scrollMarginTop: '80px' }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <motion.div {...inView(0)}>
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />Private Events</div>
@@ -454,7 +454,7 @@ function FindUs() {
     { icon:'✉️', label:'Email',   value:'info@itsurwiener.com', href:'mailto:info@itsurwiener.com' },
   ]
   return (
-    <section id="findus" className="bg-[#04030A] py-[100px] px-[5vw]">
+    <section id="findus" className="bg-[#04030A] py-[100px] px-[5vw]" style={{ scrollMarginTop: '80px' }}>
       <motion.div {...inView(0)}>
         <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />Find Us</div>
         <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white mb-12">Come Early.<br />Stay Late.</h2>

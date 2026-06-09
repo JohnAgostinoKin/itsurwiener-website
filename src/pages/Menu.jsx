@@ -521,13 +521,16 @@ export default function Menu() {
             categoryOptions: cat.categoryOptions?.length ? cat.categoryOptions : merged[key].categoryOptions,
             categoryVariants:cat.categoryVariants?.length? cat.categoryVariants: merged[key].categoryVariants,
             items: cat.items?.length
-              ? cat.items.map(item => ({
-                  name:   item.name,
-                  price:  item.price,
-                  desc:   item.description,
-                  badge:  item.badge,
-                  addons: item.addons || merged[key].items?.find(i => i.name === item.name)?.addons || [],
-                }))
+              ? cat.items.map(item => {
+                  const hardcoded = merged[key].items?.find(i => i.name === item.name)
+                  return {
+                    name:   item.name,
+                    price:  item.price != null ? (typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : item.price) : hardcoded?.price,
+                    desc:   item.description || hardcoded?.desc,
+                    badge:  item.badge || hardcoded?.badge,
+                    addons: item.addons?.length ? item.addons : hardcoded?.addons || [],
+                  }
+                })
               : merged[key].items,
           }
         })
