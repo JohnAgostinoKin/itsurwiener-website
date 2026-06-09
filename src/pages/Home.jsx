@@ -88,8 +88,8 @@ function Hero() {
           Two 12-Ft LED Walls
         </motion.p>
         <motion.div className="flex gap-4 flex-wrap" {...fadeUp(0.8)}>
-          <Link to="/#chaos" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">START YOUR JOURNEY</a>
-          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">LIVE MUSIC</a>
+          <Link to="/#chaos" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">START YOUR JOURNEY</Link>
+          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">LIVE MUSIC</Link>
         </motion.div>
       </div>
       <style>{`@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(80px)}}`}</style>
@@ -145,7 +145,7 @@ function GameDay() {
           <p className="text-[15px] max-w-[400px] leading-[1.8] mb-9" style={{color:'rgba(253,252,248,0.92)'}}>There's no better place to watch the game — and it's not even close. Clemson's legendary sports bar loaded with LED walls, big screens, and full surround sound puts you as close to Death Valley as you can get without a ticket.<br />$1 Mimosas, $2 Wien Beer Tall Boys, Gameday Brunch, and the best fans in college football.<br />
 
 But itsurwiener isn't just a place to watch — it's a place to be. One address. One decision. No better place.<br />GO TIGERS!</p>
-          <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</a>
+          <Link to="/game-day" className="font-ui text-[12px] font-bold tracking-[.15em] uppercase bg-black text-orange px-7 py-3.5 no-underline w-fit hover:bg-white hover:text-black transition-colors duration-200">See the Experience →</Link>
         </motion.div>
         <motion.div className="bg-[#08060F] flex flex-col" {...inView(0.1)}>
           {features.map(({ icon, name, desc }) => (
@@ -183,7 +183,7 @@ function LitcherSection() {
             <span className="font-display text-[28px] text-orange leading-none">60,000+</span>
             <span className="font-ui text-[12px] text-cream/70 uppercase tracking-[.12em]">Sold Each Year</span>
           </div>
-          <Link to="/the-litcher" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">Learn More →</a>
+          <Link to="/the-litcher" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">Learn More →</Link>
         </motion.div>
         <motion.div className="relative overflow-hidden" style={{minHeight:'320px', height:'100%'}} {...inView(0.15)}>
           <img src="/images/litchers.jpg" alt="The Litcher — itsurwiener" className="w-full h-full object-cover" style={{position:'absolute',inset:0,minHeight:'320px'}} />
@@ -222,8 +222,8 @@ function BasementSection() {
           {features.map(f => <span key={f} className="font-ui text-[11px] font-medium tracking-[.15em] uppercase border border-purple-bright/30 px-5 py-2.5 text-cream/60 hover:border-purple-bright hover:text-purple-bright transition-all duration-200">{f}</span>)}
         </div>
         <div className="flex gap-4 justify-center flex-wrap">
-          <Link to="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">BOOK NOW!</a>
-          <Link to="/the-basement" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/35 text-cream/60 px-11 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Learn More</a>
+          <Link to="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">BOOK NOW!</Link>
+          <Link to="/the-basement" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/35 text-cream/60 px-11 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Learn More</Link>
         </div>
       </motion.div>
       <style>{`@keyframes lineGlow{0%,100%{box-shadow:0 0 8px #9D4EDD;width:80px}50%{box-shadow:0 0 24px #9D4EDD;width:120px}}`}</style>
@@ -246,7 +246,7 @@ function VenuesGrid() {
           <div className="flex items-center gap-3 font-ui text-[11px] font-bold tracking-[.28em] uppercase text-orange mb-3"><span className="w-6 h-0.5 bg-orange" />The Destination</div>
           <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white">One Address.<br />Four Distinct Spaces.</h2>
         </div>
-        <Link to="/venues" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-8 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Explore All</a>
+        <Link to="/venues" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-8 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Explore All</Link>
       </motion.div>
       <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-4" {...inView(0.1)}>
         {venues.map(({ num, tag, title, desc, bg }) => (
@@ -327,7 +327,7 @@ function MerchSection() {
           </p>
           <Link to="/merch" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">
             Shop Now!
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -358,7 +358,7 @@ function EatsSection() {
           <div className="flex gap-4 flex-wrap">
             <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
               See Full Menu
-            </a>
+            </Link>
             <a href="https://www.doordash.com/store/itsurwiener-restaurant-and-bar-clemson-475097/12786218/" target="_blank" rel="noreferrer" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Order Online
             </a>
@@ -560,7 +560,7 @@ function SpecialEvents() {
                     <a href={e.lineleapUrl || e.ticketUrl} target="_blank" rel="noreferrer"
                       className="font-ui text-[10px] font-bold tracking-[.12em] uppercase bg-orange text-black px-3 py-1.5 no-underline hover:bg-white transition-all duration-200">
                       {e.lineleapUrl ? 'LineLeap' : 'Tickets'}
-                    </a>
+                    </Link>
                   )}
                 </div>
               </motion.div>

@@ -116,7 +116,7 @@ export default function Venues() {
                   className="font-ui text-[12px] font-bold tracking-[.18em] uppercase px-8 py-3.5 no-underline clip-angled inline-block transition-colors duration-200"
                   style={{ background: venue.color, color: '#04030A' }}>
                   {venue.linkLabel} →
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -139,7 +139,7 @@ export default function Venues() {
             </a>
             <Link to="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Book an Event
-            </a>
+            </Link>
           </div>
         </motion.div>
       </section>

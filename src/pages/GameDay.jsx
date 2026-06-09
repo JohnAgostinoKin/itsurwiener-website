@@ -115,7 +115,7 @@ export default function GameDay() {
             <div className="flex gap-4 flex-wrap">
               <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
                 See Menu
-              </a>
+              </Link>
               <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
                 (864) 722-5001
               </a>
@@ -184,7 +184,7 @@ export default function GameDay() {
           </div>
           <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200 flex-shrink-0">
             Food Menu
-          </a>
+          </Link>
         </div>
       </div>
 
