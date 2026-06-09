@@ -31,6 +31,13 @@ export default {
       validation: R => R.required().positive()
     },
     {
+      name: 'denominations',
+      title: 'Gift Card Amounts',
+      type: 'array',
+      description: 'For gift cards only — list available amounts e.g. 10, 25, 50, 100, 500',
+      of: [{ type: 'number' }]
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'text'

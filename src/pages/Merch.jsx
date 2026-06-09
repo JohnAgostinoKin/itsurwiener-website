@@ -209,9 +209,12 @@ function ProductCard({ product }) {
 
 
 function GiftCardSelector({ products }) {
-  const [amount, setAmount] = useState(products[0]?.price || 25)
-  const selected = products.find(p => p.price === amount) || products[0]
-  if (!selected) return null
+  const giftCard = products[0]
+  if (!giftCard) return null
+  const amounts = giftCard.denominations?.length
+    ? [...giftCard.denominations].sort((a,b) => a - b)
+    : [10, 25, 50, 100, 500]
+  const [amount, setAmount] = useState(amounts[1] || amounts[0])
 
   return (
     <motion.div
@@ -254,18 +257,18 @@ function GiftCardSelector({ products }) {
 
           <div>
             <p className="text-[13px] text-cream/55 mb-6 leading-relaxed">
-              {selected.desc || 'The perfect gift for any Clemson fan. Redeemable for food, drinks, and merch at itsurwiener.'}
+              {giftCard.description || 'The perfect gift for any Clemson fan. Redeemable for food, drinks, and merch at itsurwiener.'}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="font-display text-[48px] text-orange leading-none">${amount}</div>
               <button
                 className="snipcart-add-item font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
-                data-item-id={selected.id || `gift-card-${amount}`}
+                data-item-id={`gift-card-${amount}`}
                 data-item-price={amount}
                 data-item-url="/merch"
                 data-item-name={`itsurwiener Gift Card — $${amount}`}
                 data-item-description={`itsurwiener Gift Card - $${amount} value`}
-                data-item-image={selected.image || '/images/merch.jpg'}
+                data-item-image={giftCard.image || ''}
               >
                 Add to Cart
               </button>
@@ -286,7 +289,7 @@ export default function Merch() {
       "id": _id,
       name, category, price, description,
       "image": image.asset->url,
-      sizes, colors, featured
+      sizes, colors, featured, denominations
     }`).then(data => {
       if (data && data.length > 0) setSanityProducts(data)
     }).catch(() => {})
