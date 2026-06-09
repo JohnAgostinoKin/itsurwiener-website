@@ -530,7 +530,7 @@ function SpecialEvents() {
           </div>
           <Link to="/events" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-orange/30 text-orange px-5 py-2.5 no-underline hover:bg-orange hover:text-black transition-all duration-200">
             All Events
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col gap-2">
           {events.map((e, i) => {
@@ -560,7 +560,7 @@ function SpecialEvents() {
                     <a href={e.lineleapUrl || e.ticketUrl} target="_blank" rel="noreferrer"
                       className="font-ui text-[10px] font-bold tracking-[.12em] uppercase bg-orange text-black px-3 py-1.5 no-underline hover:bg-white transition-all duration-200">
                       {e.lineleapUrl ? 'LineLeap' : 'Tickets'}
-                    </Link>
+                    </a>
                   )}
                 </div>
               </motion.div>
