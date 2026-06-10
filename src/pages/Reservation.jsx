@@ -195,7 +195,7 @@ export default function Reservation() {
             {added && s.confirmationMessage && (
               <p className="text-[13px] text-orange text-center mt-4 font-bold">{s.confirmationMessage}</p>
             )}
-            <p className="text-[11px] text-cream/30 text-center mt-3">Deposit applied to your tab on the day of your visit.</p>
+            <p className="text-[11px] text-cream/30 text-center mt-3">Full payment required to secure your table reservation.</p>
           </div>
         </motion.div>
 
