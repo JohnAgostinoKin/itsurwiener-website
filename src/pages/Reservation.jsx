@@ -8,11 +8,9 @@ const defaultPackages = [
   { name: 'Game Day Table',    description: 'Premium reserved table for game day. Best sightlines guaranteed.', price: 50, maxGuests: 8  },
   { name: 'Large Group Table', description: 'Reserved section for large groups. Great for birthdays and events.', price: 100, maxGuests: 15 },
 ]
-const defaultTimes = ['11:00 AM','12:00 PM','1:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM']
 
 export default function Reservation() {
   const [packages, setPackages] = useState([])
-  const [times, setTimes] = useState([])
   const [settings, setSettings] = useState(null)
   const [selected, setSelected] = useState(null)
   const [addOns, setAddOns] = useState({})
@@ -27,17 +25,15 @@ export default function Reservation() {
 
   useEffect(() => {
     Promise.all([
-      client.fetch(`*[_type == "reservationPackages"][0]{ tablePackages, availableTimes, tableNote }`),
+      client.fetch(`*[_type == "tableReservation"][0]{ packages, time, notice }`),
       client.fetch(`*[_type == "tableReservation"][0]`),
     ]).then(([pkgData, settingsData]) => {
-      if (pkgData?.tablePackages?.length) setPackages(pkgData.tablePackages.filter(p => p.available !== false))
-      if (pkgData?.availableTimes?.length) setTimes(pkgData.availableTimes)
+      if (pkgData?.packages?.length) setPackages(pkgData.packages.filter(p => p.available !== false))
       if (settingsData) setSettings(settingsData)
     }).catch(() => {})
   }, [])
 
   const displayPackages = packages.length ? packages : defaultPackages
-  const displayTimes = times.length ? times : defaultTimes
   const s = settings || {}
 
   const addOnTotal = Object.entries(addOns).reduce((sum, [key, checked]) => {
@@ -102,50 +98,44 @@ export default function Reservation() {
               <div>
                 <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Your Name *</label>
                 <input value={name} onChange={e=>setName(e.target.value)} placeholder="Full name"
-                  className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
+                  className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
               </div>
               <div>
                 <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Email *</label>
                 <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="your@email.com"
-                  className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
+                  className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
               <div>
                 <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Phone *</label>
                 <input type="tel" value={phone} onChange={e=>setPhone(e.target.value)} placeholder="(000) 000-0000"
-                  className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
+                  className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20" />
               </div>
               <div>
                 <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Date *</label>
                 {s.availableDates?.length > 0 ? (
                   <select value={date} onChange={e=>setDate(e.target.value)}
-                    className="w-full bg-[#08060F] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors">
+                    className="w-full bg-[#08060F] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors">
                     <option value="">Select date...</option>
                     {s.availableDates.map(d=><option key={d} value={d}>{new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric',year:'numeric'})}</option>)}
                   </select>
                 ) : (
                   <input type="date" value={date} onChange={e=>setDate(e.target.value)}
-                    className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors" />
+                    className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors" />
                 )}
               </div>
               <div>
-                <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Time *</label>
-                <select value={time} onChange={e=>setTime(e.target.value)}
-                  className="w-full bg-[#08060F] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors">
-                  <option value="">Select...</option>
-                  {displayTimes.map(t=><option key={t}>{t}</option>)}
-                </select>
+                <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Preferred Time *</label>
+                <input value={time} onChange={e=>setTime(e.target.value)} placeholder={s.time || 'e.g. 7:00 PM'}
+                  className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/30" />
               </div>
             </div>
             <div className="mb-5">
-              <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Party Size *</label>
-              <select value={guests} onChange={e=>setGuests(e.target.value)}
-                className="w-full bg-[#08060F] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors">
-                <option value="">Select guests...</option>
-                {Array.from({length: selected?.maxGuests || 20},(_,i)=>i+1).map(n=><option key={n}>{n} {n===1?'Guest':'Guests'}</option>)}
-                <option>20+ Guests</option>
-              </select>
+              <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Number of People *</label>
+              <input type="number" min="1" max={selected?.maxGuests || 20} value={guests} onChange={e=>setGuests(e.target.value)} placeholder="Enter number of guests"
+                className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/30" />
+              {selected?.maxGuests && <p className="text-[11px] text-cream/35 mt-1">Max {selected.maxGuests} people for this package</p>}
             </div>
             {s.variables?.length > 0 && (
               <div className="mb-5">
@@ -169,7 +159,7 @@ export default function Reservation() {
             <div>
               <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-orange/60 block mb-2">Special Instructions</label>
               <textarea value={notes} onChange={e=>setNotes(e.target.value)} rows={3} placeholder="Allergies, special occasions, accessibility needs..."
-                className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20 resize-y" />
+                className="w-full bg-white/[0.04] border border-white/10 text-white font-ui text-[14px] px-4 py-3.5 outline-none focus:border-orange transition-colors placeholder:text-cream/20 resize-y" />
             </div>
           </div>
         </motion.div>
