@@ -2,7 +2,6 @@ export default {
   name: 'vipReservation',
   title: 'Reserve VIP — Settings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     { name: 'sortOrder', title: 'Sort Order', type: 'number', initialValue: 0 },
     { name: 'title',       title: 'Page Title',           type: 'string',  initialValue: 'Reserve VIP' },

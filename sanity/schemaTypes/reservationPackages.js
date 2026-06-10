@@ -56,5 +56,4 @@ export default {
       description: 'Shown at top of VIP reservation form'
     },
   ],
-  __experimental_actions: ['update', 'publish'],
 }

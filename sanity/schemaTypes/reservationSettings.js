@@ -10,5 +10,4 @@ export default {
     { name: 'maxPartySize',    title: 'Max Party Size (dropdown)', type: 'number', initialValue: 20 },
     { name: 'note',            title: 'Notice / Message', type: 'text', description: 'Shown at top of form — e.g. game day hours, special policies' },
   ],
-  __experimental_actions: ['update', 'publish'],
 }
