@@ -71,11 +71,12 @@ export default function Reservation() {
       <section className="px-[5vw] py-8 max-w-[1000px] mx-auto">
 
         {/* Step 1 — Packages */}
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="mb-10">
+        <div className="mb-10">
           <div className="font-ui text-[11px] font-bold tracking-[.22em] uppercase text-orange mb-4">Step 1 — Choose a Package</div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="flex flex-wrap gap-4">
             {displayPackages.map(pkg => (
               <button key={pkg.name} onClick={() => setSelected(pkg)}
+                style={{ flex: '1 1 280px', maxWidth: '100%' }}
                 className={`text-left p-6 border transition-all duration-200 ${selected?.name === pkg.name ? 'border-orange bg-orange/10' : 'border-white/[0.08] hover:border-orange/40 bg-white/[0.02]'}`}>
                 <div className="font-display text-[clamp(36px,4vw,52px)] text-orange leading-none mb-2">${pkg.price}</div>
                 <div className="font-cond text-[18px] font-bold text-white uppercase mb-2">{pkg.name}</div>
@@ -85,7 +86,7 @@ export default function Reservation() {
               </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Step 2 — Details */}
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="mb-10">
