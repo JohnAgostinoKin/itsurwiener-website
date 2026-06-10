@@ -48,9 +48,10 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a href="/book-event" className="hidden lg:block font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">
-          Book an Event
-        </a>
+        <div className="hidden lg:flex gap-2">
+          <a href="/book-event" className="font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">Book an Event</a>
+          <a href="/reserve" className="font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-6 py-3 no-underline clip-angled-sm hover:bg-[#B85EFF] transition-colors duration-200">Reserve a Table</a>
+        </div>
 
         <button onClick={() => setMenuOpen(o => !o)} className="lg:hidden flex flex-col gap-1.5 p-1 bg-transparent border-0" aria-label="Menu">
           <span className={`block w-6 h-0.5 bg-cream transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />

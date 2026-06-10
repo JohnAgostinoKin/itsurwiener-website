@@ -302,10 +302,8 @@ export default function Basement() {
           <h2 className="font-display text-[clamp(52px,10vw,130px)] leading-[.88] text-white mb-10">
             See You<br />Down <span className="text-purple-bright">There.</span>
           </h2>
-          <Link to="/events"
-              className="font-ui text-[14px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-14 py-5 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-              See All Events
-            </Link>
+          <Link to="/events" className="font-ui text-[14px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-14 py-5 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">See All Events</Link>
+            <a href="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Reserve a Table</a>
         </motion.div>
       </section>
 
