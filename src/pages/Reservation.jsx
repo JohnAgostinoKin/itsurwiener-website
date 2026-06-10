@@ -174,7 +174,7 @@ export default function Reservation() {
             data-item-url="/reserve"
             data-item-name="Table Reservation — itsurwiener"
             data-item-description={itemDescription}
-            data-item-max-quantity={s.quantity || 99}
+            data-item-max-quantity={s.quantity || undefined}
             onClick={() => { if (canSubmit) { setAdded(true); setTimeout(()=>setAdded(false), 3000) } }}
           >
             {!canSubmit ? 'Fill in all required fields' : added ? `✓ Added to Cart — Complete Checkout to Confirm` : `Reserve Now — $${total}`}

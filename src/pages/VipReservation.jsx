@@ -179,7 +179,7 @@ export default function VipReservation() {
             data-item-url="/vip"
             data-item-name="VIP Reservation — The Basement"
             data-item-description={itemDescription}
-            data-item-max-quantity={s.quantity || 99}
+            data-item-max-quantity={s.quantity || undefined}
             onClick={() => { if (canSubmit) { setAdded(true); setTimeout(()=>setAdded(false), 3000) } }}
           >
             {!canSubmit ? 'Fill in all required fields' : added ? '✓ Added to Cart — Complete Checkout to Confirm' : `Book VIP — $${total}`}
