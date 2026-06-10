@@ -3,14 +3,14 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
-  { label: 'Venues',     to: '/venues' },
-  { label: 'Game Day',   to: '/game-day' },
-  { label: 'Litcher',    to: '/the-litcher' },
-  { label: 'Basement',   to: '/the-basement' },
-  { label: 'Events',     to: '/events' },
-  { label: 'Menu',       to: '/menu' },
-  { label: 'Merch',      to: '/merch' },
-  { label: 'Find Us',    to: '/find-us' },
+  { label: 'Venues',   to: '/venues' },
+  { label: 'Game Day', to: '/game-day' },
+  { label: 'Litcher',  to: '/the-litcher' },
+  { label: 'Basement', to: '/the-basement' },
+  { label: 'Events',   to: '/events' },
+  { label: 'Menu',     to: '/menu' },
+  { label: 'Merch',    to: '/merch' },
+  { label: 'Find Us',  to: '/find-us' },
 ]
 
 export default function Nav() {
@@ -34,15 +34,16 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden lg:flex gap-5 list-none">
-          {links.map(({ label, to, native }) => (
+          {links.map(({ label, to }) => (
             <li key={label}>
-              {native ? (
-                <a href={to} className="font-ui text-[13px] font-semibold tracking-[.08em] uppercase no-underline transition-colors duration-200 relative group text-cream/80 hover:text-white">
-                  {label}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-orange transition-all duration-300 group-hover:w-full" />
-                </a>
-              }
-            </NavLink>
+              <NavLink to={to}
+                className={({ isActive }) =>
+                  `font-ui text-[13px] font-semibold tracking-[.08em] uppercase no-underline transition-colors duration-200 relative group ${isActive ? 'text-orange' : 'text-cream/80 hover:text-white'}`
+                }
+              >
+                {label}
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-orange transition-all duration-300 group-hover:w-full" />
+              </NavLink>
             </li>
           ))}
         </ul>
