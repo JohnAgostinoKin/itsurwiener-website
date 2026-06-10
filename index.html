@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="itsurwiener — Clemson's premier entertainment complex. Sports bar, The Basement nightclub, outdoor LED walls, The Litcher®, and Damn Good Beer." />
     <meta name="theme-color" content="#F56520" />
 
@@ -28,9 +29,13 @@
     <script type="module" src="/src/main.jsx"></script>
 
     <!-- Snipcart -->
-    <div id="snipcart" style="display:none"></div>
     <script>
-      document.getElementById('snipcart').setAttribute('data-api-key','MjVhZTIxOTktOGRlZi00YTE0LWIzOWYtYmQxMDJlNGIwYTFkNjM5MTYzNzc1Mjk5NjYyNjQ3');
-      document.getElementById('snipcart').setAttribute('data-currency','usd');
+      window.SnipcartSettings = {
+        publicApiKey: 'MjVhZTIxOTktOGRlZi00YTE0LWIzOWYtYmQxMDJlNGIwYTFkNjM5MTYzNzc1Mjk5NjYyNjQ3',
+        loadStrategy: 'on-user-interaction',
+        currency: 'usd',
+      };
     </script>
     <script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
+  </body>
+</html>
