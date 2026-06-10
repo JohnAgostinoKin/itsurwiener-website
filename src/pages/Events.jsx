@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
@@ -206,7 +207,7 @@ export default function Events() {
           </a>
         </motion.div>
       </section>
-
+      <PageCTA />
     </div>
   )
 }
