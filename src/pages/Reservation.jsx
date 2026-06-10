@@ -28,6 +28,8 @@ export default function Reservation() {
       ...,
       packages[]{ name, description, price, maxGuests, available }
     }`).then(data => {
+      console.log('Sanity tableReservation data:', data)
+      console.log('Packages:', data?.packages)
       if (data?.packages?.length) setPackages(data.packages.filter(p => p.available !== false))
       if (data) setSettings(data)
     }).catch(() => {})
