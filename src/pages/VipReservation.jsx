@@ -72,7 +72,7 @@ export default function VipReservation() {
 
         {/* Step 1 — Packages */}
         <div className="mb-10">
-          <div className="font-ui text-[11px] font-bold tracking-[.22em] uppercase text-purple-bright mb-4">Step 1 — Choose a Package</div>
+          <div className="font-ui text-[11px] font-bold tracking-[.22em] uppercase text-purple-bright mb-4">Step 1 — Choose a Package ({displayPackages.length} available)</div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', width:'100%' }}>
             {displayPackages.map((pkg, idx) => (
               <div key={pkg.name || idx} style={{ display:'block' }}>
