@@ -24,7 +24,7 @@ const menu = {
     label: 'Starters', icon: '⚡', color: '#F56520',
     showcase: {
       name: 'Build Your Own Chips-N-Dip Platter',
-      desc: 'Warm Tortilla Chips with your choice of Queso, Spinach Dip, or Buffalo Chicken Dip. All homemade and delicious. Choose one, two, or all three!',
+      desc: 'Warm Tortilla Chips with your choice of <strong>Queso</strong>, <strong>Spinach Dip</strong>, or <strong>Buffalo Chicken Dip</strong>. All homemade and delicious. Choose one, two, or all three!',
       tiers: [
         { label: 'Choose One',       price: '$10.99' },
         { label: 'Choose Two',       price: '$14.99' },
@@ -330,7 +330,7 @@ function MenuSection({ id, data }) {
           <div className="p-6">
             <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase mb-1" style={{ color: data.color }}>Featured Item</div>
             <div className="font-display text-[clamp(28px,3.5vw,48px)] text-white leading-none mb-3">{data.showcase.name}</div>
-            <p className="text-[13px] text-cream/80 mb-5 max-w-[600px] leading-relaxed">{data.showcase.desc}</p>
+            <p className="text-[13px] text-cream/80 mb-5 max-w-[600px] leading-relaxed" dangerouslySetInnerHTML={{ __html: data.showcase.desc }} />
             {data.showcase.tiers ? (
               <div className="flex flex-wrap gap-3">
                 {data.showcase.tiers.map(t => (
