@@ -223,7 +223,7 @@ function BasementSection() {
           {features.map(f => <span key={f} className="font-ui text-[11px] font-medium tracking-[.15em] uppercase border border-purple-bright/30 px-5 py-2.5 text-cream/60 hover:border-purple-bright hover:text-purple-bright transition-all duration-200">{f}</span>)}
         </div>
         <div className="flex gap-4 justify-center flex-wrap">
-          <Link to="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">BOOK NOW!</Link>
+          <a href="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-11 py-4 no-underline hover:bg-[#B85EFF] transition-colors duration-200">BOOK NOW!</a>
           <Link to="/the-basement" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/35 text-cream/60 px-11 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Learn More</Link>
         </div>
       </motion.div>
@@ -575,6 +575,18 @@ function SpecialEvents() {
 
 // ── HOME ─────────────────────────────────
 export default function Home() {
+  useEffect(() => {
+    const hash = window.location.hash
+    if (!hash) return
+    const id = hash.replace('#', '')
+    const attempt = (tries = 0) => {
+      const el = document.getElementById(id)
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return }
+      if (tries < 10) setTimeout(() => attempt(tries + 1), 100)
+    }
+    setTimeout(attempt, 50)
+  }, [])
+
   return (
     <div className="bg-[#04030A]">
       <Hero />
