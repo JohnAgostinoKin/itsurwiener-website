@@ -603,11 +603,9 @@ export default function Menu() {
           <div className="flex gap-4 justify-center flex-wrap">
             <a href="https://www.doordash.com/store/itsurwiener-restaurant-and-bar-clemson-475097/12786218/" target="_blank" rel="noreferrer" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">Order Online</a>
             <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Find Us</a>
+          </div>
         </div>
-        </section>
-      <PageCTA />
+      </div>
     </div>
-  </div>
-</div>
   )
 }
