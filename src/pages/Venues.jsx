@@ -116,7 +116,7 @@ export default function Venues() {
                   className="font-ui text-[12px] font-bold tracking-[.18em] uppercase px-8 py-3.5 no-underline clip-angled inline-block transition-colors duration-200"
                   style={{ background: venue.color, color: '#04030A' }}>
                   {venue.linkLabel} →
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
