@@ -37,8 +37,8 @@ const venues = [
     title: 'Covered Patios',
     color: '#F56520',
     bg: '/images/covered-patios.jpg',
-    link: '/#findus',
-    linkLabel: 'Get Directions',
+    link: '/find-us',
+    linkLabel: 'Find Us',
     features: ['Two Covered All-Weather Patios','Outdoor Bar Service','Game Day Ready','Great for Groups','Rain or Shine'],
     desc: 'Two fully covered patios mean the party never stops — rain or shine. Full outdoor bar service, comfortable seating, and the perfect spot to enjoy Clemson weather with a cold drink in hand.',
   },
@@ -116,7 +116,7 @@ export default function Venues() {
                   className="font-ui text-[12px] font-bold tracking-[.18em] uppercase px-8 py-3.5 no-underline clip-angled inline-block transition-colors duration-200"
                   style={{ background: venue.color, color: '#04030A' }}>
                   {venue.linkLabel} →
-                </Link>
+                </a>
               </div>
             </motion.div>
           ))}
@@ -135,7 +135,7 @@ export default function Venues() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-              Get Directions
+              Find Us
             </a>
             <a href="/#events-cta" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Book an Event
