@@ -75,7 +75,8 @@ export default function VipReservation() {
           <div className="font-ui text-[11px] font-bold tracking-[.22em] uppercase text-purple-bright mb-4">Step 1 — Choose a Package</div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', width:'100%' }}>
             {displayPackages.map((pkg, idx) => (
-              <button key={pkg.name || idx} onClick={() => setSelected(pkg)}
+              <div key={pkg.name || idx} style={{ display:'block' }}>
+              <button onClick={() => setSelected(pkg)} style={{ display:'block', width:'100%', textAlign:'left' }}
                 
                 className={`text-left p-6 border transition-all duration-200 ${selected?.name === pkg.name ? 'border-purple-bright bg-purple-bright/10' : 'border-white/[0.08] hover:border-purple-bright/40 bg-white/[0.02]'}`}>
                 <div className="font-display text-[clamp(36px,4vw,52px)] text-purple-bright leading-none mb-2">${pkg.price}</div>
@@ -93,6 +94,7 @@ export default function VipReservation() {
                 )}
                 {selected?.name === pkg.name && <div className="mt-3 font-ui text-[10px] font-bold tracking-[.15em] uppercase text-purple-bright">✓ Selected</div>}
               </button>
+              </div>
             ))}
           </div>
         </div>
