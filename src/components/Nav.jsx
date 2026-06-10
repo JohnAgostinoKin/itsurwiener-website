@@ -10,7 +10,7 @@ const links = [
   { label: 'Events',     to: '/events' },
   { label: 'Menu',       to: '/menu' },
   { label: 'Merch',      to: '/merch' },
-  { label: 'Find Us',    to: '/#findus' },
+  { label: 'Find Us',    to: '/#findus', native: true },
 ]
 
 export default function Nav() {
@@ -34,23 +34,30 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden lg:flex gap-5 list-none">
-          {links.map(({ label, to }) => (
+          {links.map(({ label, to, native }) => (
             <li key={label}>
-              <NavLink to={to}
-                className={({ isActive }) =>
-                  `font-ui text-[13px] font-semibold tracking-[.08em] uppercase no-underline transition-colors duration-200 relative group ${isActive ? 'text-orange' : 'text-cream/80 hover:text-white'}`
-                }
-              >
-                {label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-orange transition-all duration-300 group-hover:w-full" />
-              </NavLink>
+              {native ? (
+                <a href={to} className="font-ui text-[13px] font-semibold tracking-[.08em] uppercase no-underline transition-colors duration-200 relative group text-cream/80 hover:text-white">
+                  {label}
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-orange transition-all duration-300 group-hover:w-full" />
+                </a>
+              ) : (
+                <NavLink to={to}
+                  className={({ isActive }) =>
+                    `font-ui text-[13px] font-semibold tracking-[.08em] uppercase no-underline transition-colors duration-200 relative group ${isActive ? 'text-orange' : 'text-cream/80 hover:text-white'}`
+                  }
+                >
+                  {label}
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-orange transition-all duration-300 group-hover:w-full" />
+                </NavLink>
+              )}
             </li>
           ))}
         </ul>
 
-        <Link to="/#events-cta" className="hidden lg:block font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">
+        <a href="/#events-cta" className="hidden lg:block font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">
           Book an Event
-        </Link>
+        </a>
 
         <button onClick={() => setMenuOpen(o => !o)} className="lg:hidden flex flex-col gap-1.5 p-1 bg-transparent border-0" aria-label="Menu">
           <span className={`block w-6 h-0.5 bg-cream transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />

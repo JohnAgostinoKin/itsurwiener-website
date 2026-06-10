@@ -8,7 +8,7 @@ const footerLinks = [
   { label: 'Menu',                to: '/menu' },
   { label: 'Merch',               to: '/merch' },
   { label: 'Events',              to: '/events' },
-  { label: 'Find Us',             to: '/#findus' },
+  { label: 'Find Us', href: '/#findus' },
 ]
 
 export default function Footer() {

@@ -1,67 +1,47 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Cursor() {
-  const dotRef  = useRef(null)
-  const ringRef = useRef(null)
-  const mouse   = useRef({ x: 0, y: 0 })
-  const ring    = useRef({ x: 0, y: 0 })
-  const big     = useRef(false)
+  const [pos, setPos] = useState({ x: -100, y: -100 })
+  const [visible, setVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
 
   useEffect(() => {
+    // Check if touch device
+    const checkMobile = () => setIsMobile(window.matchMedia('(pointer: coarse)').matches)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     const move = (e) => {
-      mouse.current.x = e.clientX
-      mouse.current.y = e.clientY
-      if (dotRef.current) {
-        dotRef.current.style.left = e.clientX + 'px'
-        dotRef.current.style.top  = e.clientY + 'px'
-      }
+      setPos({ x: e.clientX, y: e.clientY })
+      setVisible(true)
     }
+    const leave = () => setVisible(false)
 
-    const over = (e) => {
-      const el = e.target.closest('a, button, [data-cursor]')
-      if (el && !big.current) {
-        big.current = true
-        dotRef.current?.classList.add('scale-[2]')
-        ringRef.current?.classList.add('!w-[70px]', '!h-[70px]')
-      } else if (!el && big.current) {
-        big.current = false
-        dotRef.current?.classList.remove('scale-[2]')
-        ringRef.current?.classList.remove('!w-[70px]', '!h-[70px]')
-      }
-    }
-
-    document.addEventListener('mousemove', move)
-    document.addEventListener('mouseover', over)
-
-    let raf
-    const loop = () => {
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.13
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.13
-      if (ringRef.current) {
-        ringRef.current.style.left = ring.current.x + 'px'
-        ringRef.current.style.top  = ring.current.y + 'px'
-      }
-      raf = requestAnimationFrame(loop)
-    }
-    loop()
-
+    window.addEventListener('mousemove', move)
+    document.addEventListener('mouseleave', leave)
     return () => {
-      document.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseover', over)
-      cancelAnimationFrame(raf)
+      window.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseleave', leave)
+      window.removeEventListener('resize', checkMobile)
     }
   }, [])
 
+  if (isMobile) return null
+
   return (
-    <>
-      <div
-        ref={dotRef}
-        className="fixed z-[9999] pointer-events-none w-[10px] h-[10px] bg-orange rounded-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 mix-blend-difference"
-      />
-      <div
-        ref={ringRef}
-        className="fixed z-[9998] pointer-events-none w-[36px] h-[36px] border border-orange/50 rounded-full -translate-x-1/2 -translate-y-1/2 transition-[width,height] duration-300"
-      />
-    </>
+    <div
+      className="fixed pointer-events-none z-[9999] transition-opacity duration-200"
+      style={{
+        left: pos.x,
+        top: pos.y,
+        opacity: visible ? 1 : 0,
+        transform: 'translate(-4px, -4px)',
+      }}
+    >
+      {/* Orange arrow cursor */}
+      <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+        <path d="M2 2L18 10L10 12L6 20L2 2Z" fill="#F56520" stroke="#04030A" strokeWidth="1.5" strokeLinejoin="round"/>
+      </svg>
+    </div>
   )
 }
