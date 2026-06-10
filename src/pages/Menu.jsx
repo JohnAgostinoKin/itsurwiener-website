@@ -24,7 +24,7 @@ const menu = {
     label: 'Starters', icon: '⚡', color: '#F56520',
     showcase: {
       name: 'Build Your Own Chips-N-Dip Platter',
-      desc: 'Warm Tortilla Chips with your choice of <strong>Queso</strong>, <strong>Spinach Dip</strong>, or <strong>Buffalo Chicken Dip</strong>. All homemade and delicious. Choose one, two, or all three!',
+      desc: 'Warm Tortilla Chips with your choice of <strong style="color:#9D4EDD">Queso</strong>, <strong style="color:#9D4EDD">Spinach Dip</strong>, or <strong style="color:#9D4EDD">Buffalo Chicken Dip</strong>. All homemade and delicious. Choose one, two, or all three!',
       tiers: [
         { label: 'Choose One',       price: '$10.99' },
         { label: 'Choose Two',       price: '$14.99' },
