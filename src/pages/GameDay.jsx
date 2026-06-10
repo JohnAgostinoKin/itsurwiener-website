@@ -138,12 +138,6 @@ export default function GameDay() {
           <p className="font-cond text-[clamp(16px,2vw,24px)] text-cream/55 max-w-[560px] mx-auto mb-10 tracking-wide">
             People line up for these. Get here early — doors open at 10 AM on game days and the mimosas flow until they don't.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Reserve a Table</a>
-            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
-              Find Us
-            </a>
-          </div>
         </motion.div>
       </section>
 
@@ -227,14 +221,6 @@ export default function GameDay() {
           <h2 className="font-display text-[clamp(40px,7vw,100px)] leading-none text-white mb-4">
             We'll Save<br />You A Seat<span className="text-orange">.</span>
           </h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-              Find Us
-            </a>
-            <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
-              Call Us
-            </a>
-          </div>
         </motion.div>
       </section>
       <PageCTA />

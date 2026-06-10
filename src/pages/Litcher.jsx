@@ -283,14 +283,6 @@ export default function Litcher() {
           <h2 className="font-display text-[clamp(52px,10vw,130px)] leading-[.88] text-white mb-10">
             You Have To<br />Try <span className="text-purple-bright">One.</span>
           </h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-              Find Us
-            </a>
-            <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
-              See Food Menu
-            </Link>
-          </div>
         </motion.div>
       </section>
       <PageCTA />
