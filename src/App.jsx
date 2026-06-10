@@ -24,6 +24,7 @@ import BookingInquiry          from '@pages/BookingInquiry'
 import VipReservation          from '@pages/VipReservation'
 import Reservation             from '@pages/Reservation'
 import FindUs                  from '@pages/FindUs'
+import BookEvent               from '@pages/BookEvent'
 import ProductDetail           from '@pages/ProductDetail'
 
 function RootLayout() {
@@ -62,6 +63,7 @@ export const router = createBrowserRouter([
       { path: 'vip',            element: <VipReservation /> },
       { path: 'reserve',        element: <Reservation /> },
       { path: 'find-us',        element: <FindUs /> },
+      { path: 'book-event',     element: <BookEvent /> },
       { path: 'merch/:id',      element: <ProductDetail /> },
       { path: '*',             element: <NotFound /> },
     ],

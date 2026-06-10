@@ -48,7 +48,7 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a href="/#events-cta" className="hidden lg:block font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">
+        <a href="/book-event" className="hidden lg:block font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-6 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">
           Book an Event
         </a>
 
