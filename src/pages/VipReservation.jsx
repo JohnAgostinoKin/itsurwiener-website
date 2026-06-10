@@ -104,8 +104,16 @@ export default function VipReservation() {
             </div>
             <div>
               <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-purple-bright/70 block mb-2">Date *</label>
-              <input type="date" value={date} onChange={e=>setDate(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-purple-bright transition-colors" />
+              {s.availableDates?.length > 0 ? (
+                <select value={date} onChange={e=>setDate(e.target.value)}
+                  className="w-full bg-[#08060F] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-purple-bright transition-colors">
+                  <option value="">Select date...</option>
+                  {s.availableDates.map(d => <option key={d} value={d}>{new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric',year:'numeric'})}</option>)}
+                </select>
+              ) : (
+                <input type="date" value={date} onChange={e=>setDate(e.target.value)}
+                  className="w-full bg-white/[0.04] border border-white/10 text-cream font-ui text-[14px] px-4 py-3.5 outline-none focus:border-purple-bright transition-colors" />
+              )}
             </div>
             <div>
               <label className="font-ui text-[9px] font-bold tracking-[.22em] uppercase text-purple-bright/70 block mb-2">Time *</label>
