@@ -22,6 +22,13 @@ export default {
           { name: 'description', title: 'Description',   type: 'text' },
           { name: 'price',       title: 'Price ($)',      type: 'number' },
           { name: 'maxGuests',   title: 'Max Guests',     type: 'number' },
+          {
+            name: 'effectiveDates',
+            title: 'Effective Dates',
+            type: 'array',
+            description: 'Leave blank = always available. Add specific dates to restrict this package.',
+            of: [{ type: 'date' }],
+          },
           { name: 'available',   title: 'Available',      type: 'boolean', initialValue: true },
         ],
         preview: { select: { title: 'name', subtitle: 'price' } }
