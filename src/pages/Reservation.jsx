@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { client } from '@/lib/sanity'
 
@@ -177,6 +178,7 @@ export default function Reservation() {
         </motion.div>
 
       </section>
+      <PageCTA />
     </div>
   )
 }

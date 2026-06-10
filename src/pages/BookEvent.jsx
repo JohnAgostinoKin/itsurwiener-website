@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 
 const inView = (delay = 0) => ({
@@ -142,6 +143,7 @@ ${form.message}
           </motion.div>
         </div>
       </section>
+      <PageCTA />
     </div>
   )
 }

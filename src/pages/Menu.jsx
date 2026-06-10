@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { client } from '@/lib/sanity'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -261,6 +262,7 @@ function DogsHeroCard({ data, color }) {
           </div>
         ))}
       </div>
+      <PageCTA />
     </div>
   )
 }

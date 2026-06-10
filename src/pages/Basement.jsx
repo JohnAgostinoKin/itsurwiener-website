@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import CallButton from '@components/CallButton'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
@@ -306,7 +307,7 @@ export default function Basement() {
             <a href="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">Reserve a Table</a>
         </motion.div>
       </section>
-
+      <PageCTA />
     </div>
   )
 }

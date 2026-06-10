@@ -29,11 +29,6 @@ export default function Footer() {
           ))}
         </nav>
 
-        <div className="flex gap-3 flex-wrap justify-center">
-          <a href="/book-event" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-orange text-black px-5 py-2.5 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">Book an Event</a>
-          <a href="/reserve" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-2.5 no-underline clip-angled-sm hover:bg-[#B85EFF] transition-colors duration-200">Reserve a Table</a>
-        </div>
-
       </div>
 
       <div className="mt-8 pt-6 border-t border-orange/[0.08] flex flex-col md:flex-row items-center justify-between gap-4">

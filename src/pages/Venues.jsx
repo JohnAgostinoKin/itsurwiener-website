@@ -1,3 +1,4 @@
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -142,7 +143,7 @@ export default function Venues() {
           </div>
         </motion.div>
       </section>
-
+      <PageCTA />
     </div>
   )
 }

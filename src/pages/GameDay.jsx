@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import CallButton from '@components/CallButton'
 import { Link } from 'react-router-dom'
@@ -236,7 +237,7 @@ export default function GameDay() {
           </div>
         </motion.div>
       </section>
-
+      <PageCTA />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import Ticker from '@components/Ticker'
 import CallButton from '@components/CallButton'
@@ -620,6 +621,7 @@ export default function Home() {
       <MerchSection />
       <EventsCTA />
       <FindUs />
+      <PageCTA />
     </div>
   )
 }

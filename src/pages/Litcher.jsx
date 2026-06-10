@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
@@ -292,7 +293,7 @@ export default function Litcher() {
           </div>
         </motion.div>
       </section>
-
+      <PageCTA />
     </div>
   )
 }

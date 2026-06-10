@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
+import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
 
 const inView = (delay = 0) => ({
@@ -360,7 +361,7 @@ export default function Merch() {
 
 
       </div>
-
+      <PageCTA />
     </div>
   )
 }
