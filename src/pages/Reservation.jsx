@@ -73,9 +73,9 @@ export default function Reservation() {
         {/* Step 1 — Packages */}
         <div className="mb-10">
           <div className="font-ui text-[11px] font-bold tracking-[.22em] uppercase text-orange mb-4">Step 1 — Choose a Package</div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(260px, 1fr))", gap:"1rem" }}>
-            {displayPackages.map(pkg => (
-              <button key={pkg.name} onClick={() => setSelected(pkg)}
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:'16px', width:'100%' }}>
+            {displayPackages.map((pkg, idx) => (
+              <button key={pkg.name || idx} onClick={() => setSelected(pkg)}
                 
                 className={`text-left p-6 border transition-all duration-200 ${selected?.name === pkg.name ? 'border-orange bg-orange/10' : 'border-white/[0.08] hover:border-orange/40 bg-white/[0.02]'}`}>
                 <div className="font-display text-[clamp(36px,4vw,52px)] text-orange leading-none mb-2">${pkg.price}</div>
