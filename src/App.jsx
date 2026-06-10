@@ -23,6 +23,7 @@ import AccessibilityStatement  from './legal/AccessibilityStatement'
 import BookingInquiry          from '@pages/BookingInquiry'
 import VipReservation          from '@pages/VipReservation'
 import Reservation             from '@pages/Reservation'
+import FindUs                  from '@pages/FindUs'
 import ProductDetail           from '@pages/ProductDetail'
 
 function RootLayout() {
@@ -60,6 +61,7 @@ export const router = createBrowserRouter([
       { path: 'booking',        element: <BookingInquiry /> },
       { path: 'vip',            element: <VipReservation /> },
       { path: 'reserve',        element: <Reservation /> },
+      { path: 'find-us',        element: <FindUs /> },
       { path: 'merch/:id',      element: <ProductDetail /> },
       { path: '*',             element: <NotFound /> },
     ],

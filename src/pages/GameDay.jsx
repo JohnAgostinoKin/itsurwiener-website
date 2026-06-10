@@ -117,7 +117,7 @@ export default function GameDay() {
               <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
                 See Menu
               </Link>
-              <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
+              <a href="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Reserve a Table</a>
             </div>
           </motion.div>
         </div>
@@ -138,9 +138,9 @@ export default function GameDay() {
             People line up for these. Get here early — doors open at 10 AM on game days and the mimosas flow until they don't.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
-            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
-              Get Directions
+            <a href="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">Reserve a Table</a>
+            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
+              Find Us
             </a>
           </div>
         </motion.div>
@@ -227,8 +227,8 @@ export default function GameDay() {
             We'll Save<br />You A Seat<span className="text-orange">.</span>
           </h2>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-              Get Directions
+            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
+              Find Us
             </a>
             <a href="tel:8647225001" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
               Call Us

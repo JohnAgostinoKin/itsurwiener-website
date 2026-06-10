@@ -100,7 +100,7 @@ export default function Litcher() {
               <a href="#menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
                 See Litcher Menu
               </a>
-              <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
+              <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
                 Find Us
               </a>
             </div>
@@ -283,7 +283,7 @@ export default function Litcher() {
             You Have To<br />Try <span className="text-purple-bright">One.</span>
           </h2>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/#findus" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
+            <a href="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
               Find Us
             </a>
             <Link to="/menu" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-purple-bright/40 text-cream px-10 py-4 no-underline hover:border-purple-bright hover:text-purple-bright transition-all duration-200">
