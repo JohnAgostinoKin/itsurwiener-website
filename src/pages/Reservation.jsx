@@ -27,6 +27,7 @@ export default function Reservation() {
     client.fetch(`*[_type == "tableReservation"][0]`).then(data => {
       console.log('Sanity tableReservation data:', data)
       console.log('Packages:', data?.packages)
+      console.log('Package[0]:', JSON.stringify(data?.packages?.[0]))
       if (data?.packages?.length) setPackages(data.packages.filter(p => p.available !== false))
       if (data) setSettings(data)
     }).catch(() => {})
