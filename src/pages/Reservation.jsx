@@ -24,10 +24,7 @@ export default function Reservation() {
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    client.fetch(`*[_type == "tableReservation"][0]{
-      ...,
-      packages[]{ name, description, price, maxGuests, available }
-    }`).then(data => {
+    client.fetch(`*[_type == "tableReservation"][0]`).then(data => {
       console.log('Sanity tableReservation data:', data)
       console.log('Packages:', data?.packages)
       if (data?.packages?.length) setPackages(data.packages.filter(p => p.available !== false))

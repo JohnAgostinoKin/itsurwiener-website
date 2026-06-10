@@ -24,10 +24,7 @@ export default function VipReservation() {
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    client.fetch(`*[_type == "vipReservation"][0]{
-      ...,
-      packages[]{ name, description, price, maxGuests, available, perks }
-    }`).then(data => {
+    client.fetch(`*[_type == "vipReservation"][0]`).then(data => {
       if (data?.packages?.length) setPackages(data.packages.filter(p => p.available !== false))
       if (data) setSettings(data)
     }).catch(() => {})
