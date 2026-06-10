@@ -63,7 +63,7 @@ export default function Reservation() {
         </div>
       </div>
 
-      {(s.notice || pkgData?.tableNote) && (
+      {s.notice && (
         <div className="px-[5vw] max-w-[1000px] mx-auto pb-4">
           <div className="border border-orange/30 px-5 py-4" style={{ background: 'rgba(245,101,32,0.06)' }}>
             <p className="text-[13px] text-orange font-bold">{s.notice}</p>
