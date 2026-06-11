@@ -125,11 +125,7 @@ const menu = {
   chicken: {
     label: 'Chicken', icon: '🍗', color: '#F56520',
     note: "Clemson's Best · Hand-Battered & Deep Fried to Order",
-<<<<<<< HEAD
-    showcase: { name: 'Chicken & Waffle', price: '10.99', desc: 'Five crispy hand-battered tenders on a golden waffle. Clemson comfort food at its finest.' },
-=======
-    showcase: { name: 'Chicken & Waffle', price: '12.99', desc: 'A crispy hand-battered tender on a golden waffle. Clemson comfort food at its finest.' },
->>>>>>> d2ddbf8fc7fe1ce76e27344e08810823083ea83f
+    showcase: { name: 'Chicken & Waffle', price: '12.99', desc: 'Five crispy hand-battered tenders on a golden waffle. Clemson comfort food at its finest.' },
     chickenCards: true,
     tenders: {
       title: "Clemson's Best Chicken Tenders",
