@@ -22,7 +22,15 @@ const categoryImages = {
 const menu = {
   starters: {
     label: 'Starters', icon: '⚡', color: '#F56520',
-    showcase: { name: 'Chicken-n-Waffle Cone', price: '9.99', desc: 'Popcorn Chicken served in a crispy Waffle Cone with maple syrup. The perfect one-hand appetizer when your other hand is holding a Litcher®.' },
+    showcase: {
+      name: 'Build Your Own Chips-N-Dip Platter',
+      desc: 'Warm Tortilla Chips with your choice of <strong style="color:#9D4EDD">Queso</strong>, <strong style="color:#9D4EDD">Spinach Dip</strong>, or <strong style="color:#9D4EDD">Buffalo Chicken Dip</strong>. All homemade and delicious. Choose one, two, or all three!',
+      tiers: [
+        { label: 'Choose One',       price: '$10.99' },
+        { label: 'Choose Two',       price: '$14.99' },
+        { label: 'Choose All Three', price: '$18.99' },
+      ]
+    },
     items: [
       { name: 'Fried Pickles',          price: 'Sm $8.99 / Lg $12.99', desc: 'Golden-fried dill pickle chips with your choice of dipping sauce.' },
       { name: 'Fried Mozz Sticks',      price: '6 Pc $9.99 / 10 Pc $13.99', desc: 'Crispy breaded mozzarella sticks, hot and stringy. Served with marinara.' },
@@ -117,7 +125,11 @@ const menu = {
   chicken: {
     label: 'Chicken', icon: '🍗', color: '#F56520',
     note: "Clemson's Best · Hand-Battered & Deep Fried to Order",
+<<<<<<< HEAD
     showcase: { name: 'Chicken & Waffle', price: '10.99', desc: 'Five crispy hand-battered tenders on a golden waffle. Clemson comfort food at its finest.' },
+=======
+    showcase: { name: 'Chicken & Waffle', price: '12.99', desc: 'A crispy hand-battered tender on a golden waffle. Clemson comfort food at its finest.' },
+>>>>>>> d2ddbf8fc7fe1ce76e27344e08810823083ea83f
     chickenCards: true,
     tenders: {
       title: "Clemson's Best Chicken Tenders",
@@ -319,13 +331,22 @@ function MenuSection({ id, data }) {
       {data.showcase && (
         <div className="mb-6 relative overflow-hidden rounded-sm border-2" style={{ borderColor: data.color, background: 'rgba(4,3,10,0.8)' }}>
           {data.showcase.badge && <div className="absolute top-0 right-0 font-ui text-[9px] font-bold tracking-[.15em] uppercase px-3 py-1.5" style={{ background: '#F56520', color: '#04030A' }}>{data.showcase.badge}</div>}
-          <div className="p-6 flex items-center justify-between gap-6">
-            <div>
-              <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase mb-1" style={{ color: data.color }}>Featured Item</div>
-              <div className="font-display text-[clamp(32px,4vw,54px)] text-white leading-none">{data.showcase.name}</div>
-              <p className="text-[13px] text-cream/80 mt-2 max-w-[460px] leading-relaxed">{data.showcase.desc}</p>
-            </div>
-            <div className="font-display text-[clamp(52px,7vw,88px)] flex-shrink-0" style={{ color: data.color }}>${data.showcase.price}</div>
+          <div className="p-6">
+            <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase mb-1" style={{ color: data.color }}>Featured Item</div>
+            <div className="font-display text-[clamp(28px,3.5vw,48px)] text-white leading-none mb-3">{data.showcase.name}</div>
+            <p className="text-[13px] text-cream/80 mb-5 max-w-[600px] leading-relaxed" dangerouslySetInnerHTML={{ __html: data.showcase.desc }} />
+            {data.showcase.tiers ? (
+              <div className="flex flex-wrap gap-3">
+                {data.showcase.tiers.map(t => (
+                  <div key={t.label} className="border px-5 py-3 text-center" style={{ borderColor: `${data.color}55`, background: `${data.color}11` }}>
+                    <div className="font-ui text-[10px] font-bold tracking-[.12em] uppercase text-cream/60 mb-1">{t.label}</div>
+                    <div className="font-display text-[32px] leading-none" style={{ color: data.color }}>{t.price}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="font-display text-[clamp(52px,7vw,88px)] flex-shrink-0" style={{ color: data.color }}>${data.showcase.price}</div>
+            )}
           </div>
         </div>
       )}
