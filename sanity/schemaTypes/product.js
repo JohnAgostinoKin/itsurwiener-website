@@ -77,6 +77,12 @@ export default {
       description: 'Uncheck to hide from store'
     },
     {
+      name: 'weight',
+      title: 'Shipping Weight (grams)',
+      type: 'number',
+      description: 'For weight-based shipping. Leave blank for gift cards. e.g. T-shirt = 250, Hoodie = 500, Hat = 200, Sticker = 10'
+    },
+    {
       name: 'sortOrder',
       title: 'Sort Order',
       type: 'number',
