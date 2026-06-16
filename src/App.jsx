@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet, ScrollRestoration } from 'react-router-dom
 import Nav from '@components/Nav'
 import Footer from '@components/Footer'
 import Cursor from '@components/Cursor'
+import Cart from '@components/Cart'
 
 // Pages
 import Home     from '@pages/Home'
@@ -32,7 +33,7 @@ function RootLayout() {
     <>
       <Cursor />
       <ScrollRestoration />
-      <Nav />
+      <Nav /><Cart />
       <main>
         <Outlet />
       </main>
