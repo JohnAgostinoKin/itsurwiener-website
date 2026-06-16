@@ -15,7 +15,7 @@ export default function ProductDetail() {
     client.fetch(`*[_type == "product" && _id == $id][0] {
       _id, name, category, price, description,
       "image": image.asset->url,
-      sizes, colors, featured, available, denominations
+      sizes, colors, featured, available, denominations, weight
     }`, { id }).then(data => {
       setProduct(data)
       if (data?.sizes?.length) setSize(data.sizes[2] || data.sizes[0])
@@ -121,10 +121,11 @@ export default function ProductDetail() {
             className={`snipcart-add-item w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 border transition-all duration-200 mt-2 ${added ? 'bg-orange/20 border-orange text-orange' : 'bg-orange text-black border-orange hover:bg-white'}`}
             data-item-id={`${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}${amount ? `-${amount}` : ''}`}
             data-item-price={amount || product.price}
-            data-item-url={`/merch/${product._id}`}
+            data-item-url={`/api/products?id=${product._id}&price=${amount || product.price}&name=${encodeURIComponent(product.name)}`}
             data-item-name={`${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}${amount ? ` — $${amount}` : ''}`}
             data-item-description={product.description || ''}
             data-item-image={product.image || ''}
+            data-item-weight={product.weight || 0}
           >
             {added ? '✓ Added to Cart' : 'Add to Cart'}
           </button>

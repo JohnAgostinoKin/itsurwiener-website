@@ -195,7 +195,7 @@ function ProductCard({ product }) {
           className={`snipcart-add-item w-full font-ui text-[11px] font-bold tracking-[.18em] uppercase py-3 border transition-all duration-200 ${added ? 'bg-orange/20 border-orange text-orange' : 'border-orange/40 text-cream hover:bg-orange hover:text-black hover:border-orange'}`}
           data-item-id={product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')}
           data-item-price={product.price}
-          data-item-url="/merch"
+          data-item-url={`/api/products?id=${`gift-card-${amount}`}&price=${amount}&name=${encodeURIComponent(`itsurwiener Gift Card — $${amount}`)}`}
           data-item-description={product.desc}
           data-item-image={product.image}
           data-item-name={product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')}
@@ -245,10 +245,11 @@ function GiftCardSelector({ products }) {
         <div className="flex-1 p-8 flex flex-col justify-between gap-6">
           <div>
             <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange/70 mb-4">Select Amount</div>
-            <div className="flex flex-wrap gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px' }}>
               {amounts.map(p => (
                 <button key={p} onClick={(e) => { e.stopPropagation(); setAmount(Number(p)); }}
-                  className={`font-display text-[28px] px-5 py-2 border transition-all duration-200 ${
+                  style={{ display: 'block', width: '100%' }}
+                  className={`font-display text-[24px] py-3 border transition-all duration-200 text-center ${
                     Number(amount) === Number(p)
                       ? 'border-orange text-orange bg-orange/10'
                       : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'
@@ -270,7 +271,7 @@ function GiftCardSelector({ products }) {
                 data-item-shippable="false"
                 data-item-id={`gift-card-${amount}`}
                 data-item-price={amount}
-                data-item-url="/merch"
+                data-item-url={`/api/products?id=${`gift-card-${amount}`}&price=${amount}&name=${encodeURIComponent(`itsurwiener Gift Card — $${amount}`)}`}
                 data-item-name={`itsurwiener Gift Card — $${amount}`}
                 data-item-description={`itsurwiener Gift Card - $${amount} value`}
                 data-item-image={giftCard.image || ''}

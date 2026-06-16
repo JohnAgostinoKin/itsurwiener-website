@@ -30,7 +30,10 @@ export default function Reservation() {
     }).catch(() => {})
   }, [])
 
-  const displayPackages = packages.length ? packages : defaultPackages
+  const allPackages = packages.length ? packages : defaultPackages
+  const displayPackages = date
+    ? allPackages.filter(p => !p.effectiveDates?.length || p.effectiveDates.includes(date))
+    : allPackages
   const s = settings || {}
 
   const addOnTotal = Object.entries(addOns).reduce((sum, [key, checked]) => {
@@ -83,6 +86,14 @@ export default function Reservation() {
                 <div className="font-cond text-[18px] font-bold text-white uppercase mb-2">{pkg.name}</div>
                 <div className="text-[12px] text-cream/50 leading-relaxed mb-3">{pkg.description}</div>
                 <div className="font-ui text-[10px] text-cream/30 uppercase tracking-wider">Up to {pkg.maxGuests} guests</div>
+                {pkg.effectiveDates?.length > 0 && (
+                  <div className="mt-3 border border-orange/20 px-3 py-2" style={{ background: 'rgba(245,101,32,0.06)' }}>
+                    <div className="font-ui text-[9px] font-bold tracking-[.12em] uppercase text-orange/60 mb-1">Available Dates Only</div>
+                    <div className="text-[11px] text-cream/50 leading-relaxed">
+                      {pkg.effectiveDates.map(d => new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})).join(' · ')}
+                    </div>
+                  </div>
+                )}
                 {selected?.name === pkg.name && <div className="mt-3 font-ui text-[10px] font-bold tracking-[.15em] uppercase text-orange">✓ Selected</div>}
               </button>
               </div>
@@ -184,7 +195,7 @@ export default function Reservation() {
               disabled={!canSubmit}
               data-item-id={`table-${(selected?.name||'').toLowerCase().replace(/\s+/g,'-')}-${Date.now()}`}
               data-item-price={total || 0}
-              data-item-url="/reserve"
+              data-item-url={`/api/products?id=${`table-${(selected?.name||"").toLowerCase().replace(/\s+/g,"-")}-${Date.now()}`}&price=${total}&name=${encodeURIComponent(`Table Reservation — ${selected?.name||""}`)}`}
               data-item-name={`Table Reservation — ${selected?.name || ''}`}
               data-item-description={itemDescription}
               data-item-max-quantity={s.quantity || undefined}
@@ -195,7 +206,7 @@ export default function Reservation() {
             {added && s.confirmationMessage && (
               <p className="text-[13px] text-orange text-center mt-4 font-bold">{s.confirmationMessage}</p>
             )}
-            <p className="text-[11px] text-cream/30 text-center mt-3">Full payment required to secure your table reservation.</p>
+            <p className="text-[11px] text-cream/30 text-center mt-3">Deposit applied to your tab on the day of your visit.</p>
           </div>
         </motion.div>
 
