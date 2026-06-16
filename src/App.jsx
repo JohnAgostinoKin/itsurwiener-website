@@ -33,7 +33,8 @@ function RootLayout() {
     <>
       <Cursor />
       <ScrollRestoration />
-      <Nav /><Cart />
+      <Nav />
+      <Cart />
       <main>
         <Outlet />
       </main>
