@@ -58,18 +58,21 @@ export default function Cart() {
   const checkout = async () => {
     setChecking(true)
     try {
-      // Try to initialize payment session (proper checkout flow)
-      const session = await window.Snipcart.api.cart.initializePaymentSession()
-      console.log('Payment session:', session)
-    } catch (e) {
-      console.error('Checkout error:', e)
-      // Fallback: open Snipcart checkout with token
-      const state = window.Snipcart?.store?.getState()
-      const token = state?.cart?.token
-      const key = window.SnipcartSettings?.publicApiKey
-      if (token && key) {
-        window.open(`https://app.snipcart.com/checkout?token=${token}&key=${key}`, '_blank')
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      })
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        console.error('Checkout error:', data.error)
+        alert('Checkout error: ' + data.error)
       }
+    } catch (e) {
+      console.error('Checkout failed:', e)
+      alert('Something went wrong. Please try again.')
     }
     setChecking(false)
   }
