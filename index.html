@@ -19,19 +19,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Space+Grotesk:wght@300;400;500;700&family=Barlow+Condensed:ital,wght@0,700;0,900;1,900&display=swap" rel="stylesheet" />
 
-    <title>Itsurwiener | Clemson's Entertainment Destination</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-
-    <!-- Snipcart v3 — latest setup per docs.snipcart.com/v3/setup/installation -->
+    <!-- Snipcart v3.7.3 pinned -->
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
     <script>
       window.SnipcartSettings = {
         publicApiKey: 'MjVhZTIxOTktOGRlZi00YTE0LWIzOWYtYmQxMDJlNGIwYTFkNjM5MTYzNzc1Mjk5NjYyNjQ3',
         currency: 'usd',
+        version: '3.7.3',
       };
-      (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=true);var y=window.SnipcartSettings.version.includes("v")?window.SnipcartSettings.version:"v"+window.SnipcartSettings.version;var f=window.SnipcartSettings.useSnipcartTestKey?"&snipcart_test_mode=true":"";var E=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/${y}/default/snipcart.js`;var I=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/${y}/default/snipcart.css`;if(window.SnipcartSettings.loadCSS){var r=document.getElementsByTagName("head")[0];var o=document.createElement("link");o.rel="stylesheet";o.type="text/css";o.href=I;r.appendChild(o)}var a=document.getElementsByTagName("body")[0];var t=document.createElement("script");t.type="text/javascript";t.async=true;t.src=E;a.appendChild(t)})();
     </script>
+    <script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
+
+    <title>Itsurwiener | Clemson's Entertainment Destination</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Snipcart cart mount point -->
+    <snipcart-cart currency="USD"></snipcart-cart>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
