@@ -191,7 +191,7 @@ export default function Reservation() {
               <p className="text-cream/35 text-[14px] mb-6">Select a package above to continue.</p>
             )}
             <button
-              className={`snipcart-add-item w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 transition-all duration-200 ${!canSubmit ? 'opacity-40 cursor-not-allowed border border-orange/30 text-orange/50 bg-transparent' : added ? 'bg-orange/20 border border-orange text-orange' : 'bg-orange text-black hover:bg-white'}`}
+              className={`w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 transition-all duration-200 ${!canSubmit ? 'opacity-40 cursor-not-allowed border border-orange/30 text-orange/50 bg-transparent' : added ? 'bg-orange/20 border border-orange text-orange' : 'bg-orange text-black hover:bg-white'}`}
               disabled={!canSubmit}
               data-item-id={`table-${(selected?.name||'').toLowerCase().replace(/\s+/g,'-')}-${Date.now()}`}
               data-item-price={total || 0}

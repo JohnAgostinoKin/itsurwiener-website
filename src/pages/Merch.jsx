@@ -190,20 +190,27 @@ function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Snipcart button */}
+        {/* Snipcart JS API button */}
         <button
-          onClick={handleAdd}
-          className={`snipcart-add-item w-full font-ui text-[11px] font-bold tracking-[.18em] uppercase py-3 border transition-all duration-200 ${added ? 'bg-orange/20 border-orange text-orange' : 'border-orange/40 text-cream hover:bg-orange hover:text-black hover:border-orange'}`}
-          data-item-id={product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')}
-          data-item-price={product.price}
-          data-item-url={`/api/products?id=${product.id}&price=${product.price}&name=${encodeURIComponent(product.name)}`}
-          data-item-description={product.desc}
-          data-item-image={product.image}
-          data-item-name={product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')}
-          data-item-custom1-name={product.sizes ? 'Size' : undefined}
-          data-item-custom1-value={product.sizes ? size : undefined}
-          data-item-custom2-name={product.colors ? 'Color' : undefined}
-          data-item-custom2-value={product.colors ? color : undefined}
+          onClick={async () => {
+            try {
+              const customFields = []
+              if (product.sizes && size) customFields.push({ name: 'Size', value: size })
+              if (product.colors && color) customFields.push({ name: 'Color', value: color })
+              await window.Snipcart.api.cart.items.add({
+                id: product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : ''),
+                name: product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : ''),
+                price: product.price,
+                url: window.location.href,
+                description: product.desc || '',
+                image: product.image || '',
+                quantity: 1,
+                customFields,
+              })
+              handleAdd()
+            } catch(e) { console.error('Cart error:', e) }
+          }}
+          className={`w-full font-ui text-[11px] font-bold tracking-[.18em] uppercase py-3 border transition-all duration-200 ${added ? 'bg-orange/20 border-orange text-orange' : 'border-orange/40 text-cream hover:bg-orange hover:text-black hover:border-orange'}`}
         >
           {added ? '✓ Added to Cart' : 'Add to Cart'}
         </button>
@@ -268,14 +275,21 @@ function GiftCardSelector({ products }) {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="font-display text-[48px] text-orange leading-none">${amount}</div>
               <button
-                className="snipcart-add-item font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
-                data-item-shippable="false"
-                data-item-id={`gift-card-${amount}`}
-                data-item-price={amount}
-                data-item-url={`/api/products?id=${`gift-card-${amount}`}&price=${amount}&name=${encodeURIComponent(`itsurwiener Gift Card — $${amount}`)}`}
-                data-item-name={`itsurwiener Gift Card — $${amount}`}
-                data-item-description={`itsurwiener Gift Card - $${amount} value`}
-                data-item-image={giftCard.image || ''}
+                onClick={async () => {
+                  try {
+                    await window.Snipcart.api.cart.items.add({
+                      id: `gift-card-${amount}`,
+                      name: `itsurwiener Gift Card — $${amount}`,
+                      price: amount,
+                      url: window.location.href,
+                      description: `itsurwiener Gift Card - $${amount} value`,
+                      image: giftCard.image || '',
+                      quantity: 1,
+                      shippable: false,
+                    })
+                  } catch(e) { console.error('Cart error:', e) }
+                }}
+                className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
               >
                 Add to Cart
               </button>
