@@ -121,7 +121,7 @@ export default function ProductDetail() {
             className={`snipcart-add-item w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 border transition-all duration-200 mt-2 ${added ? 'bg-orange/20 border-orange text-orange' : 'bg-orange text-black border-orange hover:bg-white'}`}
             data-item-id={`${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}${amount ? `-${amount}` : ''}`}
             data-item-price={amount || product.price}
-            data-item-url={`/api/products?id=${product._id}&price=${amount || product.price}&name=${encodeURIComponent(product.name)}`}
+            data-item-url={`/api/products?id=${product._id}&price=${product.price}&name=${encodeURIComponent(product.name)}`}
             data-item-name={`${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}${amount ? ` — $${amount}` : ''}`}
             data-item-description={product.description || ''}
             data-item-image={product.image || ''}
