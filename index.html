@@ -19,26 +19,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Space+Grotesk:wght@300;400;500;700&family=Barlow+Condensed:ital,wght@0,700;0,900;1,900&display=swap" rel="stylesheet" />
 
-    <!-- Snipcart -->
-    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
-    <style>
-      /* Ensure Snipcart renders above everything */
-      #snipcart { z-index: 99999 !important; }
-      .snipcart-modal__container { z-index: 99999 !important; }
-      .snipcart-modal__overlay { z-index: 99998 !important; }
-    </style>
-    <script>
-      window.SnipcartSettings = {
-        publicApiKey: 'ODQ2ZGI1ZTUtOWVlNi00ZTFhLWJjOTYtZDhkNTJiZWU0YTNhNjM5MTYzNzc1Mjk5NjYyNjQ3',
-        currency: 'usd',
-      };
-    </script>
-    <script defer src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
-
     <title>Itsurwiener | Clemson's Entertainment Destination</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Snipcart -->
+    <div hidden id="snipcart" data-api-key="MjVhZTIxOTktOGRlZi00YTE0LWIzOWYtYmQxMDJlNGIwYTFkNjM5MTYzNzc1Mjk5NjYyNjQ3" data-currency="usd" data-config-modal-style="side"></div>
+    <script async src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
   </body>
 </html>
