@@ -22,6 +22,10 @@ export default function Cart() {
         unsubRef.current = window.Snipcart.store.subscribe(readCart)
       }
 
+      // Listen for manual open trigger from CartButton or add-to-cart buttons
+      const handleOpen = () => { readCart(); setOpen(true) }
+      window.addEventListener('cart:open', handleOpen)
+
       // Intercept Snipcart's own cart UI opening — kill the page lock
       // and show our drawer instead
       const observer = new MutationObserver(() => {
@@ -36,6 +40,7 @@ export default function Cart() {
       return () => {
         unsubRef.current?.()
         observer.disconnect()
+        window.removeEventListener('cart:open', handleOpen)
       }
     }
 

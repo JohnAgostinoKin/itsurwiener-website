@@ -125,6 +125,7 @@ function ProductCard({ product }) {
   const handleAdd = () => {
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
+    window.dispatchEvent(new Event('cart:open'))
   }
 
   return (
