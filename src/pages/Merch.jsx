@@ -246,14 +246,14 @@ function GiftCardSelector({ products }) {
           <div>
             <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange/70 mb-4">Select Amount</div>
             <div className="flex flex-wrap gap-3">
-              {products.sort((a,b) => a.price - b.price).map(p => (
-                <button key={p.price} onClick={() => setAmount(p.price)}
+              {amounts.map(p => (
+                <button key={p} onClick={(e) => { e.stopPropagation(); setAmount(Number(p)); }}
                   className={`font-display text-[28px] px-5 py-2 border transition-all duration-200 ${
                     Number(amount) === Number(p)
                       ? 'border-orange text-orange bg-orange/10'
                       : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'
                   }`}>
-                  ${p.price}
+                  ${p}
                 </button>
               ))}
             </div>
@@ -267,6 +267,7 @@ function GiftCardSelector({ products }) {
               <div className="font-display text-[48px] text-orange leading-none">${amount}</div>
               <button
                 className="snipcart-add-item font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
+                data-item-shippable="false"
                 data-item-id={`gift-card-${amount}`}
                 data-item-price={amount}
                 data-item-url="/merch"
@@ -293,7 +294,7 @@ export default function Merch() {
       "id": _id,
       name, category, price, description,
       "image": image.asset->url,
-      sizes, colors, featured, denominations
+      sizes, colors, featured, denominations, weight
     }`).then(data => {
       if (data && data.length > 0) setSanityProducts(data)
     }).catch(() => {})
@@ -303,6 +304,7 @@ export default function Merch() {
     ...p,
     desc: p.desc || p.description,
     image: p.image || null,
+      weight: p.weight || 0,
   }))
 
   const filtered = activeCategory === 'all'

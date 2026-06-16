@@ -48,7 +48,10 @@ export default function Nav() {
           ))}
         </ul>
 
-        <div className="hidden lg:flex gap-2">
+        <div className="hidden lg:flex gap-2 items-center">
+          <button className="snipcart-checkout font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-cream/20 text-cream px-4 py-3 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer flex items-center gap-2">
+            🛒 <span className="snipcart-items-count">0</span>
+          </button>
           <a href="/book-event" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-orange text-black px-5 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">Book Event</a>
           <a href="/reserve" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-3 no-underline clip-angled-sm hover:bg-[#B85EFF] transition-colors duration-200">Reserve Table</a>
         </div>
