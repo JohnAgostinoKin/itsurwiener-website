@@ -195,7 +195,7 @@ function ProductCard({ product }) {
           className={`snipcart-add-item w-full font-ui text-[11px] font-bold tracking-[.18em] uppercase py-3 border transition-all duration-200 ${added ? 'bg-orange/20 border-orange text-orange' : 'border-orange/40 text-cream hover:bg-orange hover:text-black hover:border-orange'}`}
           data-item-id={product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')}
           data-item-price={product.price}
-          data-item-url={`/api/products?id=${`gift-card-${amount}`}&price=${amount}&name=${encodeURIComponent(`itsurwiener Gift Card — $${amount}`)}`}
+          data-item-url={`/api/products?id=${product.id}&price=${product.price}&name=${encodeURIComponent(product.name)}`}
           data-item-description={product.desc}
           data-item-image={product.image}
           data-item-name={product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')}
