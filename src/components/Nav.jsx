@@ -49,9 +49,6 @@ export default function Nav() {
         </ul>
 
         <div className="hidden lg:flex gap-2 items-center">
-          <button className="snipcart-checkout font-ui text-[11px] font-bold tracking-[.15em] uppercase border border-cream/20 text-cream px-3 py-3 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer relative">
-            🛒<span className="snipcart-items-count absolute -top-1 -right-1 bg-orange text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"></span>
-          </button>
           <a href="/book-event" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-orange text-black px-5 py-3 no-underline clip-angled-sm hover:bg-white transition-colors duration-200">Book Event</a>
           <a href="/reserve" className="font-ui text-[11px] font-bold tracking-[.15em] uppercase bg-purple-bright text-white px-5 py-3 no-underline clip-angled-sm hover:bg-[#B85EFF] transition-colors duration-200">Reserve Table</a>
         </div>
