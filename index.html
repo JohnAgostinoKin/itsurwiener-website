@@ -21,13 +21,19 @@
 
     <!-- Snipcart -->
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.css" />
+    <style>
+      /* Ensure Snipcart renders above everything */
+      #snipcart { z-index: 99999 !important; }
+      .snipcart-modal__container { z-index: 99999 !important; }
+      .snipcart-modal__overlay { z-index: 99998 !important; }
+    </style>
     <script>
       window.SnipcartSettings = {
         publicApiKey: 'MjVhZTIxOTktOGRlZi00YTE0LWIzOWYtYmQxMDJlNGIwYTFkNjM5MTYzNzc1Mjk5NjYyNjQ3',
         currency: 'usd',
       };
     </script>
-    <script src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
+    <script defer src="https://cdn.snipcart.com/themes/v3.7.3/default/snipcart.js"></script>
 
     <title>Itsurwiener | Clemson's Entertainment Destination</title>
   </head>
