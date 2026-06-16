@@ -77,7 +77,7 @@ export default function Cart() {
       }
     } catch (e) {
       console.error('Checkout failed:', e)
-      alert('Something went wrong. Please try again.')
+      alert('Error: ' + e.message)
     }
     setChecking(false)
   }
