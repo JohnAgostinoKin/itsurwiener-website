@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
 import PageCTA from '@components/PageCTA'
+import CartButton from '@components/CartButton'
 import { motion } from 'framer-motion'
 
 const inView = (delay = 0) => ({
@@ -278,6 +279,7 @@ function GiftCardSelector({ products }) {
               >
                 Add to Cart
               </button>
+              <CartButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-8 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             </div>
           </div>
         </div>

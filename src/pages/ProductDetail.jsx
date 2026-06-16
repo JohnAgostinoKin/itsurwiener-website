@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import CartButton from '@components/CartButton'
 import { client } from '@/lib/sanity'
 
 export default function ProductDetail() {
@@ -130,6 +131,7 @@ export default function ProductDetail() {
             {added ? '✓ Added to Cart' : 'Add to Cart'}
           </button>
 
+          <CartButton className="w-full font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
           <Link to="/merch" className="text-center font-ui text-[11px] text-cream/30 no-underline hover:text-cream/60 transition-colors">
             ← Continue Shopping
           </Link>
