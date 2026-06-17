@@ -27,11 +27,11 @@ export default function PrivacyPolicy() {
       </ul>
       <p><strong>Information from third parties</strong></p>
       <ul>
-        <li>Our payment, e-commerce, and ticketing providers may share transaction and contact details with us to complete and support your purchase.</li>
+        <li>Our payment and ticketing providers may share transaction and contact details with us to complete and support your purchase.</li>
       </ul>
       <p>
         We do <strong>not</strong> collect or store full payment card numbers. Card payments
-        are handled by our payment processors.
+        are handled by our payment processor.
       </p>
 
       <h2>2. How We Use Information</h2>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
       <h2>3. How We Share Information</h2>
       <p>We share information with:</p>
       <ul>
-        <li><strong>Service providers</strong> who help us operate, including our hosting provider (Vercel), content platform (Sanity), e-commerce provider (Stripe), payment processor, ticketing/reservation provider (LineLeap), and email/SMS and analytics providers — only as needed to perform services for us.</li>
+        <li><strong>Service providers</strong> who help us operate, including our hosting provider (Vercel), content platform (Sanity), payment processor (Stripe), ticketing/reservation provider (LineLeap), and email/SMS and analytics providers — only as needed to perform services for us.</li>
         <li><strong>Legal and safety</strong> recipients when required by law, to respond to legal process, or to protect the rights, property, or safety of itsurwiener, our patrons, or others.</li>
         <li><strong>Business transfers</strong>, if we are involved in a merger, acquisition, or sale of assets.</li>
       </ul>
@@ -57,9 +57,10 @@ export default function PrivacyPolicy() {
       <h2>4. Cookies and Tracking</h2>
       <p>
         The Site uses cookies and similar technologies to keep the Site working, remember
-        preferences, support shopping and checkout, and understand how the Site is used. You
-        can control cookies through your browser settings; disabling some cookies may affect
-        Site functionality.
+        preferences, support shopping and checkout, and understand how the Site is used. Your
+        shopping cart is stored locally in your browser, not by a third party. You can control
+        cookies through your browser settings; disabling some cookies may affect Site
+        functionality.
       </p>
 
       <h2>5. Marketing Choices</h2>
@@ -99,9 +100,9 @@ export default function PrivacyPolicy() {
 
       <h2>10. Third-Party Links</h2>
       <p>
-        The Site may link to third-party websites and services (such as our ticketing or
-        e-commerce providers). We are not responsible for their privacy practices, and we
-        encourage you to review their policies.
+        The Site may link to or redirect you to third-party websites and services (such as our
+        payment or ticketing providers). We are not responsible for their privacy practices,
+        and we encourage you to review their policies.
       </p>
 
       <h2>11. Changes to This Policy</h2>
