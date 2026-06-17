@@ -27,7 +27,7 @@ export default function AccessibilityStatement() {
       <h2>3. Known Limitations</h2>
       <p>
         Parts of the Site rely on third-party services — such as our ticketing and reservation
-        provider (LineLeap), e-commerce checkout (Snipcart), embedded maps, and social media
+        provider (LineLeap), e-commerce checkout (Stripe), embedded maps, and social media
         content — whose accessibility we do not fully control. If you encounter a barrier in
         one of these areas, please contact us and we will help you complete your request
         through another method.

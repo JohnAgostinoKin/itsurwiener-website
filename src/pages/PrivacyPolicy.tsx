@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
       <h2>3. How We Share Information</h2>
       <p>We share information with:</p>
       <ul>
-        <li><strong>Service providers</strong> who help us operate, including our hosting provider (Vercel), content platform (Sanity), e-commerce provider (Snipcart), payment processor, ticketing/reservation provider (LineLeap), and email/SMS and analytics providers — only as needed to perform services for us.</li>
+        <li><strong>Service providers</strong> who help us operate, including our hosting provider (Vercel), content platform (Sanity), e-commerce provider (Stripe), payment processor, ticketing/reservation provider (LineLeap), and email/SMS and analytics providers — only as needed to perform services for us.</li>
         <li><strong>Legal and safety</strong> recipients when required by law, to respond to legal process, or to protect the rights, property, or safety of itsurwiener, our patrons, or others.</li>
         <li><strong>Business transfers</strong>, if we are involved in a merger, acquisition, or sale of assets.</li>
       </ul>
