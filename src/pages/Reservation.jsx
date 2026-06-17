@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { client } from '@/lib/sanity'
+import { useCart } from '@components/CartContext'
 import PageCTA from '@components/PageCTA'
 
 const defaultPackages = [
@@ -10,6 +11,7 @@ const defaultPackages = [
 ]
 
 export default function Reservation() {
+  const { addItem } = useCart()
   const [packages, setPackages] = useState([])
   const [settings, setSettings] = useState(null)
   const [selected, setSelected] = useState(null)
@@ -80,7 +82,7 @@ export default function Reservation() {
             {displayPackages.map((pkg, idx) => (
               <div key={pkg.name || idx} style={{ display:'block' }}>
               <button onClick={() => setSelected(pkg)} style={{ display:'block', width:'100%', textAlign:'left' }}
-                
+
                 className={`text-left p-6 border transition-all duration-200 ${selected?.name === pkg.name ? 'border-orange bg-orange/10' : 'border-white/[0.08] hover:border-orange/40 bg-white/[0.02]'}`}>
                 <div className="font-display text-[clamp(36px,4vw,52px)] text-orange leading-none mb-2">${pkg.price}</div>
                 <div className="font-cond text-[18px] font-bold text-white uppercase mb-2">{pkg.name}</div>
@@ -193,13 +195,18 @@ export default function Reservation() {
             <button
               className={`w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 transition-all duration-200 ${!canSubmit ? 'opacity-40 cursor-not-allowed border border-orange/30 text-orange/50 bg-transparent' : added ? 'bg-orange/20 border border-orange text-orange' : 'bg-orange text-black hover:bg-white'}`}
               disabled={!canSubmit}
-              data-item-id={`table-${(selected?.name||'').toLowerCase().replace(/\s+/g,'-')}-${Date.now()}`}
-              data-item-price={total || 0}
-              data-item-url={`/api/products?id=${`table-${(selected?.name||"").toLowerCase().replace(/\s+/g,"-")}-${Date.now()}`}&price=${total}&name=${encodeURIComponent(`Table Reservation — ${selected?.name||""}`)}`}
-              data-item-name={`Table Reservation — ${selected?.name || ''}`}
-              data-item-description={itemDescription}
-              data-item-max-quantity={s.quantity || undefined}
-              onClick={() => { if (canSubmit) { setAdded(true); setTimeout(()=>setAdded(false),3000) }}}
+              onClick={() => {
+                if (!canSubmit) return
+                addItem({
+                  id: `table-${(selected?.name || '').toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`,
+                  name: `Table Reservation — ${selected?.name || ''}`,
+                  price: total,
+                  description: itemDescription,
+                  quantity: 1,
+                })
+                setAdded(true)
+                setTimeout(() => setAdded(false), 3000)
+              }}
             >
               {!canSubmit ? 'Select a package and fill in all fields' : added ? '✓ Added to Cart — Complete Checkout' : `Reserve Now — $${total}`}
             </button>

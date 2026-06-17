@@ -2,14 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
 import PageCTA from '@components/PageCTA'
+import CartButton from '@components/CartButton'
+import { useCart } from '@components/CartContext'
 import { motion } from 'framer-motion'
-
-const inView = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }
-})
 
 const products = [
   // T-Shirts
@@ -106,6 +101,8 @@ const categories = [
 ]
 
 function ProductCard({ product }) {
+  const { addItem } = useCart()
+
   const denominations = product.denominations?.length
     ? [...product.denominations].map(Number).sort((a, b) => a - b)
     : null
@@ -117,12 +114,6 @@ function ProductCard({ product }) {
   const [added, setAdded] = useState(false)
 
   const displayPrice = isGiftCard ? amount : product.price
-
-  const handleAdd = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
-    window.dispatchEvent(new Event('cart:open'))
-  }
 
   return (
     <motion.div
@@ -202,35 +193,32 @@ function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Snipcart JS API button */}
+        {/* Add to cart */}
         <button
-          onClick={async () => {
-            try {
-              const customFields = []
-              if (product.sizes && size) customFields.push({ name: 'Size', value: size })
-              if (product.colors && color) customFields.push({ name: 'Color', value: color })
+          onClick={() => {
+            const customFields = []
+            if (product.sizes && size) customFields.push({ name: 'Size', value: size })
+            if (product.colors && color) customFields.push({ name: 'Color', value: color })
 
-              const finalPrice = isGiftCard ? amount : product.price
-              const cartId = isGiftCard
-                ? `gift-card-${amount}`
-                : product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')
-              const cartName = isGiftCard
-                ? `${product.name} — $${amount}`
-                : product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')
+            const finalPrice = isGiftCard ? amount : product.price
+            const cartId = isGiftCard
+              ? `gift-card-${amount}`
+              : product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')
+            const cartName = isGiftCard
+              ? `${product.name} — $${amount}`
+              : product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')
 
-              await window.Snipcart.api.cart.items.add({
-                id: cartId,
-                name: cartName,
-                price: finalPrice,
-                url: window.location.href,
-                description: product.desc || '',
-                image: product.image || '',
-                quantity: 1,
-                ...(isGiftCard ? { shippable: false } : {}),
-                customFields,
-              })
-              handleAdd()
-            } catch(e) { console.error('Cart error:', e) }
+            addItem({
+              id: cartId,
+              name: cartName,
+              price: finalPrice,
+              image: product.image || '',
+              description: product.desc || '',
+              quantity: 1,
+              customFields,
+            })
+            setAdded(true)
+            setTimeout(() => setAdded(false), 2000)
           }}
           className={`w-full font-ui text-[11px] font-bold tracking-[.18em] uppercase py-3 border transition-all duration-200 ${added ? 'bg-orange/20 border-orange text-orange' : 'border-orange/40 text-cream hover:bg-orange hover:text-black hover:border-orange'}`}
         >
@@ -242,6 +230,7 @@ function ProductCard({ product }) {
 }
 
 export default function Merch() {
+  const { clear } = useCart()
   const [activeCategory, setActiveCategory] = useState('all')
   const [sanityProducts, setSanityProducts] = useState(null)
 
@@ -256,25 +245,13 @@ export default function Merch() {
     }).catch(() => {})
   }, [])
 
-  // Clear the Snipcart cart when returning from a successful checkout.
-  // Checkout runs through our own Stripe session, so Snipcart never sees the
-  // order complete and would otherwise keep the items in the cart.
+  // Clear the cart when returning from a successful Stripe checkout.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     if (params.get('order') !== 'success') return
-
-    const clearCart = () => {
-      try {
-        const items = window.Snipcart?.store?.getState()?.cart?.items?.items || []
-        items.forEach(it => window.Snipcart.api.cart.items.remove(it.uniqueId))
-      } catch (e) { console.error('Cart clear error:', e) }
-    }
-
-    if (window.Snipcart?.store) clearCart()
-    else document.addEventListener('snipcart.ready', clearCart, { once: true })
-
+    clear()
     window.history.replaceState({}, '', '/merch')
-  }, [])
+  }, [clear])
 
   const activeProducts = (sanityProducts || products).map(p => ({
     ...p,
@@ -309,10 +286,7 @@ export default function Merch() {
 
           {/* Cart button */}
           <div className="pt-2">
-            <button className="snipcart-checkout font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-6 py-3 bg-transparent hover:bg-orange hover:text-black hover:border-orange transition-all duration-200 flex items-center gap-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Cart (<span className="snipcart-items-count">0</span>)
-            </button>
+            <CartButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-6 py-3 bg-transparent hover:bg-orange hover:text-black hover:border-orange transition-all duration-200 flex items-center gap-3" />
           </div>
         </div>
       </div>

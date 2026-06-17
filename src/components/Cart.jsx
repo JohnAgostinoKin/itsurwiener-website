@@ -1,64 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useCart } from '@components/CartContext'
 
 export default function Cart() {
-  const [open, setOpen] = useState(false)
-  const [items, setItems] = useState([])
+  const { items, count, subtotal, isOpen, openCart, closeCart, removeItem } = useCart()
   const [checking, setChecking] = useState(false)
-  const unsubRef = useRef(null)
-
-  useEffect(() => {
-    const setup = () => {
-      // Read store state
-      const readCart = () => {
-        const state = window.Snipcart?.store?.getState()?.cart
-        const cartItems = state?.items?.items || state?.items || []
-        setItems(Array.isArray(cartItems) ? cartItems : [])
-      }
-
-      // Subscribe to store
-      if (window.Snipcart?.store?.subscribe) {
-        readCart()
-        unsubRef.current = window.Snipcart.store.subscribe(readCart)
-      }
-
-      // Listen for manual open trigger from CartButton or add-to-cart buttons
-      const handleOpen = () => { readCart(); setOpen(true) }
-      window.addEventListener('cart:open', handleOpen)
-
-      // Intercept Snipcart's own cart UI opening — kill the page lock
-      // and show our drawer instead
-      const observer = new MutationObserver(() => {
-        if (document.documentElement.classList.contains('snipcart-cart--opened')) {
-          document.documentElement.classList.remove('snipcart-cart--opened')
-          readCart()
-          setOpen(true)
-        }
-      })
-      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-
-      return () => {
-        unsubRef.current?.()
-        observer.disconnect()
-        window.removeEventListener('cart:open', handleOpen)
-      }
-    }
-
-    if (window.Snipcart?.ready) {
-      window.Snipcart.ready.then(setup)
-    } else {
-      document.addEventListener('snipcart.ready', setup, { once: true })
-    }
-  }, [])
-
-  const count = items.reduce((sum, i) => sum + (i.quantity || 1), 0)
-  const subtotal = items.reduce((sum, i) => sum + (i.price * (i.quantity || 1)), 0)
-
-  const removeItem = async (uniqueId) => {
-    try {
-      await window.Snipcart.api.cart.items.remove(uniqueId)
-    } catch (e) { console.error(e) }
-  }
 
   const checkout = async () => {
     setChecking(true)
@@ -73,7 +19,7 @@ export default function Cart() {
         window.location.href = data.url
       } else {
         console.error('Checkout error:', data.error)
-        alert('Checkout error: ' + data.error)
+        alert('Checkout error: ' + (data.error || 'Unknown error'))
       }
     } catch (e) {
       console.error('Checkout failed:', e)
@@ -84,14 +30,14 @@ export default function Cart() {
 
   return (
     <>
-      {/* Floating cart button — always rendered, shows when items exist */}
+      {/* Floating cart button — shows when items exist and drawer is closed */}
       <AnimatePresence>
-        {count > 0 && !open && (
+        {count > 0 && !isOpen && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setOpen(true)}
+            onClick={openCart}
             className="fixed bottom-6 right-6 z-[800] flex items-center gap-2 bg-orange text-black font-ui text-[11px] font-bold tracking-[.15em] uppercase px-5 py-3 shadow-xl hover:bg-white transition-colors duration-200"
           >
             🛒 {count} {count === 1 ? 'Item' : 'Items'}
@@ -101,11 +47,11 @@ export default function Cart() {
 
       {/* Cart drawer */}
       <AnimatePresence>
-        {open && (
+        {isOpen && (
           <>
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)}
+              onClick={closeCart}
               className="fixed inset-0 bg-black/70 z-[900]"
             />
             <motion.div
@@ -116,7 +62,7 @@ export default function Cart() {
             >
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
                 <div className="font-display text-[28px] text-white leading-none">Your Cart</div>
-                <button onClick={() => setOpen(false)} className="text-cream/40 hover:text-cream text-3xl leading-none transition-colors">&times;</button>
+                <button onClick={closeCart} className="text-cream/40 hover:text-cream text-3xl leading-none transition-colors">&times;</button>
               </div>
 
               <div className="flex-1 overflow-y-auto px-6 py-4">
@@ -157,7 +103,7 @@ export default function Cart() {
                   >
                     {checking ? 'Processing...' : 'Proceed to Checkout →'}
                   </button>
-                  <button onClick={() => setOpen(false)} className="w-full mt-3 text-cream/40 hover:text-cream font-ui text-[11px] tracking-[.15em] uppercase transition-colors">
+                  <button onClick={closeCart} className="w-full mt-3 text-cream/40 hover:text-cream font-ui text-[11px] tracking-[.15em] uppercase transition-colors">
                     Continue Shopping
                   </button>
                 </div>

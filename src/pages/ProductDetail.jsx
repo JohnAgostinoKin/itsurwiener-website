@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import CartButton from '@components/CartButton'
+import { useCart } from '@components/CartContext'
 import { client } from '@/lib/sanity'
 
 export default function ProductDetail() {
   const { id } = useParams()
+  const { addItem } = useCart()
   const [product, setProduct] = useState(null)
   const [size, setSize] = useState('')
   const [color, setColor] = useState('')
@@ -34,11 +36,8 @@ export default function ProductDetail() {
     </div>
   )
 
-  const handleAdd = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
-    window.dispatchEvent(new Event('cart:open'))
-  }
+  const isGiftCard = product.denominations?.length > 0
+  const displayPrice = isGiftCard ? Number(amount) : product.price
 
   return (
     <div className="bg-[#04030A] min-h-screen pt-28 px-[5vw] pb-20">
@@ -66,7 +65,7 @@ export default function ProductDetail() {
               itsurwiener Merch
             </div>
             <h1 className="font-display text-[clamp(36px,5vw,64px)] text-white leading-none mb-4">{product.name}</h1>
-            <div className="font-display text-[48px] text-orange leading-none">${product.price.toFixed(2)}</div>
+            <div className="font-display text-[48px] text-orange leading-none">${Number(displayPrice).toFixed(2)}</div>
           </div>
 
           {product.description && (
@@ -74,7 +73,7 @@ export default function ProductDetail() {
           )}
 
           {/* Denomination selector for gift cards */}
-          {product.denominations?.length > 0 && (
+          {isGiftCard && (
             <div>
               <div className="font-ui text-[9px] font-bold tracking-[.15em] uppercase text-cream/40 mb-3">Select Amount: <span className="text-orange">${amount}</span></div>
               <div className="flex gap-3 flex-wrap">
@@ -119,25 +118,30 @@ export default function ProductDetail() {
           )}
 
           {/* Add to cart */}
-          <button onClick={async () => {
-              try {
-                const customFields = []
-                if (color) customFields.push({ name: 'Color', value: color })
-                if (size) customFields.push({ name: 'Size', value: size })
-                if (amount) customFields.push({ name: 'Amount', value: `$${amount}` })
-                await window.Snipcart.api.cart.items.add({
-                  id: `${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}${amount ? `-${amount}` : ''}`,
-                  name: `${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}${amount ? ` — $${amount}` : ''}`,
-                  price: amount || product.price,
-                  url: window.location.href,
-                  description: product.description || '',
-                  image: product.image || '',
-                  quantity: 1,
-                  weight: product.weight || 0,
-                  customFields,
-                })
-                handleAdd()
-              } catch(e) { console.error('Cart error:', e) }
+          <button onClick={() => {
+              const customFields = []
+              if (product.colors?.length && color) customFields.push({ name: 'Color', value: color })
+              if (product.sizes?.length && size) customFields.push({ name: 'Size', value: size })
+
+              const finalPrice = isGiftCard ? amount : product.price
+              const cartId = isGiftCard
+                ? `gift-card-${amount}`
+                : `${product._id}${color ? `-${color.toLowerCase()}` : ''}${size ? `-${size.toLowerCase()}` : ''}`
+              const cartName = isGiftCard
+                ? `${product.name} — $${amount}`
+                : `${product.name}${color ? ` — ${color}` : ''}${size ? ` / ${size}` : ''}`
+
+              addItem({
+                id: cartId,
+                name: cartName,
+                price: finalPrice,
+                image: product.image || '',
+                description: product.description || '',
+                quantity: 1,
+                customFields,
+              })
+              setAdded(true)
+              setTimeout(() => setAdded(false), 2000)
             }}
             className={`w-full font-ui text-[13px] font-bold tracking-[.2em] uppercase py-4 border transition-all duration-200 mt-2 ${added ? 'bg-orange/20 border-orange text-orange' : 'bg-orange text-black border-orange hover:bg-white'}`}
           >

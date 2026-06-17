@@ -3,6 +3,7 @@ import Nav from '@components/Nav'
 import Footer from '@components/Footer'
 import Cursor from '@components/Cursor'
 import Cart from '@components/Cart'
+import { CartProvider } from '@components/CartContext'
 
 // Pages
 import Home     from '@pages/Home'
@@ -30,7 +31,7 @@ import ProductDetail           from '@pages/ProductDetail'
 
 function RootLayout() {
   return (
-    <>
+    <CartProvider>
       <Cursor />
       <ScrollRestoration />
       <Nav />
@@ -39,7 +40,7 @@ function RootLayout() {
         <Outlet />
       </main>
       <Footer />
-    </>
+    </CartProvider>
   )
 }
 
