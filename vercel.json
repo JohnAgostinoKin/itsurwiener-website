@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    { "source": "/about", "destination": "/", "permanent": true },
+    { "source": "/news", "destination": "/events", "permanent": true },
+    { "source": "/faq", "destination": "/find-us", "permanent": true },
+    { "source": "/checkout", "destination": "/merch", "permanent": true },
+    { "source": "/eats", "destination": "/menu", "permanent": true },
+    { "source": "/drinks", "destination": "/menu", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
