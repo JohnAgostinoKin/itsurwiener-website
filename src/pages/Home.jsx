@@ -49,7 +49,7 @@ function HeroCanvas() {
       particles.forEach((p, i) => {
         particles.slice(i + 1).forEach(q => {
           const d = Math.hypot(p.x - q.x, p.y - q.y)
-          if (d < 140) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(245,101,32,${0.9 * (1 - d / 140)})`; ctx.lineWidth = 0.0; ctx.stroke() }
+          if (d < 140) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(245,101,42,${0.9 * (1 - d / 140)})`; ctx.lineWidth = 0.1; ctx.stroke() }
         })
         p.update(); p.draw()
       })
