@@ -60,7 +60,7 @@ export default function Reservation() {
             Reserve<br /><span className="text-orange">a Table</span>
           </h1>
           <p className="font-cond text-[clamp(16px,2vw,22px)] text-cream/55 max-w-[600px] tracking-wide">
-            {s.description || 'Choose your package, pick your date, and secure your spot. Deposit applied to your tab.'}
+            {s.description || 'Choose your package, pick your date, and secure your spot. Full Payment Required.'}
           </p>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function Reservation() {
       {s.notice && (
         <div className="px-[5vw] max-w-[1000px] mx-auto pb-4">
           <div className="border border-orange/30 px-5 py-4" style={{ background: 'rgba(245,101,32,0.06)' }}>
-            <p className="text-[13px] text-orange font-bold">{s.notice}</p>
+            <p className="text-[13px] text-orange">{s.notice}</p>
           </div>
         </div>
       )}
@@ -213,7 +213,7 @@ export default function Reservation() {
             {added && s.confirmationMessage && (
               <p className="text-[13px] text-orange text-center mt-4 font-bold">{s.confirmationMessage}</p>
             )}
-            <p className="text-[11px] text-cream/30 text-center mt-3">Deposit applied to your tab on the day of your visit.</p>
+            <p className="text-[11px] text-cream/30 text-center mt-3">Full Payment Required.</p>
           </div>
         </motion.div>
 
