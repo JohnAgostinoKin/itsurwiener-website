@@ -37,7 +37,7 @@ function HeroCanvas() {
         this.x = Math.random() * W; this.y = Math.random() * H
         this.size = Math.random() * 2 + 0.5
         this.speedX = (Math.random() - 0.5) * 0.4; this.speedY = (Math.random() - 0.5) * 0.4
-        this.opacity = Math.random() * 0.4 + 0.1
+        this.opacity = Math.random() * 0.45 + 0.2
         this.color = Math.random() > 0.7 ? 'rgba(245,101,32,' : 'rgba(157,78,221,'
       }
       update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset() }
@@ -49,7 +49,7 @@ function HeroCanvas() {
       particles.forEach((p, i) => {
         particles.slice(i + 1).forEach(q => {
           const d = Math.hypot(p.x - q.x, p.y - q.y)
-          if (d < 100) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(245,101,32,${0.07 * (1 - d / 100)})`; ctx.lineWidth = 0.5; ctx.stroke() }
+          if (d < 100) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(245,101,32,${0.1 * (1 - d / 100)})`; ctx.lineWidth = 0.5; ctx.stroke() }
         })
         p.update(); p.draw()
       })

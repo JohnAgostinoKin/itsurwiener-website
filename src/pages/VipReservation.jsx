@@ -68,7 +68,7 @@ export default function VipReservation() {
       {s.notice && (
         <div className="px-[5vw] max-w-[1000px] mx-auto pb-4">
           <div className="border border-purple-bright/30 px-5 py-4" style={{ background: 'rgba(157,78,221,0.06)' }}>
-            <p className="text-[13px] text-purple-bright font-bold">{s.notice}</p>
+            <p className="text-[13px] text-purple-bright">{s.notice}</p>
           </div>
         </div>
       )}
