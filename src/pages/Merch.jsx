@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { client } from '@/lib/sanity'
 import PageCTA from '@components/PageCTA'
-import CartButton from '@components/CartButton'
 import { motion } from 'framer-motion'
 
 const inView = (delay = 0) => ({
@@ -87,24 +86,13 @@ const products = [
     sizes: null, colors: null,
   },
 
-  // Gift Cards
+  // Gift Cards — single product with selectable amounts (denominations)
   {
-    id: 'gift-card-25', category: 'giftcards',
-    name: 'Gift Card — $25', desc: 'The perfect gift for any Clemson fan.',
+    id: 'gift-card', category: 'giftcards',
+    name: 'itsurwiener Gift Card', desc: 'Good for food, drinks, and merch — anything. The perfect gift for any Clemson fan.',
     price: 25.00, image: null,
     sizes: null, colors: null,
-  },
-  {
-    id: 'gift-card-50', category: 'giftcards',
-    name: 'Gift Card — $50', desc: 'Good for food, drinks, merch — anything.',
-    price: 50.00, image: null,
-    sizes: null, colors: null,
-  },
-  {
-    id: 'gift-card-100', category: 'giftcards',
-    name: 'Gift Card — $100', desc: 'Go big. They deserve it.',
-    price: 100.00, image: null,
-    sizes: null, colors: null,
+    denominations: [25, 50, 100],
   },
 ]
 
@@ -118,9 +106,17 @@ const categories = [
 ]
 
 function ProductCard({ product }) {
+  const denominations = product.denominations?.length
+    ? [...product.denominations].map(Number).sort((a, b) => a - b)
+    : null
+  const isGiftCard = !!denominations
+
   const [size, setSize] = useState(product.sizes?.[2] || '')
   const [color, setColor] = useState(product.colors?.[0] || '')
+  const [amount, setAmount] = useState(isGiftCard ? denominations[0] : null)
   const [added, setAdded] = useState(false)
+
+  const displayPrice = isGiftCard ? amount : product.price
 
   const handleAdd = () => {
     setAdded(true)
@@ -145,12 +141,12 @@ function ProductCard({ product }) {
               className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 opacity-80" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-3 left-3">
-              <span className="font-display text-[28px] text-orange leading-none">${product.price.toFixed(2)}</span>
+              <span className="font-display text-[28px] text-orange leading-none">${Number(displayPrice).toFixed(2)}</span>
             </div>
           </div>
         ) : (
           <div className="flex items-center justify-between px-5 pt-5">
-            <span className="font-display text-[32px] text-orange leading-none">${product.price.toFixed(2)}</span>
+            <span className="font-display text-[32px] text-orange leading-none">${Number(displayPrice).toFixed(2)}</span>
             <span className="font-ui text-[10px] font-bold tracking-[.15em] uppercase text-cream/25 border border-white/10 px-2 py-1">Photo Coming Soon</span>
           </div>
         )}
@@ -160,6 +156,21 @@ function ProductCard({ product }) {
       <div className="p-5">
         <Link to={`/merch/${product.id || product._id}`} className="no-underline"><h3 className="font-cond text-[20px] font-black text-white uppercase tracking-wide leading-none mb-1 group-hover:text-orange transition-colors duration-200 cursor-pointer">{product.name}</h3></Link>
         <p className="text-[12px] text-cream/55 mb-4 leading-snug">{product.desc}</p>
+
+        {/* Amount selector (gift cards) — same style as sizes/colors */}
+        {isGiftCard && (
+          <div className="mb-4">
+            <div className="font-ui text-[9px] font-bold tracking-[.15em] uppercase text-cream/40 mb-2">Amount: <span className="text-cream/70">${amount}</span></div>
+            <div className="flex gap-2 flex-wrap">
+              {denominations.map(a => (
+                <button key={a} onClick={() => setAmount(a)}
+                  className={`font-ui text-[11px] font-bold tracking-[.08em] uppercase px-3 py-1.5 border transition-all duration-150 ${amount === a ? 'border-orange text-orange bg-orange/10' : 'border-white/15 text-cream/50 hover:border-white/40'}`}>
+                  ${a}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Color selector */}
         {product.colors && (
@@ -198,14 +209,24 @@ function ProductCard({ product }) {
               const customFields = []
               if (product.sizes && size) customFields.push({ name: 'Size', value: size })
               if (product.colors && color) customFields.push({ name: 'Color', value: color })
+
+              const finalPrice = isGiftCard ? amount : product.price
+              const cartId = isGiftCard
+                ? `gift-card-${amount}`
+                : product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : '')
+              const cartName = isGiftCard
+                ? `${product.name} — $${amount}`
+                : product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : '')
+
               await window.Snipcart.api.cart.items.add({
-                id: product.id + (color ? `-${color.toLowerCase()}` : '') + (size ? `-${size.toLowerCase()}` : ''),
-                name: product.name + (color ? ` — ${color}` : '') + (size ? ` / ${size}` : ''),
-                price: product.price,
+                id: cartId,
+                name: cartName,
+                price: finalPrice,
                 url: window.location.href,
                 description: product.desc || '',
                 image: product.image || '',
                 quantity: 1,
+                ...(isGiftCard ? { shippable: false } : {}),
                 customFields,
               })
               handleAdd()
@@ -215,93 +236,6 @@ function ProductCard({ product }) {
         >
           {added ? '✓ Added to Cart' : 'Add to Cart'}
         </button>
-      </div>
-    </motion.div>
-  )
-}
-
-
-function GiftCardSelector({ products }) {
-  const giftCard = products[0]
-  if (!giftCard) return null
-  const amounts = (giftCard.denominations?.length
-    ? giftCard.denominations
-    : products.length > 1
-      ? products.map(p => p.price)
-      : [10, 25, 50, 100, 500]
-  ).map(Number).sort((a, b) => a - b)
-  const [amount, setAmount] = useState(amounts[1] || amounts[0])
-
-  return (
-    <motion.div
-      className="border border-orange/30 overflow-hidden group transition-all duration-300 md:col-span-2 lg:col-span-3"
-      style={{ background: 'rgba(245,101,32,0.04)' }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-    >
-      <div className="flex flex-col md:flex-row items-stretch">
-        {/* Left — visual */}
-        <div className="md:w-[280px] flex-shrink-0 flex flex-col items-center justify-center p-10 border-b md:border-b-0 md:border-r border-orange/15"
-          style={{ background: 'linear-gradient(135deg,rgba(245,101,32,0.12),rgba(82,45,128,0.12))' }}>
-          <div className="font-display text-[80px] leading-none text-orange mb-2">🎁</div>
-          <div className="font-display text-[clamp(32px,4vw,52px)] text-white leading-none text-center">
-            itsurwiener<br /><span className="text-orange">Gift Card</span>
-          </div>
-          <div className="font-ui text-[11px] tracking-[.15em] uppercase text-cream/40 mt-3 text-center">
-            Good for food, drinks & merch
-          </div>
-        </div>
-
-        {/* Right — selector */}
-        <div className="flex-1 p-8 flex flex-col justify-between gap-6">
-          <div>
-            <div className="font-ui text-[11px] font-bold tracking-[.2em] uppercase text-orange/70 mb-4">Select Amount</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px' }}>
-              {amounts.map(p => (
-                <button key={p} onClick={(e) => { e.stopPropagation(); setAmount(Number(p)); }}
-                  style={{ display: 'block', width: '100%' }}
-                  className={`font-display text-[24px] py-3 border transition-all duration-200 text-center ${
-                    Number(amount) === Number(p)
-                      ? 'border-orange text-orange bg-orange/10'
-                      : 'border-white/15 text-white/60 hover:border-orange/50 hover:text-white'
-                  }`}>
-                  ${p}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-[13px] text-cream/55 mb-6 leading-relaxed">
-              {giftCard.description || 'The perfect gift for any Clemson fan. Redeemable for food, drinks, and merch at itsurwiener.'}
-            </p>
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="font-display text-[48px] text-orange leading-none">${amount}</div>
-              <button
-                onClick={async () => {
-                  try {
-                    await window.Snipcart.api.cart.items.add({
-                      id: `gift-card-${amount}`,
-                      name: `itsurwiener Gift Card — $${amount}`,
-                      price: amount,
-                      url: window.location.href,
-                      description: `itsurwiener Gift Card - $${amount} value`,
-                      image: giftCard.image || '',
-                      quantity: 1,
-                      shippable: false,
-                    })
-                    window.dispatchEvent(new Event('cart:open'))
-                  } catch(e) { console.error('Cart error:', e) }
-                }}
-                className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
-              >
-                Add to Cart
-              </button>
-              <CartButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-8 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
-            </div>
-          </div>
-        </div>
       </div>
     </motion.div>
   )
@@ -349,12 +283,9 @@ export default function Merch() {
       weight: p.weight || 0,
   }))
 
-  const giftCards = activeProducts.filter(p => p.category === 'giftcards')
-  const showGiftSelector = activeCategory === 'all' || activeCategory === 'giftcards'
-  const filtered = (activeCategory === 'all'
+  const filtered = activeCategory === 'all'
     ? activeProducts
     : activeProducts.filter(p => p.category === activeCategory)
-  ).filter(p => p.category !== 'giftcards') // gift cards handled by the selector below
 
   return (
     <div className="bg-[#04030A] min-h-screen">
@@ -404,7 +335,6 @@ export default function Merch() {
       <div className="px-[5vw] py-16 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map(product => <ProductCard key={product.id} product={product} />)}
-          {showGiftSelector && giftCards.length > 0 && <GiftCardSelector products={giftCards} />}
         </div>
 
 
