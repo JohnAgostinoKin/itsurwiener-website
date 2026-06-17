@@ -225,8 +225,11 @@ function GiftCardSelector({ products }) {
   const giftCard = products[0]
   if (!giftCard) return null
   const amounts = (giftCard.denominations?.length
-    ? [...giftCard.denominations]
-    : [10, 25, 50, 100, 500]).map(Number).sort((a,b) => a - b)
+    ? giftCard.denominations
+    : products.length > 1
+      ? products.map(p => p.price)
+      : [10, 25, 50, 100, 500]
+  ).map(Number).sort((a, b) => a - b)
   const [amount, setAmount] = useState(amounts[1] || amounts[0])
 
   return (
@@ -288,6 +291,7 @@ function GiftCardSelector({ products }) {
                       quantity: 1,
                       shippable: false,
                     })
+                    window.dispatchEvent(new Event('cart:open'))
                   } catch(e) { console.error('Cart error:', e) }
                 }}
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 hover:bg-white transition-colors duration-200"
@@ -318,6 +322,26 @@ export default function Merch() {
     }).catch(() => {})
   }, [])
 
+  // Clear the Snipcart cart when returning from a successful checkout.
+  // Checkout runs through our own Stripe session, so Snipcart never sees the
+  // order complete and would otherwise keep the items in the cart.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('order') !== 'success') return
+
+    const clearCart = () => {
+      try {
+        const items = window.Snipcart?.store?.getState()?.cart?.items?.items || []
+        items.forEach(it => window.Snipcart.api.cart.items.remove(it.uniqueId))
+      } catch (e) { console.error('Cart clear error:', e) }
+    }
+
+    if (window.Snipcart?.store) clearCart()
+    else document.addEventListener('snipcart.ready', clearCart, { once: true })
+
+    window.history.replaceState({}, '', '/merch')
+  }, [])
+
   const activeProducts = (sanityProducts || products).map(p => ({
     ...p,
     desc: p.desc || p.description,
@@ -325,9 +349,12 @@ export default function Merch() {
       weight: p.weight || 0,
   }))
 
-  const filtered = activeCategory === 'all'
+  const giftCards = activeProducts.filter(p => p.category === 'giftcards')
+  const showGiftSelector = activeCategory === 'all' || activeCategory === 'giftcards'
+  const filtered = (activeCategory === 'all'
     ? activeProducts
     : activeProducts.filter(p => p.category === activeCategory)
+  ).filter(p => p.category !== 'giftcards') // gift cards handled by the selector below
 
   return (
     <div className="bg-[#04030A] min-h-screen">
@@ -377,6 +404,7 @@ export default function Merch() {
       <div className="px-[5vw] py-16 max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map(product => <ProductCard key={product.id} product={product} />)}
+          {showGiftSelector && giftCards.length > 0 && <GiftCardSelector products={giftCards} />}
         </div>
 
 
