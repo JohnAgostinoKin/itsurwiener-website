@@ -20,7 +20,7 @@ export default function CookiePolicy() {
 
       <h2>2. Types of Cookies We Use</h2>
       <ul>
-        <li><strong>Strictly necessary.</strong> Required for the Site to work — for example, to keep your shopping cart and checkout working, maintain security, and remember consent choices. These cannot be turned off through our Site.</li>
+        <li><strong>Strictly necessary.</strong> Required for the Site to work — for example, to keep your shopping cart (stored locally in your browser) and checkout working, maintain security, and remember consent choices. These cannot be turned off through our Site.</li>
         <li><strong>Functional / preferences.</strong> Remember choices you make to improve your experience.</li>
         <li><strong>Analytics / performance.</strong> Help us understand how visitors use the Site so we can improve it (for example, which pages are popular).</li>
         <li><strong>Marketing.</strong> Where used, these help us measure and deliver relevant promotions about events and specials.</li>
@@ -29,7 +29,7 @@ export default function CookiePolicy() {
       <h2>3. Third-Party Cookies</h2>
       <p>
         Some cookies are set by third-party services we use to operate the Site, including our
-        e-commerce provider (Stripe), ticketing and reservation provider (LineLeap), hosting
+        payment processor (Stripe), ticketing and reservation provider (LineLeap), hosting
         and content platforms (Vercel and Sanity), analytics providers, and any embedded
         content such as maps or social media. These third parties set cookies under their own
         policies, which we encourage you to review.
