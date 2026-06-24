@@ -267,10 +267,10 @@ export default function Basement() {
               Available for private events, birthday parties, corporate functions, and more. Several plans available. Contact us to discuss your event and get a custom quote.
             </p>
             <div className="flex gap-4 flex-wrap">
-              <a href="/book-event"
+              <Link to="/book-event"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
                 Book an Event
-              </a>
+              </Link>
               <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             </div>
           </motion.div>
