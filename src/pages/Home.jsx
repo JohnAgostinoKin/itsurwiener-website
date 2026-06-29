@@ -591,8 +591,8 @@ export default function Home() {
 
   return (
     <div className="bg-[#04030A]">
-      <HeroTiles />
       <Hero />
+      <HeroTiles />
       <Ticker
         items={["Dogs, Burgers & Beer","Famous Litchers","Clemson's Best Chicken Tenders","Red Bull Litchers","Live Music in The Basement","Huge Deck and Turf Area","Saturday $1 Mimosas","Double 12Ft LED Walls","16 Beers on Tap","Damn Good Beer","Green Tea Bottles","No Better Place to Watch The Game!"]}
         variant="orange"
