@@ -65,7 +65,7 @@ function HeroCanvas() {
 // ── Hero ─────────────────────────────────
 function Hero() {
   return (
-    <section id="hero" style={{ height: '75vh' }} className="relative flex flex-col justify-center px-[5vw] overflow-hidden bg-[#04030A]">
+    <section id="hero" style={{ height: '62vh' }} className="relative flex flex-col justify-center px-[5vw] overflow-hidden bg-[#04030A]">
       <HeroCanvas />
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(245,101,32,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,101,32,0.04) 1px,transparent 1px)', backgroundSize: '80px 80px', animation: 'gridScroll 20s linear infinite' }} />
       <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-transparent to-[#04030A]" />
@@ -90,10 +90,6 @@ function Hero() {
           Huge Outdoor Areas&nbsp;<span className="text-orange/50">·</span>&nbsp;
           Two 12-Ft LED Walls
         </motion.p>
-        <motion.div className="flex gap-4 flex-wrap" {...fadeUp(0.8)}>
-          <Link to="/#chaos" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">START YOUR JOURNEY</Link>
-          <Link to="/events" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">LIVE MUSIC</Link>
-        </motion.div>
       </div>
       <style>{`@keyframes gridScroll{0%{transform:translateY(0)}100%{transform:translateY(80px)}}`}</style>
     </section>

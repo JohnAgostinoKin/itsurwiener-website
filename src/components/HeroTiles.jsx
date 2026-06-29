@@ -20,22 +20,22 @@ function getWeekendRange() {
 function BarTile() {
   return (
     <motion.div
-      className="relative flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 border-b border-white/[0.06] lg:border-b-0 lg:border-r overflow-hidden"
+      className="flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 min-h-[200px] hover:border-orange/30 transition-colors duration-300"
+      style={{ border: '1px solid rgba(255,255,255,0.08)', borderTopWidth: '3px', borderTopColor: '#F56520' }}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-orange" />
-
-      <div className="font-display text-[clamp(36px,4.5vw,64px)] leading-[.88] text-white">
+      <div className="font-display text-[clamp(36px,4vw,60px)] leading-[.88] text-white">
         itsurwiener
       </div>
 
-      <div className="mt-8">
-        <Link to="/#chaos" className="font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-orange text-black px-8 py-3.5 no-underline clip-angled hover:bg-white transition-colors duration-200 inline-block">
-          Enter →
-        </Link>
-      </div>
+      <Link
+        to="/#chaos"
+        className="w-full block font-ui text-[12px] font-bold tracking-[.2em] uppercase bg-orange text-black py-4 no-underline text-center clip-angled hover:bg-white transition-colors duration-200 mt-8"
+      >
+        The Bar →
+      </Link>
     </motion.div>
   )
 }
@@ -44,31 +44,29 @@ function BarTile() {
 function BasementTile() {
   return (
     <motion.div
-      className="relative flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 border-b border-white/[0.06] lg:border-b-0 lg:border-r overflow-hidden"
+      className="flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 min-h-[200px] hover:border-purple-bright/30 transition-colors duration-300"
+      style={{ border: '1px solid rgba(255,255,255,0.08)', borderTopWidth: '3px', borderTopColor: '#9D4EDD' }}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-purple-bright" />
-
-      <div className="font-display text-[clamp(36px,4.5vw,64px)] leading-[.88] text-white">
+      <div className="font-display text-[clamp(36px,4vw,60px)] leading-[.88] text-white">
         The<br />Basement
       </div>
 
-      <div className="mt-8">
-        <Link to="/the-basement" className="font-ui text-[11px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-8 py-3.5 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300 inline-block">
-          Enter →
-        </Link>
-      </div>
+      <Link
+        to="/the-basement"
+        className="w-full block font-ui text-[12px] font-bold tracking-[.2em] uppercase bg-purple-bright text-white py-4 no-underline text-center clip-angled hover:bg-orange hover:text-black transition-all duration-300 mt-8"
+      >
+        The Basement →
+      </Link>
     </motion.div>
   )
 }
 
 // ── Tile 3: This Weekend (dynamic) ────────
 function ThisWeekendTile() {
-  const [state, setState] = useState({
-    loading: true, weekend: null, homeGames: [],
-  })
+  const [state, setState] = useState({ loading: true, weekend: null, homeGames: [] })
 
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0]
@@ -98,33 +96,39 @@ function ThisWeekendTile() {
   const isGameday = mode === 'gameday'
   const headline = weekend?.headline || (isGameday ? 'Gameday' : 'This Weekend')
   const ctaLabel = weekend?.ctaLabel || "See What's On"
+  const accentColor = isGameday ? '#F56520' : 'rgba(255,255,255,0.25)'
 
   return (
     <motion.div
-      className="relative flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 overflow-hidden"
+      className="flex flex-col justify-between px-10 py-10 lg:px-12 lg:py-12 min-h-[200px] transition-colors duration-300"
+      style={{
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderTopWidth: '3px',
+        borderTopColor: accentColor,
+      }}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="absolute top-0 left-0 right-0 h-[3px]"
-        style={{ background: isGameday ? '#F56520' : 'rgba(253,252,248,0.25)' }} />
-
-      <div className="font-display text-[clamp(36px,4.5vw,64px)] leading-[.88] text-white">
+      <div className="font-display text-[clamp(36px,4vw,60px)] leading-[.88] text-white">
         {loading ? <span className="text-cream/15">—</span> : headline}
       </div>
 
-      <div className="mt-8">
+      {isGameday ? (
         <Link
           to="/this-weekend"
-          className="font-ui text-[11px] font-bold tracking-[.18em] uppercase px-8 py-3.5 no-underline clip-angled transition-all duration-200 inline-block"
-          style={isGameday
-            ? { background: '#F56520', color: '#000' }
-            : { border: '1px solid rgba(253,252,248,0.2)', color: 'rgba(253,252,248,0.65)' }
-          }
+          className="w-full block font-ui text-[12px] font-bold tracking-[.2em] uppercase bg-orange text-black py-4 no-underline text-center clip-angled hover:bg-white transition-colors duration-200 mt-8"
         >
           {ctaLabel} →
         </Link>
-      </div>
+      ) : (
+        <Link
+          to="/this-weekend"
+          className="w-full block font-ui text-[12px] font-bold tracking-[.2em] uppercase border border-white/20 text-cream/70 py-4 no-underline text-center hover:border-orange hover:text-orange transition-all duration-200 mt-8"
+        >
+          {ctaLabel} →
+        </Link>
+      )}
     </motion.div>
   )
 }
@@ -132,8 +136,8 @@ function ThisWeekendTile() {
 // ── HeroTiles ─────────────────────────────
 export default function HeroTiles() {
   return (
-    <section className="bg-[#04030A] border-t border-b border-white/[0.06]">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
+    <section className="bg-[#04030A] px-[5vw] pb-14">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <BarTile />
         <BasementTile />
         <ThisWeekendTile />
