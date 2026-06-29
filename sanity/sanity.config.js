@@ -18,12 +18,43 @@ function DuplicateAction({ id, type, onComplete }) {
   }
 }
 
+const SINGLETONS = ['weeklySpecials', 'currentWeekend']
+
 export default defineConfig({
   name: 'default',
   title: 'Itsurwiener',
   projectId: 'dwoifffe',
   dataset: 'production',
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Weekly Specials (standing)')
+              .id('weeklySpecials')
+              .child(
+                S.document()
+                  .schemaType('weeklySpecials')
+                  .documentId('weeklySpecials')
+              ),
+            S.listItem()
+              .title('This Weekend (dynamic)')
+              .id('currentWeekend')
+              .child(
+                S.document()
+                  .schemaType('currentWeekend')
+                  .documentId('currentWeekend')
+              ),
+            S.divider(),
+            ...S.documentTypeListItems().filter(
+              item => !SINGLETONS.includes(item.getId())
+            ),
+          ]),
+    }),
+    visionTool(),
+  ],
   document: {
     actions: (prev) => [...prev, DuplicateAction],
   },
