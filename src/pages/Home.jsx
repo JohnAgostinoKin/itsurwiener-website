@@ -7,6 +7,7 @@ import CallButton from '@components/CallButton'
 import GameDayHero from '@components/GameDayHero'
 import { useCounter, useScrollReveal } from '@hooks/useScrollReveal'
 import { client } from '@/lib/sanity'
+import HeroTiles from '@components/HeroTiles'
 
 const fadeUp = (delay = 0) => ({
   initial:    { opacity: 0, y: 30 },
@@ -590,6 +591,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#04030A]">
+      <HeroTiles />
       <Hero />
       <Ticker
         items={["Dogs, Burgers & Beer","Famous Litchers","Clemson's Best Chicken Tenders","Red Bull Litchers","Live Music in The Basement","Huge Deck and Turf Area","Saturday $1 Mimosas","Double 12Ft LED Walls","16 Beers on Tap","Damn Good Beer","Green Tea Bottles","No Better Place to Watch The Game!"]}
