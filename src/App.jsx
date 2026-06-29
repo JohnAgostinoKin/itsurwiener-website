@@ -28,6 +28,7 @@ import Reservation             from '@pages/Reservation'
 import FindUs                  from '@pages/FindUs'
 import BookEvent               from '@pages/BookEvent'
 import ProductDetail           from '@pages/ProductDetail'
+import ThisWeekend             from '@pages/ThisWeekend'
 
 function RootLayout() {
   return (
@@ -67,6 +68,7 @@ export const router = createBrowserRouter([
       { path: 'reserve',        element: <Reservation /> },
       { path: 'find-us',        element: <FindUs /> },
       { path: 'book-event',     element: <BookEvent /> },
+      { path: 'this-weekend',   element: <ThisWeekend /> },
       { path: 'merch/:id',      element: <ProductDetail /> },
       { path: '*',             element: <NotFound /> },
     ],
