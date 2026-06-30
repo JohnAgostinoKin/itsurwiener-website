@@ -208,10 +208,10 @@ export default function ThisWeekend() {
   }
   const isGameday = mode === 'gameday'
 
-  const headline = weekend?.headline || (isGameday ? 'Gameday at The Wien' : 'This Weekend at The Wien')
+  const headline = weekend?.headline || (isGameday ? 'Gameday at The Wien' : 'The Wien Is The Weekend')
   const subline = weekend?.subline || (isGameday && thisWeekendGame?.opponent
     ? `Tigers vs. ${thisWeekendGame.opponent}`
-    : 'Live music · specials · good times')
+    : 'Live Music · Specials · Good Times')
 
   // Group events by their date string → Thu / Fri / Sat buckets
   const days = [
