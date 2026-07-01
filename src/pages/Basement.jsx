@@ -105,19 +105,19 @@ export default function Basement() {
         <div className="absolute top-0 right-1/3 w-px h-full opacity-15 z-[2]" style={{ background: 'linear-gradient(180deg,transparent,#F56520,transparent)' }} />
         <div className="relative z-[3] px-[5vw] w-full pt-32">
           <motion.div {...inView(0)}>
-            <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-white mb-5">
+            <div className="flex items-center gap-3 font-ui text-[15px] font-bold tracking-[.28em] uppercase text-white mb-5">
               <span className="w-8 h-0.5 bg-white" />If You Know . . . You Know
             </div>
             <img src="/images/basement-logo.png" alt="The Basement"
               className="mb-6 max-w-full"
               style={{ width: 'clamp(320px,55vw,750px)', height: 'auto' }} />
             <p className="font-cond text-[clamp(18px,2.5vw,28px)] text-cream/60 max-w-[600px] mb-10 tracking-wide">
-              Live music every weekend. Clemson's hottest night spot — hiding right in plain sight.
+              Live Music — DJs — 12FT LED Wall — Late-Night Food — VIP Section
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link to="/book-event"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-                Book An Event
+                Enter Underground »»»
               </Link>
               <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             </div>
