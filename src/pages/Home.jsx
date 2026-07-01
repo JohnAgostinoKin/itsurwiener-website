@@ -208,7 +208,7 @@ function WordmarkHero() {
         </div>
 
         <p className="hero-tagline font-display text-[clamp(20px,3vw,44px)] text-orange tracking-[0.04em] mt-6">
-          The Wien Is The Weekend.
+          The Home of The Litcher<sup style={{ fontSize: '0.38em', verticalAlign: 'super', lineHeight: 0 }}>®</sup>
         </p>
       </div>
 
