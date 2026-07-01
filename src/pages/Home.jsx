@@ -382,7 +382,7 @@ function ExperienceBands() {
             Live Music — DJs — 12FT LED Wall — Late-Night Food — VIP Section
           </p>
           <span className="inline-block font-ui text-[11px] font-bold tracking-[.22em] uppercase bg-purple-bright text-white px-7 py-3.5 hover:bg-white hover:text-black transition-colors duration-200 w-fit">
-            Enter Underground »»»
+            Go Underground →
           </span>
         </div>
       </Link>

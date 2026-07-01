@@ -117,7 +117,7 @@ export default function Basement() {
             <div className="flex gap-4 flex-wrap">
               <Link to="/book-event"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-purple-bright text-white px-10 py-4 no-underline clip-angled hover:bg-orange hover:text-black transition-all duration-300">
-                Enter Underground »»»
+                Go Underground →
               </Link>
               <CallButton className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 hover:border-orange hover:text-orange transition-all duration-200 bg-transparent cursor-pointer" />
             </div>
