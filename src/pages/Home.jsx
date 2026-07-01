@@ -368,7 +368,7 @@ function ExperienceBands() {
         />
 
         <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
-          <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase text-purple-bright mb-4">Downstairs</div>
+          <div className="font-ui text-[13px] font-bold tracking-[.34em] uppercase text-purple-bright mb-4">Downstairs</div>
           <h2
             className="font-display text-[clamp(44px,9vw,120px)] leading-[.85] text-white mb-3"
             style={{
@@ -376,13 +376,13 @@ function ExperienceBands() {
               animation: prefersReducedMotion ? 'none' : 'neonFlicker 7s ease-in-out infinite',
             }}
           >
-            The Basement —<br />Dance &amp; Nightclub
+            The Basement —<br /><span className="text-purple-bright">Dance &amp; Nightclub</span>
           </h2>
           <p className="font-cond text-[clamp(14px,1.7vw,22px)] text-cream/65 mb-7 tracking-wide max-w-[500px]">
-            Live music · DJs · second 12-ft LED wall · late-night
+            Live Music — DJs — 12FT LED Wall — Late-Night Food — VIP Section
           </p>
           <span className="inline-block font-ui text-[11px] font-bold tracking-[.22em] uppercase bg-purple-bright text-white px-7 py-3.5 hover:bg-white hover:text-black transition-colors duration-200 w-fit">
-            See What's On →
+            Enter Underground »»»
           </span>
         </div>
       </Link>
