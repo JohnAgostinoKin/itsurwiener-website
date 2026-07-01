@@ -146,7 +146,8 @@ function WordmarkHero() {
 
         <h1
           ref={titleRef}
-          className="font-display text-[clamp(64px,17vw,240px)] leading-[.85] text-white uppercase"
+          data-text="ITSURWIENER"
+          className="glitch font-display text-[clamp(64px,17vw,240px)] leading-[.85] text-white uppercase"
           style={{ letterSpacing: '-0.01em', willChange: 'transform' }}
         >
           ITSURWIENER

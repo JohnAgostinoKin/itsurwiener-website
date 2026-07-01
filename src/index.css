@@ -179,6 +179,7 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .basement-vid { transform: none !important; }
+  .glitch::before, .glitch::after { animation: none !important; opacity: 0 !important; }
 }
 
 /* ── Snipcart overrides (populated when Snipcart is added) ── */
