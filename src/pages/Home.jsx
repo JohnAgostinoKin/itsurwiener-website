@@ -82,7 +82,9 @@ function HeroCanvas() {
 // ── Section 1: Animated Wordmark Hero ────
 function WordmarkHero() {
   const containerRef = useRef(null)
-  const titleRef = useRef(null)
+  const titleRef     = useRef(null)
+  const glitchTopRef = useRef(null)
+  const glitchBotRef = useRef(null)
 
   useGSAP(() => {
     if (!titleRef.current) return
@@ -103,7 +105,33 @@ function WordmarkHero() {
         .from('.hero-tagline', { opacity: 0, y: 20, duration: 0.5, ease: 'power3.out' }, 0.7)
         .from('.hero-scroll', { opacity: 0, y: 10, duration: 0.4, ease: 'power2.out' }, 1.0)
 
-      return () => split.revert()
+      // Lightning strike — GSAP-controlled real DOM elements, fires after intro
+      let strikeCall
+      const strike = () => {
+        const top = glitchTopRef.current
+        const bot = glitchBotRef.current
+        if (!top || !bot) return
+        gsap.timeline({
+          onComplete: () => { strikeCall = gsap.delayedCall(3 + Math.random() * 2.5, strike) },
+        })
+          .set([top, bot], { opacity: 1 })
+          .to(top, { x: -14, duration: 0.04, ease: 'none' }, 0)
+          .to(bot, { x:  14, duration: 0.04, ease: 'none' }, 0)
+          .to(top, { x:  14, duration: 0.04, ease: 'none' }, 0.04)
+          .to(bot, { x: -14, duration: 0.04, ease: 'none' }, 0.04)
+          .to(top, { x: -10, duration: 0.04, ease: 'none' }, 0.08)
+          .to(bot, { x:  10, duration: 0.04, ease: 'none' }, 0.08)
+          .to(top, { x:   8, duration: 0.04, ease: 'none' }, 0.12)
+          .to(bot, { x:  -8, duration: 0.04, ease: 'none' }, 0.12)
+          .to([top, bot], { opacity: 0, x: 0, duration: 0.06, ease: 'none' }, 0.16)
+      }
+      strikeCall = gsap.delayedCall(1.8, strike)
+
+      return () => {
+        split.revert()
+        if (strikeCall) strikeCall.kill()
+        gsap.killTweensOf([glitchTopRef.current, glitchBotRef.current])
+      }
     })
 
     mm.add('(prefers-reduced-motion: reduce)', () => {
@@ -144,14 +172,40 @@ function WordmarkHero() {
           <span className="w-8 h-0.5 bg-orange" />
         </div>
 
-        <h1
-          ref={titleRef}
-          data-text="ITSURWIENER"
-          className="glitch font-display text-[clamp(64px,17vw,240px)] leading-[.85] text-white uppercase"
-          style={{ letterSpacing: '-0.01em', willChange: 'transform' }}
-        >
-          ITSURWIENER
-        </h1>
+        <div className="relative">
+          <h1
+            ref={titleRef}
+            className="font-display text-[clamp(64px,17vw,240px)] leading-[.85] text-white uppercase"
+            style={{ letterSpacing: '-0.01em' }}
+          >
+            ITSURWIENER
+          </h1>
+          {/* Lightning strike overlays — GSAP-animated, always start hidden */}
+          <span
+            ref={glitchTopRef}
+            aria-hidden="true"
+            className="font-display text-[clamp(64px,17vw,240px)] leading-[.85] uppercase absolute inset-0 select-none pointer-events-none"
+            style={{
+              color: '#FF7A30',
+              clipPath: 'polygon(0 0, 100% 0, 100% 33%, 0 33%)',
+              opacity: 0,
+              letterSpacing: '-0.01em',
+              textShadow: '0 0 20px rgba(255,122,48,0.95), 0 0 50px rgba(255,122,48,0.5)',
+            }}
+          >ITSURWIENER</span>
+          <span
+            ref={glitchBotRef}
+            aria-hidden="true"
+            className="font-display text-[clamp(64px,17vw,240px)] leading-[.85] uppercase absolute inset-0 select-none pointer-events-none"
+            style={{
+              color: '#C46EFF',
+              clipPath: 'polygon(0 67%, 100% 67%, 100% 100%, 0 100%)',
+              opacity: 0,
+              letterSpacing: '-0.01em',
+              textShadow: '0 0 20px rgba(196,110,255,0.95), 0 0 50px rgba(196,110,255,0.5)',
+            }}
+          >ITSURWIENER</span>
+        </div>
 
         <p className="hero-tagline font-display text-[clamp(20px,3vw,44px)] text-orange tracking-[0.04em] mt-6">
           The Wien Is The Weekend.

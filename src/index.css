@@ -56,30 +56,7 @@ body {
 .font-ui       { font-family: 'Space Grotesk', sans-serif; }
 .font-cond     { font-family: 'Barlow Condensed', sans-serif; }
 
-/* ── Glitch effect (used in Hero) ── */
-.glitch {
-  position: relative;
-  display: inline-block;
-}
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-}
-.glitch::before {
-  color: #FF7A30;
-  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-  animation: glitch1 4s infinite;
-  text-shadow: 0 0 18px rgba(255,122,48,0.9), 0 0 40px rgba(255,122,48,0.5);
-}
-.glitch::after {
-  color: #C46EFF;
-  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-  animation: glitch2 4s infinite;
-  text-shadow: 0 0 18px rgba(196,110,255,0.9), 0 0 40px rgba(196,110,255,0.5);
-}
+/* ── Glitch keyframes (lightning strike timing via GSAP, not CSS animation) ── */
 
 /* ── LED Wall background ── */
 .led-wall-bg {
@@ -121,22 +98,6 @@ body {
 }
 
 /* ── Keyframes ── */
-@keyframes glitch1 {
-  0%,89%,100% { transform: translateX(0);    opacity: 0; }
-  90%          { transform: translateX(-14px); opacity: 1; }
-  91%          { transform: translateX(14px);  opacity: 1; }
-  92%          { transform: translateX(-10px); opacity: 1; }
-  93%          { transform: translateX(12px);  opacity: 0.8; }
-  94%          { transform: translateX(0);     opacity: 0; }
-}
-@keyframes glitch2 {
-  0%,87%,100% { transform: translateX(0);    opacity: 0; }
-  88%          { transform: translateX(14px);  opacity: 1; }
-  89%          { transform: translateX(-14px); opacity: 1; }
-  90%          { transform: translateX(10px);  opacity: 1; }
-  91%          { transform: translateX(-12px); opacity: 0.8; }
-  92%          { transform: translateX(0);     opacity: 0; }
-}
 @keyframes ledAnimate {
   0%,100% { background-position: 0% 50%; }
   50%     { background-position: 100% 50%; }
@@ -185,7 +146,6 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .basement-vid { transform: none !important; }
-  .glitch::before, .glitch::after { animation: none !important; opacity: 0 !important; }
 }
 
 /* ── Snipcart overrides (populated when Snipcart is added) ── */
