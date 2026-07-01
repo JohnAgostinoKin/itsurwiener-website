@@ -7,6 +7,7 @@ import CallButton from '@components/CallButton'
 import GameDayHero from '@components/GameDayHero'
 import { useCounter, useScrollReveal } from '@hooks/useScrollReveal'
 import { client } from '@/lib/sanity'
+import BandVideoBg from '@components/BandVideoBg'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
@@ -327,21 +328,15 @@ function ExperienceBands() {
         style={{ height: '80vh', display: 'block' }}
         aria-label="The Wien Sports Bar & Grill — Watch the game upstairs"
       >
-        {/* TODO: set VITE_SPORTS_BAR_VIDEO_URL to your Mux/Cloudflare Stream URL */}
-        <video
-          autoPlay muted loop playsInline
+        {/* TODO: add sports-bar-loop-720.mp4 + poster to public/videos/, then add:
+             src720="/videos/sports-bar-loop-720.mp4" poster="/videos/sports-bar-poster.jpg" */}
+        <BandVideoBg
           poster="/images/sports-bar.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
-          preload="none"
-        >
-          {import.meta.env.VITE_SPORTS_BAR_VIDEO_URL && (
-            <source src={import.meta.env.VITE_SPORTS_BAR_VIDEO_URL} type="video/mp4" />
-          )}
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          overlay="linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)"
+          lazy
+        />
 
-        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh]">
+        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
           <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase text-orange mb-4">Upstairs</div>
           <h2 className="font-display text-[clamp(44px,9vw,120px)] leading-[.85] text-white mb-3">
             The Wien —<br />Sports Bar &amp; Grill
@@ -362,26 +357,17 @@ function ExperienceBands() {
         style={{ height: '80vh', display: 'block' }}
         aria-label="The Basement Dance & Nightclub — See what's on downstairs"
       >
-        {/* TODO: set VITE_BASEMENT_VIDEO_URL to your Mux/Cloudflare Stream URL */}
-        <video
-          autoPlay muted loop playsInline
-          poster="/images/basement.jpg"
-          className="basement-vid absolute inset-0 w-full h-full object-cover"
-          style={{ transform: 'scale(1.25)', willChange: 'transform', transformOrigin: 'center center' }}
-          preload="none"
-        >
-          {import.meta.env.VITE_BASEMENT_VIDEO_URL && (
-            <source src={import.meta.env.VITE_BASEMENT_VIDEO_URL} type="video/mp4" />
-          )}
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        <div
-          className="absolute bottom-0 left-0 w-full h-1/2 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(82,45,128,0.3), transparent)' }}
+        <BandVideoBg
+          src720="/videos/basement-loop-720.mp4"
+          src1080="/videos/basement-loop-1080.mp4"
+          poster="/videos/basement-poster.jpg"
+          overlay="linear-gradient(rgba(20,10,40,.55), rgba(20,10,40,.75))"
+          lazy
+          videoClassName="basement-vid"
+          videoStyle={{ transform: 'scale(1.25)', willChange: 'transform', transformOrigin: 'center center' }}
         />
 
-        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh]">
+        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
           <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase text-purple-bright mb-4">Downstairs</div>
           <h2
             className="font-display text-[clamp(44px,9vw,120px)] leading-[.85] text-white mb-3"
@@ -413,19 +399,11 @@ function ExperienceBands() {
           style={{ background: 'radial-gradient(ellipse 80% 60% at 15% 50%, rgba(245,101,32,0.14), transparent 60%), radial-gradient(ellipse 80% 60% at 85% 50%, rgba(82,45,128,0.22), transparent 60%), #04030A' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {/* TODO: add thisweekend-loop-720.mp4 + poster to public/videos/, then replace the line below with:
+             <BandVideoBg src720="/videos/thisweekend-loop-720.mp4" poster="/videos/thisweekend-poster.jpg"
+               overlay="linear-gradient(rgba(20,10,40,.45), rgba(20,10,40,.65))" lazy /> */}
 
-        {/* TODO: set VITE_WEEKEND_VIDEO_URL to your Mux/Cloudflare Stream URL */}
-        {import.meta.env.VITE_WEEKEND_VIDEO_URL && (
-          <video
-            autoPlay muted loop playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
-            preload="none"
-          >
-            <source src={import.meta.env.VITE_WEEKEND_VIDEO_URL} type="video/mp4" />
-          </video>
-        )}
-
-        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh]">
+        <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
           <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase flex items-center gap-2.5 mb-4" style={{ color: '#F56520' }}>
             <span className="w-2 h-2 rounded-full bg-orange inline-block animate-pulse" />
             This Weekend

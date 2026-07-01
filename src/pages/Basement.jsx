@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import BandVideoBg from '@components/BandVideoBg'
 import CallButton from '@components/CallButton'
 import PageCTA from '@components/PageCTA'
 import { motion } from 'framer-motion'
@@ -92,13 +93,17 @@ export default function Basement() {
 
       {/* Hero */}
       <div className="relative min-h-screen flex items-end pb-24 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-          <img src="/images/basement-hero.jpg" alt="" className="w-full object-cover opacity-40" style={{ minHeight: '100%' }} />
-        </div>
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 100% 60% at 50% 100%, rgba(4,3,10,1) 20%, transparent 80%), radial-gradient(ellipse 100% 60% at 50% 0%, rgba(4,3,10,0.9) 20%, transparent 80%), radial-gradient(ellipse 60% 40% at 50% 50%, rgba(82,45,128,0.25) 0%, transparent 100%)' }} />
-        <div className="absolute top-0 left-1/4 w-px h-full opacity-20" style={{ background: 'linear-gradient(180deg,transparent,#9D4EDD,transparent)' }} />
-        <div className="absolute top-0 right-1/3 w-px h-full opacity-15" style={{ background: 'linear-gradient(180deg,transparent,#F56520,transparent)' }} />
-        <div className="relative z-[1] px-[5vw] w-full pt-32">
+        <BandVideoBg
+          src720="/videos/basement-loop-720.mp4"
+          src1080="/videos/basement-loop-1080.mp4"
+          poster="/videos/basement-poster.jpg"
+          overlay="linear-gradient(rgba(20,10,40,.55), rgba(20,10,40,.75))"
+          lazy={false}
+        />
+        {/* Decorative light rays sit above the video overlay */}
+        <div className="absolute top-0 left-1/4 w-px h-full opacity-20 z-[2]" style={{ background: 'linear-gradient(180deg,transparent,#9D4EDD,transparent)' }} />
+        <div className="absolute top-0 right-1/3 w-px h-full opacity-15 z-[2]" style={{ background: 'linear-gradient(180deg,transparent,#F56520,transparent)' }} />
+        <div className="relative z-[3] px-[5vw] w-full pt-32">
           <motion.div {...inView(0)}>
             <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.28em] uppercase text-white mb-5">
               <span className="w-8 h-0.5 bg-white" />If You Know . . . You Know
