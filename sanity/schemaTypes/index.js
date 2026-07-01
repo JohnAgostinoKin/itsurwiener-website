@@ -8,9 +8,10 @@ import vipReservation from './vipReservation'
 import weeklySpecials from './weeklySpecials'
 import currentWeekend from './currentWeekend'
 import homeGame from './homeGame'
+import weekendEvent from './weekendEvent'
 
 export const schemaTypes = [
   menuCategory, menuItem, globalAddon, event, product,
   tableReservation, vipReservation,
-  weeklySpecials, currentWeekend, homeGame,
+  weeklySpecials, currentWeekend, homeGame, weekendEvent,
 ]
