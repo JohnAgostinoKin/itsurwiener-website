@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
 /**
@@ -6,15 +6,21 @@ import { useReducedMotion } from 'framer-motion'
  *
  * Props
  *   src720        MP4 path (720p) — required to show video
- *   src1080       MP4 path (1080p, wide screens) — optional
+ *   src1080       MP4 path (1080p) — optional, tried first (no media query)
  *   poster        Image shown before video loads + on prefers-reduced-motion
  *   overlay       CSS gradient string for the colour overlay (sits at z-[1])
- *   lazy          Defer load until element nears viewport — default true
+ *   lazy          Defer play until element nears viewport — default true
  *   videoClassName Extra classes applied to the <video> element
  *   videoStyle    Extra inline styles on <video> (e.g. parallax pre-scale)
  *
  * Parent must have position:relative; overflow:hidden.
  * Band content / headings must sit at z-[2] or higher.
+ *
+ * How lazy-load works:
+ *   Sources are always in the DOM. preload="none" means the browser downloads
+ *   nothing until play() is called. IntersectionObserver (rootMargin 200px)
+ *   calls v.play() when the band approaches the viewport — that's the moment
+ *   the browser fetches and decodes the video. No setState, no timing races.
  */
 export default function BandVideoBg({
   src720,
@@ -27,29 +33,28 @@ export default function BandVideoBg({
 }) {
   const wrapRef  = useRef(null)
   const videoRef = useRef(null)
-  const [ready, setReady] = useState(!lazy)
-  const reduced = useReducedMotion()
+  const reduced  = useReducedMotion()
 
-  // IntersectionObserver — start loading only when band enters rootMargin
   useEffect(() => {
-    if (!lazy || ready || !src720 || reduced) return
-    const el = wrapRef.current
-    if (!el) return
+    if (!src720 || reduced) return
+    const v = wrapRef.current   // observe the wrapper div
+    const vid = videoRef.current
+    if (!v || !vid) return
+
+    const play = () => vid.play().catch(() => {})
+
+    if (!lazy) {
+      play()
+      return
+    }
+
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setReady(true); io.disconnect() } },
+      ([entry]) => { if (entry.isIntersecting) { play(); io.disconnect() } },
       { rootMargin: '200px' }
     )
-    io.observe(el)
+    io.observe(v)
     return () => io.disconnect()
-  }, [lazy, ready, src720, reduced])
-
-  // Once sources are present in DOM, load + play
-  useEffect(() => {
-    if (!ready || !videoRef.current || !src720 || reduced) return
-    const v = videoRef.current
-    v.load()
-    v.play().catch(() => {})
-  }, [ready, src720, reduced])
+  }, [lazy, src720, reduced])
 
   return (
     <div ref={wrapRef} className="absolute inset-0">
@@ -62,14 +67,12 @@ export default function BandVideoBg({
           className={`absolute inset-0 w-full h-full object-cover z-0 ${videoClassName}`}
           style={videoStyle}
         >
-          {/* Wide screens get 1080p if provided; 720p is the universal fallback */}
-          {ready && src1080 && (
-            <source src={src1080} media="(min-width: 1280px)" type="video/mp4" />
-          )}
-          {ready && <source src={src720} type="video/mp4" />}
+          {/* src1080 first so wide-screen clients get higher quality;
+              browser falls back to src720 if the file is absent */}
+          {src1080 && <source src={src1080} type="video/mp4" />}
+          <source src={src720} type="video/mp4" />
         </video>
       ) : poster ? (
-        // Static fallback: no video src, or prefers-reduced-motion
         <img
           src={poster}
           alt=""
@@ -78,7 +81,6 @@ export default function BandVideoBg({
         />
       ) : null}
 
-      {/* Colour / contrast overlay — content sits above this */}
       <div className="absolute inset-0 z-[1]" style={{ background: overlay }} />
     </div>
   )
