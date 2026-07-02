@@ -411,12 +411,18 @@ function ExperienceBands() {
         />
 
         <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
-          <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase flex items-center gap-2.5 mb-4" style={{ color: '#F56520' }}>
+          <div className="font-ui text-[13px] font-bold tracking-[.34em] uppercase text-orange flex items-center gap-2.5 mb-4">
             <span className="w-2 h-2 rounded-full bg-orange inline-block animate-pulse" />
             This Weekend
           </div>
           <h2 className="font-display text-[clamp(44px,9vw,120px)] leading-[.85] text-white mb-0">
-            The Wien Is<br />The Weekend
+            The Wien Is<br />
+            <span
+              className="text-orange"
+              style={{ textShadow: '0 0 30px rgba(245,101,32,0.55), 0 0 60px rgba(245,101,32,0.25)' }}
+            >
+              The Weekend
+            </span>
           </h2>
 
           <ThisWeekendMarquee />
