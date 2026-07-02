@@ -338,15 +338,21 @@ function ExperienceBands() {
         />
 
         <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
-          <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase text-orange mb-4">Upstairs</div>
+          <div className="font-ui text-[13px] font-bold tracking-[.34em] uppercase text-orange mb-4">Upstairs</div>
           <h2 className="font-display text-[clamp(44px,9vw,120px)] leading-[.85] text-white mb-3">
-            The Wien —<br />Sports Bar &amp; Grill
+            The Wien —<br />
+            <span
+              className="text-orange"
+              style={{ textShadow: '0 0 30px rgba(245,101,32,0.55), 0 0 60px rgba(245,101,32,0.25)' }}
+            >
+              Sports Bar &amp; Grill
+            </span>
           </h2>
           <p className="font-cond text-[clamp(14px,1.7vw,22px)] text-cream/65 mb-7 tracking-wide max-w-[500px]">
-            25 big screens · game-day brunch · The Litcher®
+            25 Big Screens — Best Food In Town — Covered Patios — Home Of The Litcher®
           </p>
           <span className="inline-block font-ui text-[11px] font-bold tracking-[.22em] uppercase bg-orange text-black px-7 py-3.5 hover:bg-white transition-colors duration-200 w-fit">
-            Watch the Game →
+            Come On In →
           </span>
         </div>
       </Link>
