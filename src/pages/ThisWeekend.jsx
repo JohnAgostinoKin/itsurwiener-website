@@ -412,17 +412,9 @@ export default function ThisWeekend() {
             <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-white mb-5">
               See You<br /><span className="text-orange">This Weekend.</span>
             </h2>
-            <p className="text-[15px] text-cream/75 leading-[1.85] max-w-[440px] mb-8">
+            <p className="text-[15px] text-cream/75 leading-[1.85] max-w-[440px]">
               101 Keith Street, Clemson, SC. The bar, the basement, the patio — all under one roof. Come early, stay late.
             </p>
-            <div className="flex gap-4 flex-wrap">
-              <Link to="/find-us" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200">
-                Find Us →
-              </Link>
-              <Link to="/reserve" className="font-ui text-[12px] font-bold tracking-[.18em] uppercase border border-orange/40 text-cream px-10 py-4 no-underline hover:border-orange hover:text-orange transition-all duration-200">
-                Reserve a Table
-              </Link>
-            </div>
           </div>
           <div className="flex flex-col gap-3">
             {[
