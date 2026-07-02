@@ -27,9 +27,10 @@ import { useReducedMotion } from 'framer-motion'
  *   calls v.play() when the band approaches the viewport — that's the moment
  *   the browser fetches and decodes the video. No setState, no timing races.
  *
- * srcDesktop/srcMobile render as two <source media="..."> tags so the
- * browser itself picks the right file; `poster` still needs JS to pick
- * between posterDesktop/posterMobile since <video poster> takes one value.
+ * srcDesktop/srcMobile pick the active file via JS (window.matchMedia) rather
+ * than a <source media="..."> tag — the `media` attribute on <source> is a
+ * <picture>-only feature and most browsers ignore it inside <video>, silently
+ * failing to switch (or failing to select any source at all).
  */
 export default function BandVideoBg({
   src720,
@@ -61,6 +62,7 @@ export default function BandVideoBg({
     return () => mq.removeEventListener('change', update)
   }, [responsive, mobileBreakpoint])
 
+  const activeSrc = responsive ? ((isMobile ? srcMobile : srcDesktop) || srcDesktop || srcMobile) : null
   const activePoster = responsive
     ? (isMobile ? (posterMobile || poster) : (posterDesktop || poster))
     : poster
@@ -71,7 +73,9 @@ export default function BandVideoBg({
     const vid = videoRef.current
     if (!v || !vid) return
 
-    const play = () => vid.play().catch(() => {})
+    // load() re-runs source selection so a mid-session isMobile flip
+    // (window resized past mobileBreakpoint) picks up the new <source>.
+    const play = () => { vid.load(); vid.play().catch(() => {}) }
 
     if (!lazy) {
       play()
@@ -84,7 +88,7 @@ export default function BandVideoBg({
     )
     io.observe(v)
     return () => io.disconnect()
-  }, [lazy, hasVideo, reduced])
+  }, [lazy, hasVideo, reduced, activeSrc])
 
   return (
     <div ref={wrapRef} className="absolute inset-0">
@@ -98,10 +102,7 @@ export default function BandVideoBg({
           style={videoStyle}
         >
           {responsive ? (
-            <>
-              {srcMobile && <source src={srcMobile} media={`(max-width: ${mobileBreakpoint}px)`} type="video/mp4" />}
-              {srcDesktop && <source src={srcDesktop} type="video/mp4" />}
-            </>
+            activeSrc && <source src={activeSrc} type="video/mp4" />
           ) : (
             <>
               {/* src1080 first so wide-screen clients get higher quality;

@@ -44,23 +44,27 @@ export default function SportsBar() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex items-center gap-3 font-ui text-[10px] font-bold tracking-[.32em] uppercase text-orange mb-5">
+            <div className="flex items-center gap-3 font-ui text-[13px] font-bold tracking-[.32em] uppercase text-orange mb-5">
               <span className="w-8 h-0.5 bg-orange" />Upstairs
             </div>
             <h1 className="font-display text-[clamp(60px,12vw,160px)] leading-[.85] text-white mb-4">
               The Wien<br />
-              <span className="text-orange">Sports Bar</span><br />
-              &amp; Grill
+              <span
+                className="text-orange"
+                style={{ textShadow: '0 0 30px rgba(245,101,32,0.55), 0 0 60px rgba(245,101,32,0.25)' }}
+              >
+                Sports Bar<br />&amp; Grill
+              </span>
             </h1>
             <p className="font-cond text-[clamp(16px,2vw,24px)] text-cream/65 mb-10 max-w-[560px] tracking-wide">
-              Clemson's legendary game-day headquarters. 25 screens, two 12-ft LED walls, The Litcher®, and the best brunch in town.
+              25 Big Screens — Best Food In Town — Covered Patios — Home Of The Litcher®
             </p>
             <div className="flex gap-4 flex-wrap">
               <Link
                 to="/menu"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200"
               >
-                See the Menu →
+                Come On In →
               </Link>
               <Link
                 to="/game-day"
