@@ -209,7 +209,8 @@ export default function ThisWeekend() {
   }
   const isGameday = mode === 'gameday'
 
-  const headline = weekend?.headline || (isGameday ? 'Gameday at The Wien' : 'The Wien Is The Weekend')
+  const headlineOverride = weekend?.headline
+  const headline = headlineOverride || (isGameday ? 'Gameday at The Wien' : 'The Wien Is The Weekend')
   const subline = weekend?.subline || (isGameday && thisWeekendGame?.opponent
     ? `Tigers vs. ${thisWeekendGame.opponent}`
     : 'Live Music · Specials · Good Times')
@@ -254,7 +255,19 @@ export default function ThisWeekend() {
               </span>
             </div>
             <h1 className="font-display text-[clamp(60px,12vw,160px)] leading-[.85] text-white mb-5">
-              {headline}
+              {!headlineOverride && !isGameday ? (
+                <>
+                  The Wien Is<br />
+                  <span
+                    className="text-orange"
+                    style={{ textShadow: '0 0 30px rgba(245,101,32,0.55), 0 0 60px rgba(245,101,32,0.25)' }}
+                  >
+                    The Weekend
+                  </span>
+                </>
+              ) : (
+                headline
+              )}
             </h1>
             <p className="font-cond text-[clamp(18px,2.5vw,28px)] text-cream/55 max-w-[600px] tracking-wide mb-10">
               {subline}
