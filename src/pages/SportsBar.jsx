@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import PageCTA from '@components/PageCTA'
 import Ticker from '@components/Ticker'
 import BandVideoBg from '@components/BandVideoBg'
 
@@ -208,8 +207,6 @@ export default function SportsBar() {
           ))}
         </div>
       </section>
-
-      <PageCTA />
     </div>
   )
 }
