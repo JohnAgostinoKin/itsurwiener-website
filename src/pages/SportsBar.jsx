@@ -165,7 +165,7 @@ export default function SportsBar() {
               to="/menu"
               className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-black text-orange px-10 py-4 no-underline hover:bg-white hover:text-black transition-colors duration-200 inline-block"
             >
-              Brunch Menu →
+              View Menu →
             </Link>
           </div>
           <div className="relative overflow-hidden border-4 border-black/10 flex items-center justify-center" style={{ aspectRatio: '4/3', background: 'rgba(0,0,0,0.1)' }}>
