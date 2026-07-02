@@ -63,7 +63,7 @@ export default function SportsBar() {
                 to="/menu"
                 className="font-ui text-[12px] font-bold tracking-[.18em] uppercase bg-orange text-black px-10 py-4 no-underline clip-angled hover:bg-white transition-colors duration-200"
               >
-                Come On In →
+                View Menu →
               </Link>
               <Link
                 to="/game-day"
@@ -147,18 +147,18 @@ export default function SportsBar() {
         </motion.div>
       </section>
 
-      {/* ── Gameday Brunch ── */}
+      {/* ── Saturday Brunch ── */}
       <section className="bg-orange py-[80px] px-[5vw]">
         <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" {...inView(0)}>
           <div>
             <div className="font-ui text-[10px] font-bold tracking-[.3em] uppercase bg-black text-orange inline-block px-4 py-2 mb-6">
-              Gameday Brunch
+              A Saturday Tradition
             </div>
             <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-black mb-5">
               $1 Mimosas.<br />Every Saturday.
             </h2>
             <p className="text-[15px] leading-[1.8] text-black/75 max-w-[440px] mb-8">
-              The Wien opens at 10AM on gamedays. $1 Mimosas, $2 Wien Beer Tall Boys, and a full brunch menu — the perfect start before the tailgate.
+              The Wien opens early every Saturday. $1 Mimosas, $2 Wien Beer Tall Boys, and a full brunch menu — the perfect way to start the weekend right.
             </p>
             <Link
               to="/menu"
