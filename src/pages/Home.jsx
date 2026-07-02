@@ -46,7 +46,7 @@ function HeroCanvas() {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     let W, H, particles = [], raf
-    const resize = () => { W = canvas.width = canvas.clientWidth; H = canvas.height = canvas.clientHeight }
+    const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight }
     resize()
     window.addEventListener('resize', resize)
     class Particle {
@@ -143,7 +143,7 @@ function WordmarkHero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[80vh] flex flex-col items-center justify-center bg-[#04030A] overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-[#04030A] overflow-hidden"
       aria-label="itsurwiener — A Clemson Destination"
     >
       <HeroCanvas />
