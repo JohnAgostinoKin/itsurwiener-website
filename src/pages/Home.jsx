@@ -328,11 +328,12 @@ function ExperienceBands() {
         style={{ height: '80vh', display: 'block' }}
         aria-label="The Wien Sports Bar & Grill — Watch the game upstairs"
       >
-        {/* TODO: add sports-bar-loop-720.mp4 + poster to public/videos/, then add:
-             src720="/videos/sports-bar-loop-720.mp4" poster="/videos/sports-bar-poster.jpg" */}
         <BandVideoBg
-          poster="/images/sports-bar.jpg"
-          overlay="linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)"
+          srcDesktop="/videos/sportsbar2-landscape.mp4"
+          srcMobile="/videos/sportsbar2-portrait.mp4"
+          posterDesktop="/videos/sportsbar2-landscape-poster.jpg"
+          posterMobile="/videos/sportsbar2-portrait-poster.jpg"
+          overlay="linear-gradient(rgba(40,20,5,.5), rgba(40,20,5,.72))"
           lazy
         />
 

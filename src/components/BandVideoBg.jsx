@@ -1,13 +1,18 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
 /**
  * Full-bleed video background for experience bands and hero sections.
  *
  * Props
- *   src720        MP4 path (720p) — required to show video
+ *   src720        MP4 path (720p) — required to show video (quality fallback mode)
  *   src1080       MP4 path (1080p) — optional, tried first (no media query)
+ *   srcDesktop    MP4 path served above mobileBreakpoint (media-query mode)
+ *   srcMobile     MP4 path served at/below mobileBreakpoint (media-query mode)
  *   poster        Image shown before video loads + on prefers-reduced-motion
+ *   posterDesktop Poster used for srcDesktop — falls back to `poster`
+ *   posterMobile  Poster used for srcMobile — falls back to `poster`
+ *   mobileBreakpoint Max width (px) that counts as mobile — default 767
  *   overlay       CSS gradient string for the colour overlay (sits at z-[1])
  *   lazy          Defer play until element nears viewport — default true
  *   videoClassName Extra classes applied to the <video> element
@@ -21,11 +26,20 @@ import { useReducedMotion } from 'framer-motion'
  *   nothing until play() is called. IntersectionObserver (rootMargin 200px)
  *   calls v.play() when the band approaches the viewport — that's the moment
  *   the browser fetches and decodes the video. No setState, no timing races.
+ *
+ * srcDesktop/srcMobile render as two <source media="..."> tags so the
+ * browser itself picks the right file; `poster` still needs JS to pick
+ * between posterDesktop/posterMobile since <video poster> takes one value.
  */
 export default function BandVideoBg({
   src720,
   src1080,
+  srcDesktop,
+  srcMobile,
   poster,
+  posterDesktop,
+  posterMobile,
+  mobileBreakpoint = 767,
   overlay = 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7))',
   lazy = true,
   videoClassName = '',
@@ -34,9 +48,25 @@ export default function BandVideoBg({
   const wrapRef  = useRef(null)
   const videoRef = useRef(null)
   const reduced  = useReducedMotion()
+  const responsive = !!(srcDesktop || srcMobile)
+  const hasVideo = !!(src720 || responsive)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    if (!src720 || reduced) return
+    if (!responsive) return
+    const mq = window.matchMedia(`(max-width: ${mobileBreakpoint}px)`)
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [responsive, mobileBreakpoint])
+
+  const activePoster = responsive
+    ? (isMobile ? (posterMobile || poster) : (posterDesktop || poster))
+    : poster
+
+  useEffect(() => {
+    if (!hasVideo || reduced) return
     const v = wrapRef.current   // observe the wrapper div
     const vid = videoRef.current
     if (!v || !vid) return
@@ -54,27 +84,36 @@ export default function BandVideoBg({
     )
     io.observe(v)
     return () => io.disconnect()
-  }, [lazy, src720, reduced])
+  }, [lazy, hasVideo, reduced])
 
   return (
     <div ref={wrapRef} className="absolute inset-0">
-      {src720 && !reduced ? (
+      {hasVideo && !reduced ? (
         <video
           ref={videoRef}
           muted loop playsInline
-          poster={poster}
+          poster={activePoster}
           preload="none"
           className={`absolute inset-0 w-full h-full object-cover z-0 ${videoClassName}`}
           style={videoStyle}
         >
-          {/* src1080 first so wide-screen clients get higher quality;
-              browser falls back to src720 if the file is absent */}
-          {src1080 && <source src={src1080} type="video/mp4" />}
-          <source src={src720} type="video/mp4" />
+          {responsive ? (
+            <>
+              {srcMobile && <source src={srcMobile} media={`(max-width: ${mobileBreakpoint}px)`} type="video/mp4" />}
+              {srcDesktop && <source src={srcDesktop} type="video/mp4" />}
+            </>
+          ) : (
+            <>
+              {/* src1080 first so wide-screen clients get higher quality;
+                  browser falls back to src720 if the file is absent */}
+              {src1080 && <source src={src1080} type="video/mp4" />}
+              <source src={src720} type="video/mp4" />
+            </>
+          )}
         </video>
-      ) : poster ? (
+      ) : activePoster ? (
         <img
-          src={poster}
+          src={activePoster}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover z-0"

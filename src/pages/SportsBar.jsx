@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageCTA from '@components/PageCTA'
 import Ticker from '@components/Ticker'
+import BandVideoBg from '@components/BandVideoBg'
 
 const inView = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
@@ -25,18 +26,19 @@ export default function SportsBar() {
 
       {/* ── Hero ── */}
       <div className="relative min-h-[85vh] flex items-end pb-20 overflow-hidden">
-        <img
-          src="/images/sports-bar.jpg"
-          alt="The Wien Sports Bar & Grill — Clemson, SC"
-          className="absolute inset-0 w-full h-full object-cover"
+        <BandVideoBg
+          srcDesktop="/videos/sportsbar2-landscape.mp4"
+          srcMobile="/videos/sportsbar2-portrait.mp4"
+          posterDesktop="/videos/sportsbar2-landscape-poster.jpg"
+          posterMobile="/videos/sportsbar2-portrait-poster.jpg"
+          overlay="linear-gradient(rgba(40,20,5,.5), rgba(40,20,5,.72))"
+          lazy={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         <div
-          className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none"
+          className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none z-[2]"
           style={{ background: 'radial-gradient(circle, rgba(245,101,32,0.15) 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
-        <div className="relative z-[1] px-[5vw] w-full pt-40">
+        <div className="relative z-[3] px-[5vw] w-full pt-40">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
