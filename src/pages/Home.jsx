@@ -401,14 +401,14 @@ function ExperienceBands() {
         style={{ height: '80vh', display: 'block' }}
         aria-label="The Wien Is The Weekend — Plan your weekend"
       >
-        <div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 15% 50%, rgba(245,101,32,0.14), transparent 60%), radial-gradient(ellipse 80% 60% at 85% 50%, rgba(82,45,128,0.22), transparent 60%), #04030A' }}
+        <BandVideoBg
+          srcDesktop="/videos/weekend-landscape.mp4"
+          srcMobile="/videos/weekend-portrait.mp4"
+          posterDesktop="/videos/weekend-landscape-poster.jpg"
+          posterMobile="/videos/weekend-portrait-poster.jpg"
+          overlay="linear-gradient(rgba(30,15,40,.5), rgba(30,15,40,.72))"
+          lazy
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-        {/* TODO: add thisweekend-loop-720.mp4 + poster to public/videos/, then replace the line below with:
-             <BandVideoBg src720="/videos/thisweekend-loop-720.mp4" poster="/videos/thisweekend-poster.jpg"
-               overlay="linear-gradient(rgba(20,10,40,.45), rgba(20,10,40,.65))" lazy /> */}
 
         <div className="band-content absolute inset-0 flex flex-col justify-end p-[5vw] pb-[8vh] z-[2]">
           <div className="font-ui text-[10px] font-bold tracking-[.34em] uppercase flex items-center gap-2.5 mb-4" style={{ color: '#F56520' }}>

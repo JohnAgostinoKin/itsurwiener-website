@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { client } from '@/lib/sanity'
 import PageCTA from '@components/PageCTA'
+import BandVideoBg from '@components/BandVideoBg'
 
 const inView = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -233,12 +234,16 @@ export default function ThisWeekend() {
 
       {/* ── Hero ── */}
       <div className="relative min-h-[70vh] flex items-end pb-20 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: isGameday
-          ? 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,101,32,0.18), transparent 70%), linear-gradient(180deg,#08060F,#04030A)'
-          : 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(82,45,128,0.14), transparent 70%), linear-gradient(180deg,#08060F,#04030A)'
-        }} />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(245,101,32,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,101,32,1) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
-        <div className="relative z-[1] px-[5vw] w-full pt-40">
+        <BandVideoBg
+          srcDesktop="/videos/weekend-landscape.mp4"
+          srcMobile="/videos/weekend-portrait.mp4"
+          posterDesktop="/videos/weekend-landscape-poster.jpg"
+          posterMobile="/videos/weekend-portrait-poster.jpg"
+          overlay="linear-gradient(rgba(30,15,40,.5), rgba(30,15,40,.72))"
+          lazy={false}
+        />
+        <div className="absolute inset-0 opacity-[0.03] z-[1]" style={{ backgroundImage: 'linear-gradient(rgba(245,101,32,1) 1px,transparent 1px),linear-gradient(90deg,rgba(245,101,32,1) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
+        <div className="relative z-[2] px-[5vw] w-full pt-40">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <div className="flex items-center gap-3 mb-5">
               {isGameday && (
