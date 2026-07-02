@@ -156,7 +156,7 @@ export default function SportsBar() {
               Gameday Brunch
             </div>
             <h2 className="font-display text-[clamp(52px,8vw,100px)] leading-[.88] text-black mb-5">
-              $1 Mimosas.<br />Every Gameday.
+              $1 Mimosas.<br />Every Saturday.
             </h2>
             <p className="text-[15px] leading-[1.8] text-black/75 max-w-[440px] mb-8">
               The Wien opens at 10AM on gamedays. $1 Mimosas, $2 Wien Beer Tall Boys, and a full brunch menu — the perfect start before the tailgate.
@@ -168,10 +168,16 @@ export default function SportsBar() {
               Brunch Menu →
             </Link>
           </div>
-          <div className="relative overflow-hidden border-4 border-black/10" style={{ aspectRatio: '4/3', background: 'rgba(0,0,0,0.1)' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-[clamp(40px,8vw,100px)] text-black/15">BRUNCH</span>
-            </div>
+          <div className="relative overflow-hidden border-4 border-black/10 flex items-center justify-center" style={{ aspectRatio: '4/3', background: 'rgba(0,0,0,0.1)' }}>
+            {/* TODO: replace with full-res mimosa photo */}
+            <picture>
+              <source srcSet="/images/mimosas-placeholder.webp" type="image/webp" />
+              <img
+                src="/images/mimosas-placeholder.jpg"
+                alt="Mimosas"
+                className="max-w-[240px] max-h-[320px] w-auto h-auto object-contain"
+              />
+            </picture>
           </div>
         </motion.div>
       </section>
